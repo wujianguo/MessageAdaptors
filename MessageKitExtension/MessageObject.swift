@@ -19,7 +19,7 @@ protocol MessageObject: MessageType {
     var user: MessageUser { get }
 }
 
-/*
+
 protocol MessageEncoder {
     
 }
@@ -27,7 +27,7 @@ protocol MessageEncoder {
 protocol MessageDecoder {
     
 }
-
+/*
 protocol MessageDecodable {
 
     init(from decoder: MessageDecoder) throws

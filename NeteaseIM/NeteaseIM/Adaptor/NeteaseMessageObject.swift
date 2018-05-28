@@ -49,6 +49,40 @@ extension MessageKind: Hashable {
     }
 }
 
+class NeteaseMessageTextCoder: MessageDecoder, MessageEncoder {
+    
+    func encode(text: String) -> NIMMessage {
+        let ret = NIMMessage()
+        ret.text = text
+        return ret
+    }
+    
+    func decode(message: NIMMessage) -> MessageKind {
+        return .text(message.text ?? "")
+    }
+    
+}
+
+class NeteaseMessageImageCoder: MessageDecoder, MessageEncoder {
+    
+    func encode(text: String) -> NIMMessage {
+        let ret = NIMMessage()
+        ret.text = text
+        return ret
+    }
+    
+    func decode(message: NIMMessage) -> MessageKind {
+        return .text("")
+//        let item =
+//        return .photo(item)
+    }
+
+}
+
+class NeteaseMessageLocationCoder: MessageDecoder, MessageEncoder {
+    
+}
+
 class NeteaseMessageEncoder {
     
     typealias EncoderFunc = (NeteaseMessageObject) -> NIMMessage

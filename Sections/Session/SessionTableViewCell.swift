@@ -46,6 +46,7 @@ class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 4
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -106,6 +107,9 @@ class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
             formater.timeStyle = .short
             timeLabel.text = formater.string(from: last.sentDate)
             messageLabel.text = last.messageContent
+        } else {
+            timeLabel.text = " "
+            messageLabel.text = " "
         }
     }
 }

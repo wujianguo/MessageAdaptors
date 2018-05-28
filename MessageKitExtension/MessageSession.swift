@@ -11,6 +11,7 @@ import Foundation
 enum MessageSessionType {
     case P2P
     case Team
+    case Chatroom
 }
 
 protocol MessageSession {
