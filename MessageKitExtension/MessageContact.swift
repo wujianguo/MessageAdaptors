@@ -10,11 +10,11 @@ import Foundation
 
 protocol MessageContact {
     
-    var friends: [MessageUser] { get set }
+    var friends: [MessageUser] { get }
     
-    func requestFriend()
+//    func requestFriend()
     
-    func acceptFriend()
+//    func acceptFriend()
     
-    func denyFriend()
+//    func denyFriend()
 }

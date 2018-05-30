@@ -132,21 +132,6 @@ class NeteaseMessageDecoder {
     
 }
 
-extension NIMUser: MessageUser {
-    
-    var id: String {
-        return userId ?? ""
-    }
-    
-    var displayName: String {
-        return userInfo?.nickName ?? ""
-    }
-    
-    var avatarURL: URL {
-        return URL(string: userInfo?.avatarUrl ?? "") ?? DefaultAvatarURL
-    }
-    
-}
 
 class NeteaseMessageObject: MessageObject {
     
@@ -168,7 +153,10 @@ class NeteaseMessageObject: MessageObject {
     
     var info: NeteaseMessageUser
     
+    var message: NIMMessage? = nil
+    
     init(message: NIMMessage) {
+        self.message = message
         info = NeteaseMessageUser(id: message.from ?? "", displayName: message.senderName ?? "", avatarURL: DefaultAvatarURL)
         messageId = message.messageId
         sentDate = Date(timeIntervalSince1970: message.timestamp)

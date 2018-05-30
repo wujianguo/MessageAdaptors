@@ -21,35 +21,6 @@ struct NeteaseLoginData {
 
 }
 
-class NeteaseMessageUser: MessageUser {
-    
-    var id: String
-    
-    var displayName: String
-    
-    var avatarURL: URL
-    
-    var info: NIMUser? = nil {
-        didSet {
-            if let userId = info?.userId {
-                id = userId
-            }
-            if let name = info?.userInfo?.nickName {
-                displayName = name
-            }
-            if let avatar = URL(string: info?.userInfo?.avatarUrl ?? "") {
-                avatarURL = avatar
-            }
-        }
-    }
-    
-    init(id: String, displayName: String, avatarURL: URL) {
-        self.id = id
-        self.displayName = displayName
-        self.avatarURL = avatarURL
-    }
-    
-}
 
 class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {    
     
@@ -59,11 +30,15 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     
     typealias ObjectType  = NeteaseMessageObject
     
+    typealias ContactType = NeteaseMessageContact
+    
     var id: String = ""
     
     var displayName: String = ""
     
     var avatarURL: URL = DefaultAvatarURL
+    
+    var contact = NeteaseMessageContact()
     
     var status: AccountStatus = .Idle {
         didSet {
@@ -85,7 +60,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
         status = .Connecting
         NIMSDK.shared().loginManager.login(name, token: token) { (error) in
             self.displayName = name
-            self.id = name
+            self.id = NIMSDK.shared().loginManager.currentAccount()
             self.onLogin(error: error)
             complete?(error)
         }

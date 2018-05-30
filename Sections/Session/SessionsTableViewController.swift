@@ -28,17 +28,12 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         title = AccountType.name
+        
+        tableView.rowHeight = 70
         tableView.register(SessionTableViewCell<AccountType.SessionType>.self, forCellReuseIdentifier: SessionTableViewCell<AccountType.SessionType>.identifier())
         tableView.tableFooterView = UIView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(statusChanged(notification:)), name: AccountStatusChangedNotificationName, object: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(requestFriend(sender:)))
-    }
-    
-    // MARK: - Action
-    @objc func requestFriend(sender: UIBarButtonItem) {
-        let vc = RequestFriendViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Notification
@@ -57,10 +52,6 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     }
     
     // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

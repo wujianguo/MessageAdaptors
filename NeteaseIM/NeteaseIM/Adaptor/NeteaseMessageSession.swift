@@ -41,6 +41,12 @@ class NeteaseMessageSession: MessageSession {
         return info.avatarURL
     }
     
+    var user: MessageUser {
+        return info
+    }
+    
+    var lastMessage: NeteaseMessageObject? = nil
+    
     var messages = [NeteaseMessageObject]()
     
     var session: NIMSession
@@ -50,6 +56,9 @@ class NeteaseMessageSession: MessageSession {
     var info: NeteaseMessageUser
 
     init(recent: NIMRecentSession) {
+        if let last = recent.lastMessage {
+            self.lastMessage = NeteaseMessageObject(message: last)
+        }
         sessionType = recent.session!.sessionType.toType()
         let sessionId = recent.session?.sessionId ?? ""
         self.session = recent.session!
@@ -97,9 +106,27 @@ class NeteaseMessageSession: MessageSession {
     
     func onRecv(message: NIMMessage) {
         let msg = NeteaseMessageObject(message: message)
+        lastMessage = msg
         messages.append(msg)
         for consumer in consumers {
             consumer.on(sessionId: id, recv: [msg])
+        }
+    }
+    
+    func fetchLocalHistory() -> [NeteaseMessageObject] {
+        var history = [NeteaseMessageObject]()
+        if let msgs = NIMSDK.shared().conversationManager.messages(in: session, message: messages.last?.message, limit: 100) {
+            for msg in msgs {
+                history.append(NeteaseMessageObject(message: msg))
+            }
+            messages.insert(contentsOf: history, at: 0)
+        }
+        return history
+    }
+    
+    func fetchRemoteHistory(complete: @escaping ([ObjectType], Error?) -> Void) {
+        DispatchQueue.main.async {
+            complete([], nil)
         }
     }
 }

@@ -12,6 +12,10 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
 
     let account: AccountType
     
+    var contact: AccountType.ContactType {
+        return account.contact
+    }
+    
     init(account: AccountType) {
         self.account = account
         super.init(style: .plain)
@@ -24,39 +28,44 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        title = Strings.Contact
+        tableView.rowHeight = 60
+        tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: ContactTableViewCell.identifier())
+        tableView.tableFooterView = UIView()
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(requestFriend(sender:)))
+    }
+    
+    // MARK: - Action
+    @objc func requestFriend(sender: UIBarButtonItem) {
+        let vc = RequestFriendViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return contact.friends.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier(), for: indexPath) as! ContactTableViewCell
+        cell.user = contact.friends[indexPath.row]
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UserTableViewController<AccountType>(account: account, user: contact.friends[indexPath.row])
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

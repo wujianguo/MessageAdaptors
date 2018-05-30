@@ -24,6 +24,8 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         fatalError("init(coder:) has not been implemented")
     }
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -36,18 +38,41 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         messageInputBar.delegate = self
         
         session.add(consumer: self)
+        
+        messagesCollectionView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(loadMoreMessages(sender:)), for: .valueChanged)
+        
+        firstLoad()
+        messagesCollectionView.scrollToBottom()
     }
 
     deinit {
         session.remove(consumer: self)
     }
+    
 
     // MARK: - Navigation
 
     @objc func userItemClick(sender: UIBarButtonItem) {
-        
+        let vc = UserTableViewController<AccountType>(account: account, user: session.user)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
+    // MARK: - Load more messages
+    
+    func firstLoad() {
+        if session.messages.count > 0 {
+            return
+        }
+        let msgs = session.fetchLocalHistory()
+        if msgs.count > 0 {
+            return
+        }
+    }
+    
+    @objc func loadMoreMessages(sender: UIRefreshControl) {
+        sender.endRefreshing()
+    }
 }
 
 

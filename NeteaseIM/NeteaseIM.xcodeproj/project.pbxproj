@@ -37,6 +37,12 @@
 		814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BD720BD3078006E4FC6 /* RequestFriendViewController.swift */; };
 		814E1BDA20BD364E006E4FC6 /* AcceptFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BD920BD364E006E4FC6 /* AcceptFriendViewController.swift */; };
 		814E1BDC20BD4669006E4FC6 /* MessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BDB20BD4669006E4FC6 /* MessageContact.swift */; };
+		814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */; };
+		814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEA20BE7237006E4FC6 /* ContactTableViewCell.swift */; };
+		814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEC20BE7264006E4FC6 /* NeteaseMessageContact.swift */; };
+		814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEE20BE7364006E4FC6 /* MessageUser.swift */; };
+		814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */; };
+		814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */; };
 		81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4720A04385009D9916 /* MessageSession.swift */; };
 		81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */; };
 		81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */; };
@@ -103,6 +109,12 @@
 		814E1BD720BD3078006E4FC6 /* RequestFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendViewController.swift; sourceTree = "<group>"; };
 		814E1BD920BD364E006E4FC6 /* AcceptFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptFriendViewController.swift; sourceTree = "<group>"; };
 		814E1BDB20BD4669006E4FC6 /* MessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContact.swift; sourceTree = "<group>"; };
+		814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		814E1BEA20BE7237006E4FC6 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		814E1BEC20BE7264006E4FC6 /* NeteaseMessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageContact.swift; sourceTree = "<group>"; };
+		814E1BEE20BE7364006E4FC6 /* MessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUser.swift; sourceTree = "<group>"; };
+		814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageUser.swift; sourceTree = "<group>"; };
+		814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeadTableViewCell.swift; sourceTree = "<group>"; };
 		81D4AE4720A04385009D9916 /* MessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProducer.swift; sourceTree = "<group>"; };
@@ -172,11 +184,11 @@
 		8109FD6520B536400051C192 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				8109FD7820B538B10051C192 /* UIConstants */,
 				8109FD7520B536C30051C192 /* Main */,
+				8109FD6820B536400051C192 /* Session */,
 				8109FD6620B536400051C192 /* Contact */,
 				8109FD6720B536400051C192 /* User */,
-				8109FD6820B536400051C192 /* Session */,
+				8109FD7820B538B10051C192 /* UIConstants */,
 			);
 			name = Sections;
 			path = ../../Sections;
@@ -188,6 +200,7 @@
 				8109FD7B20B53B8D0051C192 /* ContactTableViewController.swift */,
 				814E1BD720BD3078006E4FC6 /* RequestFriendViewController.swift */,
 				814E1BD920BD364E006E4FC6 /* AcceptFriendViewController.swift */,
+				814E1BEA20BE7237006E4FC6 /* ContactTableViewCell.swift */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -195,10 +208,12 @@
 		8109FD6720B536400051C192 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */,
 				8109FD7D20B53B9C0051C192 /* UserTableViewController.swift */,
 				8109FD7F20B53BBD0051C192 /* LoginViewController.swift */,
 				8109FD8120B53BCB0051C192 /* RegisterViewController.swift */,
-				814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */,
+				814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */,
+				814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -301,6 +316,7 @@
 				81D4AE5520A0657B009D9916 /* MessageObject.swift */,
 				8109FD9C20B7B9A20051C192 /* MessageSessionManager.swift */,
 				814E1BDB20BD4669006E4FC6 /* MessageContact.swift */,
+				814E1BEE20BE7364006E4FC6 /* MessageUser.swift */,
 			);
 			name = MessageKitExtension;
 			path = ../../MessageKitExtension;
@@ -313,6 +329,8 @@
 				810E130420A02A8800D10B5E /* NeteaseMessageAccount.swift */,
 				81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */,
 				81D4AE5820A1A5B1009D9916 /* NeteaseMessageObject.swift */,
+				814E1BEC20BE7264006E4FC6 /* NeteaseMessageContact.swift */,
+				814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */,
 			);
 			path = Adaptor;
 			sourceTree = "<group>";
@@ -558,13 +576,17 @@
 				814E1BC420BC1653006E4FC6 /* AccountTableViewController.swift in Sources */,
 				8109FD9920B7A8740051C192 /* UIConstants.swift in Sources */,
 				814E1BDA20BD364E006E4FC6 /* AcceptFriendViewController.swift in Sources */,
+				814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */,
 				810E129B20A0213A00D10B5E /* ViewController.swift in Sources */,
 				81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */,
 				8109FD8220B53BCB0051C192 /* RegisterViewController.swift in Sources */,
 				8109FD6C20B536400051C192 /* SessionViewController.swift in Sources */,
 				810E130520A02A8800D10B5E /* NeteaseMessageAccount.swift in Sources */,
+				814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */,
 				814E1BC220BC162F006E4FC6 /* SessionDetailTableViewController.swift in Sources */,
+				814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */,
 				81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */,
+				814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */,
 				8109FD8820B540AB0051C192 /* BaseNavigationController.swift in Sources */,
 				81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */,
 				8109FD7720B5373F0051C192 /* MainViewController.swift in Sources */,
@@ -577,7 +599,9 @@
 				814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */,
 				8109FD9D20B7B9A20051C192 /* MessageSessionManager.swift in Sources */,
 				8109FD7E20B53B9C0051C192 /* UserTableViewController.swift in Sources */,
+				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,
+				814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */,
 				8109FD8620B53FDF0051C192 /* Images.swift in Sources */,
 				8109FD6B20B536400051C192 /* SessionsTableViewController.swift in Sources */,
 				810E129920A0213A00D10B5E /* AppDelegate.swift in Sources */,

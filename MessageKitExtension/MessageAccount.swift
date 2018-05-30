@@ -15,15 +15,6 @@ let AccountStatusChangedNotificationName = Notification.Name("AccountStatusChang
 
 let DefaultAvatarURL = URL(string: "https://dn-coding-net-avatar.qbox.me/4d5b9231-5b44-4ade-b08f-8d1a825aae58.png?imageMogr2/thumbnail/80")!
 
-protocol MessageUser {
-    
-    var id: String { get }
-    
-    var displayName: String { get }
-    
-    var avatarURL: URL { get }
-}
-
 //extension Sender: MessageUser {
 //
 //}
@@ -44,6 +35,8 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     
     associatedtype ObjectType: MessageObject
     
+    associatedtype ContactType: MessageContact
+    
     static var name: String { get }
     
     init()
@@ -62,5 +55,6 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
 
     func send(message: ObjectType, to session: SessionType)
     
+    var contact: ContactType { get }
 }
 

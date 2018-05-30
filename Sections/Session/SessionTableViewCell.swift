@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import SnapKit
+import MessageKit
 
 class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
     
@@ -95,16 +96,17 @@ class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
         messageLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(nameLabel.snp.leading)
             make.top.equalTo(nameLabel.snp.bottom).offset(UIConstants.padding)
+            make.trailing.equalTo(contentView.snp.trailingMargin)
         }
     }
     
     func update() {
         avatarImageView.kf.setImage(with: session.avatarURL)
         nameLabel.text = session.displayName
-        if let last = session.messages.last {
-            let formater = DateFormatter()
-            formater.dateStyle = .none
-            formater.timeStyle = .short
+        if let last = session.lastMessage {
+            let formater = MessageKitDateFormatter.shared
+//            formater.dateStyle = .none
+//            formater.timeStyle = .short
             timeLabel.text = formater.string(from: last.sentDate)
             messageLabel.text = last.messageContent
         } else {

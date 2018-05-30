@@ -20,6 +20,8 @@ protocol MessageSession {
     
     var sessionType: MessageSessionType { get }
     
+    var lastMessage: ObjectType? { get set }
+    
     var messages: [ObjectType] { get set }
     
     var consumers: [MessageConsumer] { get set }
@@ -29,6 +31,12 @@ protocol MessageSession {
     var displayName: String { get }
     
     var avatarURL: URL { get }
+    
+    var user: MessageUser { get }
+    
+    func fetchLocalHistory() -> [ObjectType]
+
+    func fetchRemoteHistory(complete: @escaping ([ObjectType], Error?) -> Void)
 }
 
 extension MessageSession {
