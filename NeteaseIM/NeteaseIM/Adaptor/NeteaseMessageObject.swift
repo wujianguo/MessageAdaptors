@@ -8,6 +8,8 @@
 
 import Foundation
 import MessageKit
+import class CoreLocation.CLLocation
+
 
 extension MessageKind: Hashable {
 
@@ -45,7 +47,7 @@ extension MessageKind: Hashable {
         default:
             break
         }
-        return ""
+        return "[not support yet.]"
     }
 }
 
@@ -119,7 +121,23 @@ class NeteaseMessageDecoder {
                 return .text(text)
             }
         case .image:
-            break
+            if let object = message.messageObject as? NIMImageObject {
+                let placeholder = UIImage()
+                var size = object.size
+                let m = max(size.width, size.height)
+                if m > 100 {
+                    let ratio = m / 100.0
+                    size = CGSize(width: size.width/ratio, height: size.height/ratio)
+                }
+                let item = MessageMediaItem(placeholderImage: placeholder, size: size)
+                item.url = URL(string: object.url ?? "")
+                return .photo(item)
+            }
+        case .location:
+            if let object = message.messageObject as? NIMLocationObject {
+                let item = MessageLocationItem(location: CLLocation(latitude: object.latitude, longitude: object.longitude), size: CGSize(width: 100, height: 100))
+                return .location(item)
+            }
         default:
             break
         }
@@ -161,7 +179,11 @@ class NeteaseMessageObject: MessageObject {
         messageId = message.messageId
         sentDate = Date(timeIntervalSince1970: message.timestamp)
         kind = NeteaseMessageDecoder.decode(message: message)
-        messageContent = kind.messageContent
+        if let content = message.apnsContent {
+            messageContent = content
+        } else {
+            messageContent = kind.messageContent
+        }
         info.info = NIMSDK.shared().userManager.userInfo(user.id)
         if info.info == nil {
             NIMSDK.shared().userManager.fetchUserInfos([user.id]) { (infos, error) in

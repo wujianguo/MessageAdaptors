@@ -35,6 +35,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         
         session.add(consumer: self)
@@ -61,7 +62,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
     // MARK: - Load more messages
     
     func firstLoad() {
-        if session.messages.count > 0 {
+        if session.messages.count > 20 {
             return
         }
         let msgs = session.fetchLocalHistory()
@@ -85,6 +86,7 @@ extension SessionViewController: MessageConsumer {
         let end = session.messages.count
         let index = IndexSet(integersIn: start..<end)
         messagesCollectionView.insertSections(index)
+        messagesCollectionView.scrollToBottom()
     }
 
 }
@@ -105,17 +107,81 @@ extension SessionViewController: MessagesDataSource {
     }
 }
 
-extension SessionViewController: MessagesDisplayDelegate, MessagesLayoutDelegate {
-    func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 200
+extension SessionViewController: MessagesDisplayDelegate {
+    
+    func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
+        return [.url, .address, .phoneNumber, .date, .transitInformation]
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let message = session.messages[indexPath.section]
         avatarView.kf.setImage(with: message.user.avatarURL)
     }
+    
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        switch message.kind {
+        case .photo(let item):
+            imageView.kf.setImage(with: item.url)
+        default:
+            break
+        }
+    }
 }
 
+extension SessionViewController: MessagesLayoutDelegate {
+
+}
+
+// MARK: - MessageCellDelegate
+extension SessionViewController: MessageCellDelegate {
+    
+    func didTapAvatar(in cell: MessageCollectionViewCell) {
+        let vc = UserTableViewController<AccountType>(account: account, user: session.user)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+        print("Message tapped")
+    }
+    
+    func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
+        print("Top cell label tapped")
+    }
+    
+    func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
+        print("Top message label tapped")
+    }
+    
+    func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {
+        print("Bottom label tapped")
+    }
+    
+}
+
+// MARK: - MessageLabelDelegate
+extension SessionViewController: MessageLabelDelegate {
+    
+    func didSelectAddress(_ addressComponents: [String: String]) {
+        print("Address Selected: \(addressComponents)")
+    }
+    
+    func didSelectDate(_ date: Date) {
+        print("Date Selected: \(date)")
+    }
+    
+    func didSelectPhoneNumber(_ phoneNumber: String) {
+        print("Phone Number Selected: \(phoneNumber)")
+    }
+    
+    func didSelectURL(_ url: URL) {
+        print("URL Selected: \(url)")
+    }
+    
+    func didSelectTransitInformation(_ transitInformation: [String: String]) {
+        print("TransitInformation Selected: \(transitInformation)")
+    }
+    
+}
 
 // MARK: - MessageInputBarDelegate
 

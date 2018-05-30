@@ -9,6 +9,36 @@
 import Foundation
 import MessageKit
 
+class MessageMediaItem: MediaItem {
+    
+    var url: URL? = nil
+    
+    var image: UIImage? = nil
+    
+    var placeholderImage: UIImage
+    
+    var size: CGSize
+    
+    init(placeholderImage: UIImage, size: CGSize) {
+        self.placeholderImage = placeholderImage
+        self.size = size
+    }
+    
+}
+
+import class CoreLocation.CLLocation
+
+class MessageLocationItem: LocationItem {
+    
+    var location: CLLocation
+    
+    var size: CGSize
+    
+    init(location: CLLocation, size: CGSize) {
+        self.location = location
+        self.size = size
+    }
+}
 
 protocol MessageObject: MessageType {
         
