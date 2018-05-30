@@ -28,6 +28,8 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         title = session.displayName
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.User, style: .plain, target: self, action: #selector(userItemClick(sender:)))
+        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -39,7 +41,15 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
     deinit {
         session.remove(consumer: self)
     }
+
+    // MARK: - Navigation
+
+    @objc func userItemClick(sender: UIBarButtonItem) {
+        
+    }
+
 }
+
 
 // MARK: - MessageConsumer
 

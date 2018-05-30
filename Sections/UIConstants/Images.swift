@@ -12,8 +12,10 @@ struct Images {
     
 }
 
-// tab
+// session
 extension Images {
-    static let Contact = UIImage(named: "tab_contact")
-    static let Me      = UIImage(named: "tab_me")
+    
+    static let User    = UIImage(named: "message_user_icon")
+    static let Group   = UIImage(named: "message_group_icon")
+
 }

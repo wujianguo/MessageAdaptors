@@ -32,8 +32,15 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
         tableView.tableFooterView = UIView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(statusChanged(notification:)), name: AccountStatusChangedNotificationName, object: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(requestFriend(sender:)))
     }
-        
+    
+    // MARK: - Action
+    @objc func requestFriend(sender: UIBarButtonItem) {
+        let vc = RequestFriendViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - Notification
     @objc func statusChanged(notification: Notification) {
         if let status = notification.userInfo?["status"] as? AccountStatus {

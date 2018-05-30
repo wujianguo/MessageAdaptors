@@ -12,7 +12,7 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
 
     var sessions: SessionsTableViewController<AccountType>!
     var contact:  ContactTableViewController<AccountType>!
-    var more:     UserTableViewController<AccountType>!
+    var more:     AccountTableViewController<AccountType>!
     
     var account: AccountType!
     
@@ -29,7 +29,7 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
 
         sessions = SessionsTableViewController<AccountType>(account: account)
         contact  = ContactTableViewController<AccountType>(account: account)
-        more     = UserTableViewController<AccountType>(account: account)
+        more     = AccountTableViewController<AccountType>(account: account)
         
         viewControllers = [
             createTab(vc: sessions, item: .recents,  tag: 0),
