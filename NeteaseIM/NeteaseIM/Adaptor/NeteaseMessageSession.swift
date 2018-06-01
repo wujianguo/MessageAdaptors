@@ -29,21 +29,7 @@ class NeteaseMessageSession: MessageSession {
     
     var sessionType: MessageSessionType
     
-    var id: String {
-        return info.id
-    }
-
-    var displayName: String {
-        return info.displayName
-    }
-    
-    var avatarURL: URL {
-        return info.avatarURL
-    }
-    
-    var user: MessageUser {
-        return info
-    }
+    var user: MessageUser = NIMUser()
     
     var lastMessage: NeteaseMessageObject? = nil
     
@@ -52,64 +38,56 @@ class NeteaseMessageSession: MessageSession {
     var session: NIMSession
     
     var consumers = [MessageConsumer]()
-        
-    var info: NeteaseMessageUser
 
     init(recent: NIMRecentSession) {
         if let last = recent.lastMessage {
             self.lastMessage = NeteaseMessageObject(message: last)
         }
         sessionType = recent.session!.sessionType.toType()
-        let sessionId = recent.session?.sessionId ?? ""
         self.session = recent.session!
-        info = NeteaseMessageUser(id: sessionId, displayName: sessionId, avatarURL: DefaultAvatarURL)
-        info = fetchUserInfo(session: recent.session!)
+        self.user = fetchUserInfo(session: self.session)
     }
     
-    func fetchUserInfo(session: NIMSession) -> NeteaseMessageUser {
-        var info: NeteaseMessageUser? = nil
+    func fetchUserInfo(session: NIMSession) -> MessageUser {
         switch session.sessionType {
         case .P2P:
-            info = p2pUserInfo(session: session)
+            return p2pUserInfo(session: session)
         default:
-            info = teamUserInfo(session: session)
-        }
-        if let info = info {
-            return info
-        } else {
-            let sessionId = session.sessionId
-            return NeteaseMessageUser(id: sessionId, displayName: sessionId, avatarURL: DefaultAvatarURL)
+            return teamUserInfo(session: session)
         }
     }
     
-    func p2pUserInfo(session: NIMSession) -> NeteaseMessageUser? {
+    func p2pUserInfo(session: NIMSession) -> MessageUser {
         if let user = NIMSDK.shared().userManager.userInfo(session.sessionId) {
-            return NeteaseMessageUser(id: id, displayName: user.userInfo?.nickName ?? id, avatarURL: URL(string: user.userInfo?.avatarUrl ?? "") ?? DefaultAvatarURL)
+            return user
         } else {
             NIMSDK.shared().userManager.fetchUserInfos([session.sessionId]) { (users, error) in
-                
+                if let user = users?.first {
+                    self.user = user
+                }
             }
-            return nil
+            return NIMUser()
         }
     }
     
-    func teamUserInfo(session: NIMSession) -> NeteaseMessageUser? {
+    func teamUserInfo(session: NIMSession) -> MessageUser {
         if let team = NIMSDK.shared().teamManager.team(byId: session.sessionId) {
-            return NeteaseMessageUser(id: id, displayName: team.teamName ?? id, avatarURL: URL(string: team.avatarUrl ?? "") ?? DefaultAvatarURL)
+            return team
         } else {
             NIMSDK.shared().teamManager.fetchTeamInfo(session.sessionId) { (error, team) in
-                
+                if let team = team {
+                    self.user = team
+                }
             }
-            return nil
+            return NIMTeam()
         }
     }
     
-    func onRecv(message: NIMMessage) {
-        let msg = NeteaseMessageObject(message: message)
-        lastMessage = msg
-        messages.append(msg)
+    func onRecv(array: [NeteaseMessageObject]) {
+        lastMessage = array.last
+        self.messages.append(contentsOf: array)
         for consumer in consumers {
-            consumer.on(sessionId: id, recv: [msg])
+            consumer.on(sessionId: id, recv: array)
         }
     }
     

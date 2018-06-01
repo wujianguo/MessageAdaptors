@@ -20,6 +20,11 @@ extension Strings {
 
 // status
 extension Strings {
-    static let Connecting = NSLocalizedString("Connecting", comment: "Connecting")
+    static let Connecting   = NSLocalizedString("Connecting", comment: "Connecting")
     static let Disconnected = NSLocalizedString("Disconnected", comment: "Disconnected")
+}
+
+// message
+extension Strings {
+    static let NotSupportYet = NSLocalizedString("[not support yet.]", comment: "[not support yet.]")
 }

@@ -9,6 +9,19 @@
 import Foundation
 import MessageKit
 
+extension MessageKind {
+    
+    var messageContent: String {
+        switch self {
+        case .text(let text):
+            return text
+        default:
+            break
+        }
+        return Strings.NotSupportYet
+    }
+}
+
 class MessageMediaItem: MediaItem {
     
     var url: URL? = nil
@@ -47,6 +60,14 @@ protocol MessageObject: MessageType {
     var messageContent: String { get }
     
     var user: MessageUser { get }
+}
+
+extension MessageObject {
+    
+    var sender: Sender {
+        return Sender(id: user.id, displayName: user.displayName)
+    }
+
 }
 
 

@@ -27,13 +27,20 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = Strings.Contact
         tableView.rowHeight = 60
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: ContactTableViewCell.identifier())
         tableView.tableFooterView = UIView()
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(requestFriend(sender:)))
+        
+        contact.loadFriends { (error) in
+            guard error == nil else {
+                return
+            }
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Action

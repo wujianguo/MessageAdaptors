@@ -25,6 +25,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
     }
     
     let refreshControl = UIRefreshControl()
+    var firstWillAppear = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +45,19 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         refreshControl.addTarget(self, action: #selector(loadMoreMessages(sender:)), for: .valueChanged)
         
         firstLoad()
-        messagesCollectionView.scrollToBottom()
     }
 
     deinit {
         session.remove(consumer: self)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if firstWillAppear {
+            firstWillAppear = false
+            messagesCollectionView.scrollToBottom()
+        }
+    }
 
     // MARK: - Navigation
 
@@ -104,7 +111,7 @@ extension SessionViewController: MessagesDataSource {
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return session.messages[indexPath.section]
-    }
+    }    
 }
 
 extension SessionViewController: MessagesDisplayDelegate {
@@ -136,8 +143,10 @@ extension SessionViewController: MessagesLayoutDelegate {
 extension SessionViewController: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
-        let vc = UserTableViewController<AccountType>(account: account, user: session.user)
-        navigationController?.pushViewController(vc, animated: true)
+        if let indexPath = messagesCollectionView.indexPath(for: cell) {
+            let vc = UserTableViewController<AccountType>(account: account, user: session.messages[indexPath.section].user)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {

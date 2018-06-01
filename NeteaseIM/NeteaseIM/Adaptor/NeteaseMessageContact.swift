@@ -14,4 +14,7 @@ class NeteaseMessageContact: MessageContact {
         return NIMSDK.shared().userManager.myFriends() ?? []
     }
     
+    func loadFriends(complete: Completion?) {
+        complete?(nil)
+    }
 }

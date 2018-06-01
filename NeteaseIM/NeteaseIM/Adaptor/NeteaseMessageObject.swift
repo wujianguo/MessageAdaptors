@@ -11,46 +11,6 @@ import MessageKit
 import class CoreLocation.CLLocation
 
 
-extension MessageKind: Hashable {
-
-    public var hashValue : Int {
-        return 1
-    }
-    
-    func toInt() -> Int {
-        switch self {
-        case .text:
-            return 1
-        case .attributedText:
-            return 2
-        case .photo:
-            return 3
-        case .video:
-            return 4
-        case .location:
-            return 5
-        case .emoji:
-            return 6
-        case .custom:
-            return 7
-        }
-    }
-    
-    public static func == (lhs: MessageKind, rhs: MessageKind) -> Bool {
-        return lhs.toInt() == rhs.toInt()
-    }
-
-    var messageContent: String {
-        switch self {
-        case .text(let text):
-            return text
-        default:
-            break
-        }
-        return "[not support yet.]"
-    }
-}
-
 class NeteaseMessageTextCoder: MessageDecoder, MessageEncoder {
     
     func encode(text: String) -> NIMMessage {
@@ -141,7 +101,11 @@ class NeteaseMessageDecoder {
         default:
             break
         }
-        return .text("[not support yet.]")
+        if let content = message.apnsContent {
+            return .text(content)
+        } else {
+            return .text(Strings.NotSupportYet)
+        }
     }
     
     static func decode(textMessage: NIMMessage) -> NeteaseMessageObject {
@@ -153,10 +117,6 @@ class NeteaseMessageDecoder {
 
 class NeteaseMessageObject: MessageObject {
     
-    var sender: Sender {
-        return Sender(id: user.id, displayName: user.displayName)
-    }
-
     var messageId: String
     
     var sentDate: Date
@@ -166,16 +126,15 @@ class NeteaseMessageObject: MessageObject {
     var messageContent: String
     
     var user: MessageUser {
-        return info
+        didSet {
+
+        }
     }
-    
-    var info: NeteaseMessageUser
     
     var message: NIMMessage? = nil
     
     init(message: NIMMessage) {
         self.message = message
-        info = NeteaseMessageUser(id: message.from ?? "", displayName: message.senderName ?? "", avatarURL: DefaultAvatarURL)
         messageId = message.messageId
         sentDate = Date(timeIntervalSince1970: message.timestamp)
         kind = NeteaseMessageDecoder.decode(message: message)
@@ -184,16 +143,35 @@ class NeteaseMessageObject: MessageObject {
         } else {
             messageContent = kind.messageContent
         }
-        info.info = NIMSDK.shared().userManager.userInfo(user.id)
-        if info.info == nil {
-            NIMSDK.shared().userManager.fetchUserInfos([user.id]) { (infos, error) in
-                self.info.info = infos?.first
+        if let user = NIMSDK.shared().userManager.userInfo(message.from ?? "") {
+            self.user = user
+            if user.userInfo == nil {
+                NIMSDK.shared().userManager.fetchUserInfos([message.from ?? ""]) { (infos, error) in
+                    if let user = infos?.first {
+                        self.user = user
+                    }
+                }
+            }
+        } else {
+            self.user = NIMUser()
+            NIMSDK.shared().userManager.fetchUserInfos([message.from ?? ""]) { (infos, error) in
+                if let user = infos?.first {
+                    self.user = user
+                }
+            }
+        }
+        
+        func fetchUser(userId: String) {
+            NIMSDK.shared().userManager.fetchUserInfos([userId]) { (infos, error) in
+                if let user = infos?.first {
+                    self.user = user
+                }
             }
         }
     }
     
     required init(kind: MessageKind, sender: MessageUser) {
-        self.info = NeteaseMessageUser(id: sender.id, displayName: sender.displayName, avatarURL: sender.avatarURL)
+        self.user = sender
         self.kind = kind
         messageId = UUID().uuidString
         sentDate = Date(timeIntervalSinceNow: 0)

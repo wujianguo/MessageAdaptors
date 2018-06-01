@@ -1,15 +1,15 @@
 //
-//  MainViewController.swift
+//  MasterViewController.swift
 //  NeteaseIM
 //
-//  Created by Jianguo Wu on 2018/5/23.
+//  Created by Jianguo Wu on 2018/5/31.
 //  Copyright © 2018年 wujianguo. All rights reserved.
 //
 
 import UIKit
 
-class MainViewController<AccountType: MessageAccount>: UITabBarController {
-
+class MasterViewController<AccountType: MessageAccount>: UITabBarController {
+    
     var sessions: SessionsTableViewController<AccountType>!
     var contact:  ContactTableViewController<AccountType>!
     var more:     AccountTableViewController<AccountType>!
@@ -18,15 +18,7 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        account = AccountType()
-        account.autoLogin { (error) in
-            guard error == nil else {
-                print("login:\(String(describing: error))")
-                return
-            }
-        }
-
+                
         sessions = SessionsTableViewController<AccountType>(account: account)
         contact  = ContactTableViewController<AccountType>(account: account)
         more     = AccountTableViewController<AccountType>(account: account)
@@ -36,7 +28,7 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
             createTab(vc: contact,  item: .contacts, tag: 1),
             createTab(vc: more,     item: .more,     tag: 2),
         ]
-
+        
     }
     
     func createTab(vc: UIViewController, name: String, image: UIImage?, tag: Int) -> UINavigationController {
@@ -51,25 +43,4 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: item, tag: tag)
         return navigationController;
     }
-}
-
-class SplitViewController<AccountType: MessageAccount>: UISplitViewController, UISplitViewControllerDelegate {
-    
-    var account: AccountType!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        account = AccountType()
-        account.autoLogin { (error) in
-            guard error == nil else {
-                return
-            }
-        }
-
-        delegate = self
-
-    }
-    
-    
 }

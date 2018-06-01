@@ -12,6 +12,8 @@ protocol MessageContact {
     
     var friends: [MessageUser] { get }
     
+    func loadFriends(complete: Completion?)
+    
 //    func requestFriend()
     
 //    func acceptFriend()

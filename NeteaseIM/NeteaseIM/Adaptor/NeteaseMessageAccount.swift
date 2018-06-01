@@ -36,7 +36,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     
     var displayName: String = ""
     
-    var avatarURL: URL = DefaultAvatarURL
+    var avatarURL: URL = Images.avatarURL(id: NeteaseMessageAccount.name)
     
     var contact = NeteaseMessageContact()
     
@@ -45,11 +45,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             NotificationCenter.default.post(name: AccountStatusChangedNotificationName, object: self, userInfo: ["status": status])
         }
     }
-    
-    func sender() -> Sender {
-        return Sender(id: id, displayName: displayName)
-    }
-    
+        
     required override init() {
         super.init()
     }
@@ -98,6 +94,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
         status = .Connected
     }
     
+    
     func send(message: NeteaseMessageObject, to session: NeteaseMessageSession) {
         session.messages.append(message)
         do {
@@ -115,11 +112,20 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     }
     
     func dispatchMessages(messages: [NIMMessage]) {
+        var count = 0
         for session in sessions {
+            var array = [NeteaseMessageObject]()
             for message in messages {
                 if message.session?.sessionId == session.session.sessionId {
-                    session.onRecv(message: message)
+                    count += 1
+                    array.append(NeteaseMessageObject(message: message))
                 }
+            }
+            if array.count > 0 {
+                session.onRecv(array: array)
+            }
+            if count == messages.count {
+                break;
             }
         }
     }

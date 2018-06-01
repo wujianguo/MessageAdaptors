@@ -43,6 +43,7 @@
 		814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEE20BE7364006E4FC6 /* MessageUser.swift */; };
 		814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */; };
 		814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */; };
+		814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BFF20BFDEEA006E4FC6 /* MasterViewController.swift */; };
 		81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4720A04385009D9916 /* MessageSession.swift */; };
 		81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */; };
 		81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */; };
@@ -115,6 +116,7 @@
 		814E1BEE20BE7364006E4FC6 /* MessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUser.swift; sourceTree = "<group>"; };
 		814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageUser.swift; sourceTree = "<group>"; };
 		814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeadTableViewCell.swift; sourceTree = "<group>"; };
+		814E1BFF20BFDEEA006E4FC6 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		81D4AE4720A04385009D9916 /* MessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProducer.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				8109FD7620B5373F0051C192 /* MainViewController.swift */,
 				8109FD8720B540AB0051C192 /* BaseNavigationController.swift */,
+				814E1BFF20BFDEEA006E4FC6 /* MasterViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,
 				814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */,
+				814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */,
 				8109FD8620B53FDF0051C192 /* Images.swift in Sources */,
 				8109FD6B20B536400051C192 /* SessionsTableViewController.swift in Sources */,
 				810E129920A0213A00D10B5E /* AppDelegate.swift in Sources */,

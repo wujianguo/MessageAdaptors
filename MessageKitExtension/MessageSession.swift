@@ -25,13 +25,7 @@ protocol MessageSession {
     var messages: [ObjectType] { get set }
     
     var consumers: [MessageConsumer] { get set }
-    
-    var id: String { get }
-    
-    var displayName: String { get }
-    
-    var avatarURL: URL { get }
-    
+        
     var user: MessageUser { get }
     
     func fetchLocalHistory() -> [ObjectType]
@@ -40,6 +34,18 @@ protocol MessageSession {
 }
 
 extension MessageSession {
+    
+    var id: String {
+        return user.id
+    }
+    
+    var displayName: String {
+        return user.displayName
+    }
+    
+    var avatarURL: URL {
+        return user.avatarURL
+    }
     
     mutating func add(consumer: MessageConsumer) {
         for cs in consumers {

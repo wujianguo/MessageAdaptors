@@ -15,15 +15,31 @@ extension NIMUser: MessageUser {
     }
     
     var displayName: String {
-        return userInfo?.nickName ?? ""
+        return userInfo?.nickName ?? id
     }
     
     var avatarURL: URL {
-        return URL(string: userInfo?.avatarUrl ?? "") ?? DefaultAvatarURL
+        return URL(string: userInfo?.avatarUrl ?? "") ?? Images.avatarURL(id: id)
     }
     
 }
 
+extension NIMTeam: MessageUser {
+    
+    var id: String {
+        return teamId ?? ""
+    }
+    
+    var displayName: String {
+        return teamName ?? ""
+    }
+    
+    var avatarURL: URL {
+        return URL(string: avatarUrl ?? "") ?? Images.avatarURL(id: id)
+    }
+    
+}
+/*
 class NeteaseMessageUser: MessageUser {
     
     var id: String
@@ -53,3 +69,4 @@ class NeteaseMessageUser: MessageUser {
     }
     
 }
+*/

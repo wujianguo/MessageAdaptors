@@ -13,11 +13,8 @@ typealias Completion = (Error?) -> Void
 
 let AccountStatusChangedNotificationName = Notification.Name("AccountStatusChangedNotificationName")
 
-let DefaultAvatarURL = URL(string: "https://dn-coding-net-avatar.qbox.me/4d5b9231-5b44-4ade-b08f-8d1a825aae58.png?imageMogr2/thumbnail/80")!
+//let DefaultAvatarURL = URL(string: "https://dn-coding-net-avatar.qbox.me/4d5b9231-5b44-4ade-b08f-8d1a825aae58.png?imageMogr2/thumbnail/80")!
 
-//extension Sender: MessageUser {
-//
-//}
 
 enum AccountStatus {
     
@@ -43,8 +40,6 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     
     
     var status: AccountStatus { get set }
-
-    func sender() -> Sender
     
     func autoLogin(complete: Completion?)
         
@@ -58,3 +53,10 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     var contact: ContactType { get }
 }
 
+extension MessageAccount {
+    
+    func sender() -> Sender {
+        return Sender(id: id, displayName: displayName)
+    }
+
+}
