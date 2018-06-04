@@ -31,7 +31,8 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         title = session.displayName
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.User, style: .plain, target: self, action: #selector(userItemClick(sender:)))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonImage, style: .plain, target: self, action: #selector(userItemClick(sender:)))
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -45,6 +46,15 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         refreshControl.addTarget(self, action: #selector(loadMoreMessages(sender:)), for: .valueChanged)
         
         firstLoad()
+    }
+    
+    var rightBarButtonImage: UIImage? {
+        switch session.sessionType {
+        case .P2P:
+            return Images.User
+        default:
+            return Images.Group
+        }
     }
 
     deinit {
@@ -111,10 +121,31 @@ extension SessionViewController: MessagesDataSource {
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return session.messages[indexPath.section]
-    }    
+    }
+    
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if indexPath.section % 3 == 0 {
+            return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedStringKey.foregroundColor: UIColor.darkGray])
+        }
+        return nil
+    }
+
+    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if session.sessionType != .P2P {
+            let name = message.sender.displayName
+            return NSAttributedString(string: name, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .caption1)])
+        } else {
+            return nil
+        }
+    }
+
 }
 
 extension SessionViewController: MessagesDisplayDelegate {
+    
+    func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedStringKey: Any] {
+        return MessageLabel.defaultAttributes
+    }
     
     func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
         return [.url, .address, .phoneNumber, .date, .transitInformation]
@@ -133,9 +164,29 @@ extension SessionViewController: MessagesDisplayDelegate {
             break
         }
     }
+    
+    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        return .bubbleTail(corner, .curved)
+    }
 }
 
 extension SessionViewController: MessagesLayoutDelegate {
+    
+    func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        if indexPath.section % 3 == 0 {
+            return 10
+        }
+        return 0
+    }
+    
+    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        if session.sessionType != .P2P {
+            return 16
+        } else {
+            return 0
+        }
+    }
 
 }
 

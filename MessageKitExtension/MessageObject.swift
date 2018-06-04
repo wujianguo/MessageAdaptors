@@ -11,6 +11,25 @@ import MessageKit
 
 extension MessageKind {
     
+//    var typeValue: Int {
+//        switch self {
+//        case .text:
+//            return 1
+//        case .attributedText:
+//            return 2
+//        case .photo:
+//            return 3
+//        case .video:
+//            return 4
+//        case .location:
+//            return 5
+//        case .emoji:
+//            return 6
+//        case .custom:
+//            return 7
+//        }
+//    }
+    
     var messageContent: String {
         switch self {
         case .text(let text):
@@ -19,6 +38,69 @@ extension MessageKind {
             break
         }
         return Strings.NotSupportYet
+    }
+    
+    var text: String? {
+        switch self {
+        case .text(let text):
+            return text
+        default:
+            return nil
+        }
+    }
+    
+    var attributedText: NSAttributedString? {
+        switch self {
+        case .attributedText(let attributedText):
+            return attributedText
+        default:
+            return nil
+        }
+    }
+    
+    var photo: MediaItem? {
+        switch self {
+        case .photo(let item):
+            return item
+        default:
+            return nil
+        }
+    }
+    
+    var video: MediaItem? {
+        switch self {
+        case .video(let item):
+            return item
+        default:
+            return nil
+        }
+    }
+    
+    var location: LocationItem? {
+        switch self {
+        case .location(let item):
+            return item
+        default:
+            return nil
+        }
+    }
+    
+    var emoji: String? {
+        switch self {
+        case .emoji(let emoji):
+            return emoji
+        default:
+            return nil
+        }
+    }
+    
+    var custom: Any? {
+        switch self {
+        case .custom(let item):
+            return item
+        default:
+            return nil
+        }
     }
 }
 
@@ -78,18 +160,6 @@ protocol MessageEncoder {
 protocol MessageDecoder {
     
 }
-/*
-protocol MessageDecodable {
 
-    init(from decoder: MessageDecoder) throws
+typealias MessageCoding = MessageDecoder & MessageEncoder
 
-}
-
-protocol MessageEncodable {
-    
-    func encode(to encoder: MessageEncoder) throws
-
-}
-
-typealias MessageCodable = MessageDecodable & MessageEncodable
-*/

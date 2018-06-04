@@ -27,4 +27,5 @@ extension Strings {
 // message
 extension Strings {
     static let NotSupportYet = NSLocalizedString("[not support yet.]", comment: "[not support yet.]")
+    static let ID            = NSLocalizedString("ID", comment: "ID")
 }

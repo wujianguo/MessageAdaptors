@@ -11,6 +11,11 @@ import MessageKit
 
 struct NeteaseRegisterData {
     
+    let username: String
+    
+    let password: String
+    
+    let nickname: String
 }
 
 struct NeteaseLoginData {
@@ -51,8 +56,8 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     }
     
     func autoLogin(complete: Completion?) {
-        let name = "JustinWu"
-        let token = "289a18bab6b5b60d9b1ce3c426833a9d"
+        let name = "justin11"
+        let token = "e10adc3949ba59abbe56e057f20f883e"
         status = .Connecting
         NIMSDK.shared().loginManager.login(name, token: token) { (error) in
             self.displayName = name

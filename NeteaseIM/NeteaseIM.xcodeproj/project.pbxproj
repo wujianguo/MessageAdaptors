@@ -44,6 +44,12 @@
 		814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */; };
 		814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */; };
 		814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BFF20BFDEEA006E4FC6 /* MasterViewController.swift */; };
+		814E1C5720C14EDF006E4FC6 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1C5620C14EDF006E4FC6 /* APIClient.swift */; };
+		816775C020C4D0450024A556 /* NeteaseMessageTextCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775BF20C4D0450024A556 /* NeteaseMessageTextCoding.swift */; };
+		816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C120C4D0570024A556 /* NeteaseMessagePhotoCoding.swift */; };
+		816775C420C4D0750024A556 /* NeteaseMessageVideoCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C320C4D0750024A556 /* NeteaseMessageVideoCoding.swift */; };
+		816775C620C4D0D00024A556 /* NeteaseMessageLocationCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C520C4D0D00024A556 /* NeteaseMessageLocationCoding.swift */; };
+		816775C820C4D9F40024A556 /* NeteaseMessageCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C720C4D9F40024A556 /* NeteaseMessageCoding.swift */; };
 		81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4720A04385009D9916 /* MessageSession.swift */; };
 		81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */; };
 		81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */; };
@@ -117,6 +123,12 @@
 		814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageUser.swift; sourceTree = "<group>"; };
 		814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeadTableViewCell.swift; sourceTree = "<group>"; };
 		814E1BFF20BFDEEA006E4FC6 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		814E1C5620C14EDF006E4FC6 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		816775BF20C4D0450024A556 /* NeteaseMessageTextCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageTextCoding.swift; sourceTree = "<group>"; };
+		816775C120C4D0570024A556 /* NeteaseMessagePhotoCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessagePhotoCoding.swift; sourceTree = "<group>"; };
+		816775C320C4D0750024A556 /* NeteaseMessageVideoCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageVideoCoding.swift; sourceTree = "<group>"; };
+		816775C520C4D0D00024A556 /* NeteaseMessageLocationCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageLocationCoding.swift; sourceTree = "<group>"; };
+		816775C720C4D9F40024A556 /* NeteaseMessageCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageCoding.swift; sourceTree = "<group>"; };
 		81D4AE4720A04385009D9916 /* MessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProducer.swift; sourceTree = "<group>"; };
@@ -186,6 +198,7 @@
 		8109FD6520B536400051C192 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				814E1C5420C13A82006E4FC6 /* Service */,
 				8109FD7520B536C30051C192 /* Main */,
 				8109FD6820B536400051C192 /* Session */,
 				8109FD6620B536400051C192 /* Contact */,
@@ -328,6 +341,7 @@
 		810E130320A02A6600D10B5E /* Adaptor */ = {
 			isa = PBXGroup;
 			children = (
+				816775BE20C4D02F0024A556 /* Coding */,
 				810E130620A02B1000D10B5E /* NeteaseIM-Bridging-Header.h */,
 				810E130420A02A8800D10B5E /* NeteaseMessageAccount.swift */,
 				81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */,
@@ -336,6 +350,34 @@
 				814E1BF020BE737F006E4FC6 /* NeteaseMessageUser.swift */,
 			);
 			path = Adaptor;
+			sourceTree = "<group>";
+		};
+		814E1C5420C13A82006E4FC6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				814E1C5520C13A82006E4FC6 /* Network */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		814E1C5520C13A82006E4FC6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				814E1C5620C14EDF006E4FC6 /* APIClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		816775BE20C4D02F0024A556 /* Coding */ = {
+			isa = PBXGroup;
+			children = (
+				816775C720C4D9F40024A556 /* NeteaseMessageCoding.swift */,
+				816775BF20C4D0450024A556 /* NeteaseMessageTextCoding.swift */,
+				816775C120C4D0570024A556 /* NeteaseMessagePhotoCoding.swift */,
+				816775C320C4D0750024A556 /* NeteaseMessageVideoCoding.swift */,
+				816775C520C4D0D00024A556 /* NeteaseMessageLocationCoding.swift */,
+			);
+			path = Coding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,25 +632,31 @@
 				814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */,
 				81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */,
 				814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */,
+				816775C820C4D9F40024A556 /* NeteaseMessageCoding.swift in Sources */,
 				8109FD8820B540AB0051C192 /* BaseNavigationController.swift in Sources */,
 				81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */,
 				8109FD7720B5373F0051C192 /* MainViewController.swift in Sources */,
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
 				81D4AE5220A04DBA009D9916 /* MessageConsumer.swift in Sources */,
 				8109FD7A20B538BD0051C192 /* Strings.swift in Sources */,
+				816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */,
 				81D4AE5620A0657B009D9916 /* MessageObject.swift in Sources */,
 				8109FD7C20B53B8D0051C192 /* ContactTableViewController.swift in Sources */,
 				81D4AE5420A04E6B009D9916 /* MessageConversation.swift in Sources */,
 				814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */,
 				8109FD9D20B7B9A20051C192 /* MessageSessionManager.swift in Sources */,
+				814E1C5720C14EDF006E4FC6 /* APIClient.swift in Sources */,
 				8109FD7E20B53B9C0051C192 /* UserTableViewController.swift in Sources */,
+				816775C020C4D0450024A556 /* NeteaseMessageTextCoding.swift in Sources */,
 				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,
 				814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */,
 				814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */,
 				8109FD8620B53FDF0051C192 /* Images.swift in Sources */,
+				816775C620C4D0D00024A556 /* NeteaseMessageLocationCoding.swift in Sources */,
 				8109FD6B20B536400051C192 /* SessionsTableViewController.swift in Sources */,
 				810E129920A0213A00D10B5E /* AppDelegate.swift in Sources */,
+				816775C420C4D0750024A556 /* NeteaseMessageVideoCoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

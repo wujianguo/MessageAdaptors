@@ -90,7 +90,7 @@ class UserHeadTableViewCell: UITableViewCell {
     func update() {
         avatarImageView.kf.setImage(with: user.avatarURL)
         displayLabel.text = user.displayName
-        idLabel.text = user.id        
+        idLabel.text = "\(Strings.ID): \(user.id)"
     }
 
 }

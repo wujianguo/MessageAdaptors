@@ -11,110 +11,6 @@ import MessageKit
 import class CoreLocation.CLLocation
 
 
-class NeteaseMessageTextCoder: MessageDecoder, MessageEncoder {
-    
-    func encode(text: String) -> NIMMessage {
-        let ret = NIMMessage()
-        ret.text = text
-        return ret
-    }
-    
-    func decode(message: NIMMessage) -> MessageKind {
-        return .text(message.text ?? "")
-    }
-    
-}
-
-class NeteaseMessageImageCoder: MessageDecoder, MessageEncoder {
-    
-    func encode(text: String) -> NIMMessage {
-        let ret = NIMMessage()
-        ret.text = text
-        return ret
-    }
-    
-    func decode(message: NIMMessage) -> MessageKind {
-        return .text("")
-//        let item =
-//        return .photo(item)
-    }
-
-}
-
-class NeteaseMessageLocationCoder: MessageDecoder, MessageEncoder {
-    
-}
-
-class NeteaseMessageEncoder {
-    
-    typealias EncoderFunc = (NeteaseMessageObject) -> NIMMessage
-
-    static let encoders: [Int: EncoderFunc] = [
-        1: NeteaseMessageEncoder.encodeText
-    ]
-    
-    static func encodeText(message: NeteaseMessageObject) -> NIMMessage {
-        return NIMMessage()
-    }
-    
-    static func encode(message: NeteaseMessageObject) -> NIMMessage {
-        let ret = NIMMessage()
-        switch message.kind {
-        case .text(let text):
-            ret.text = text
-        default:
-            break
-        }
-        return ret
-    }
-    
-}
-
-class NeteaseMessageDecoder {
-    
-    static let decoders = ""
-    
-    static func decode(message: NIMMessage) -> MessageKind {
-        switch message.messageType {
-        case .text:
-            if let text = message.text {
-                return .text(text)
-            }
-        case .image:
-            if let object = message.messageObject as? NIMImageObject {
-                let placeholder = UIImage()
-                var size = object.size
-                let m = max(size.width, size.height)
-                if m > 100 {
-                    let ratio = m / 100.0
-                    size = CGSize(width: size.width/ratio, height: size.height/ratio)
-                }
-                let item = MessageMediaItem(placeholderImage: placeholder, size: size)
-                item.url = URL(string: object.url ?? "")
-                return .photo(item)
-            }
-        case .location:
-            if let object = message.messageObject as? NIMLocationObject {
-                let item = MessageLocationItem(location: CLLocation(latitude: object.latitude, longitude: object.longitude), size: CGSize(width: 100, height: 100))
-                return .location(item)
-            }
-        default:
-            break
-        }
-        if let content = message.apnsContent {
-            return .text(content)
-        } else {
-            return .text(Strings.NotSupportYet)
-        }
-    }
-    
-    static func decode(textMessage: NIMMessage) -> NeteaseMessageObject {
-        return NeteaseMessageObject(message: textMessage)
-    }
-    
-}
-
-
 class NeteaseMessageObject: MessageObject {
     
     var messageId: String
@@ -137,7 +33,7 @@ class NeteaseMessageObject: MessageObject {
         self.message = message
         messageId = message.messageId
         sentDate = Date(timeIntervalSince1970: message.timestamp)
-        kind = NeteaseMessageDecoder.decode(message: message)
+        kind = NeteaseMessageCoder.decode(message: message)
         if let content = message.apnsContent {
             messageContent = content
         } else {
@@ -179,6 +75,6 @@ class NeteaseMessageObject: MessageObject {
     }
     
     func encode() -> NIMMessage {
-        return NeteaseMessageEncoder.encode(message: self)
+        return NeteaseMessageCoder.encode(message: self)
     }
 }
