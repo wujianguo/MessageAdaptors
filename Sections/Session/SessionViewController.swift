@@ -111,6 +111,14 @@ extension SessionViewController: MessageConsumer {
 // MARK: - MessagesDataSource
 
 extension SessionViewController: MessagesDataSource {
+    
+    func shouldShowTime(at indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        }
+        return abs(session.messages[indexPath.section].sentDate.timeIntervalSince1970 - session.messages[indexPath.section-1].sentDate.timeIntervalSince1970) > 300
+    }
+    
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return session.messages.count
     }
@@ -124,7 +132,7 @@ extension SessionViewController: MessagesDataSource {
     }
     
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        if indexPath.section % 3 == 0 {
+        if shouldShowTime(at: indexPath) {
             return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedStringKey.foregroundColor: UIColor.darkGray])
         }
         return nil
@@ -174,7 +182,7 @@ extension SessionViewController: MessagesDisplayDelegate {
 extension SessionViewController: MessagesLayoutDelegate {
     
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        if indexPath.section % 3 == 0 {
+        if shouldShowTime(at: indexPath) {
             return 10
         }
         return 0
