@@ -71,7 +71,7 @@ class NeteaseMessageCoder {
         if let content = message.apnsContent {
             return .text(content)
         } else {
-            return .text("\(message.messageType.rawValue) \(Strings.NotSupportYet)")
+            return .text(Strings.NotSupportYet)
         }
     }
 

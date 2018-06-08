@@ -27,6 +27,23 @@ enum AccountStatus {
     case Disconnected
 }
 
+struct AccountSignupData {
+    
+    let username: String
+    
+    let password: String
+    
+    let nickname: String
+}
+
+struct AccountSigninData {
+    
+    let name: String
+    
+    let token: String
+    
+}
+
 
 protocol MessageAccount: MessageUser, MessageProducer where SessionType: MessageSession {
     
@@ -38,12 +55,17 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     
     init()
     
-    
     var status: AccountStatus { get set }
     
-    func autoLogin(complete: Completion?)
+    static func canAutoSignin() -> Bool
+    
+    func signup(data: AccountSignupData, complete: Completion?)
+    
+    func signin(data: AccountSigninData, complete: Completion?)
+    
+    func autoSignin(complete: Completion?)
         
-    func logout(complete: Completion?)
+    func signout(complete: Completion?)
 
     
     var sessions: [SessionType] { get set }

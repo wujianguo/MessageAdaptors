@@ -25,13 +25,20 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
         super.viewDidLoad()
 
         title = Strings.Me
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Strings.Signout, style: .plain, target: self, action: #selector(signoutClick(sender:)))
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @objc func signoutClick(sender: UIBarButtonItem) {
+        account.signout(complete: nil)
+        
+        let naccount = AccountType()
+        let vc = SigninViewController<AccountType>(account: naccount)
+        let nav = BaseNavigationController(rootViewController: vc)
+        let app = UIApplication.shared.delegate as! AppDelegate
+        app.window?.rootViewController = nav
+        
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

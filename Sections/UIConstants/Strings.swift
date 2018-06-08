@@ -29,3 +29,13 @@ extension Strings {
     static let NotSupportYet = NSLocalizedString("[not support yet.]", comment: "[not support yet.]")
     static let ID            = NSLocalizedString("ID", comment: "ID")
 }
+
+// signin & signup
+extension Strings {
+    static let inputNamePlaceholder = NSLocalizedString("user name for login", comment: "input your user name")
+    static let inputNickPlaceholder = NSLocalizedString("input your nick name", comment: "input your nick name")
+    static let inputPasswordPlaceholder = NSLocalizedString("input your password", comment: "input your password")
+    static let Signin = NSLocalizedString("Sign in", comment: "Sign in")
+    static let Signup = NSLocalizedString("Sign up", comment: "Sign up")
+    static let Signout = NSLocalizedString("Sign out", comment: "Sign out")
+}

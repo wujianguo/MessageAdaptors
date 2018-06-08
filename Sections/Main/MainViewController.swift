@@ -14,16 +14,26 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
     var contact:  ContactTableViewController<AccountType>!
     var more:     AccountTableViewController<AccountType>!
     
-    var account: AccountType!
+    let account: AccountType!
+    
+    init(account: AccountType) {
+        self.account = account
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        account = AccountType()
-        account.autoLogin { (error) in
-            guard error == nil else {
-                print("login:\(String(describing: error))")
-                return
+        if account.status != .Connected {
+            account.autoSignin { (error) in
+                guard error == nil else {
+                    print("login:\(String(describing: error))")
+                    return
+                }
             }
         }
 
@@ -37,6 +47,7 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
             createTab(vc: more,     item: .more,     tag: 2),
         ]
 
+        tabBar.tintColor = UIConstants.themeColor
     }
     
     func createTab(vc: UIViewController, name: String, image: UIImage?, tag: Int) -> UINavigationController {
@@ -59,13 +70,6 @@ class SplitViewController<AccountType: MessageAccount>: UISplitViewController, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        account = AccountType()
-        account.autoLogin { (error) in
-            guard error == nil else {
-                return
-            }
-        }
 
         delegate = self
 

@@ -14,5 +14,6 @@ struct UIConstants {
 }
 
 extension UIConstants {
-    static let padding = 8
+    static let padding    = 8
+    static let themeColor = UIColor(red: 238/255.0, green: 87/255.0, blue: 75/255.0, alpha: 1)
 }

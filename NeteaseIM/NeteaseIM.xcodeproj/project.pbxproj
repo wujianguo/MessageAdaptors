@@ -15,8 +15,6 @@
 		8109FD7A20B538BD0051C192 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD7920B538BD0051C192 /* Strings.swift */; };
 		8109FD7C20B53B8D0051C192 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD7B20B53B8D0051C192 /* ContactTableViewController.swift */; };
 		8109FD7E20B53B9C0051C192 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD7D20B53B9C0051C192 /* UserTableViewController.swift */; };
-		8109FD8020B53BBD0051C192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD7F20B53BBD0051C192 /* LoginViewController.swift */; };
-		8109FD8220B53BCB0051C192 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD8120B53BCB0051C192 /* RegisterViewController.swift */; };
 		8109FD8620B53FDF0051C192 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD8520B53FDF0051C192 /* Images.swift */; };
 		8109FD8820B540AB0051C192 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD8720B540AB0051C192 /* BaseNavigationController.swift */; };
 		8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109FD9620B6A13F0051C192 /* SessionTableViewCell.swift */; };
@@ -51,6 +49,9 @@
 		816775C620C4D0D00024A556 /* NeteaseMessageLocationCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C520C4D0D00024A556 /* NeteaseMessageLocationCoding.swift */; };
 		816775C820C4D9F40024A556 /* NeteaseMessageCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816775C720C4D9F40024A556 /* NeteaseMessageCoding.swift */; };
 		819AED8020C5080000B1491E /* NeteaseMessageNotificationCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED7F20C5080000B1491E /* NeteaseMessageNotificationCoding.swift */; };
+		819AED8720C69D7B00B1491E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED8620C69D7B00B1491E /* SigninViewController.swift */; };
+		819AED8920C69D8800B1491E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED8820C69D8800B1491E /* SignupViewController.swift */; };
+		819AED9120C908DA00B1491E /* String+md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED9020C908DA00B1491E /* String+md5.swift */; };
 		81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4720A04385009D9916 /* MessageSession.swift */; };
 		81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */; };
 		81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */; };
@@ -88,8 +89,6 @@
 		8109FD7920B538BD0051C192 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		8109FD7B20B53B8D0051C192 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 		8109FD7D20B53B9C0051C192 /* UserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
-		8109FD7F20B53BBD0051C192 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		8109FD8120B53BCB0051C192 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8109FD8520B53FDF0051C192 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		8109FD8720B540AB0051C192 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		8109FD9620B6A13F0051C192 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +130,9 @@
 		816775C520C4D0D00024A556 /* NeteaseMessageLocationCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageLocationCoding.swift; sourceTree = "<group>"; };
 		816775C720C4D9F40024A556 /* NeteaseMessageCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageCoding.swift; sourceTree = "<group>"; };
 		819AED7F20C5080000B1491E /* NeteaseMessageNotificationCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageNotificationCoding.swift; sourceTree = "<group>"; };
+		819AED8620C69D7B00B1491E /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		819AED8820C69D8800B1491E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		819AED9020C908DA00B1491E /* String+md5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+md5.swift"; sourceTree = "<group>"; };
 		81D4AE4720A04385009D9916 /* MessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4920A0464A009D9916 /* NeteaseMessageSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageSession.swift; sourceTree = "<group>"; };
 		81D4AE4F20A04DA9009D9916 /* MessageProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageProducer.swift; sourceTree = "<group>"; };
@@ -227,10 +229,10 @@
 			children = (
 				814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */,
 				8109FD7D20B53B9C0051C192 /* UserTableViewController.swift */,
-				8109FD7F20B53BBD0051C192 /* LoginViewController.swift */,
-				8109FD8120B53BCB0051C192 /* RegisterViewController.swift */,
 				814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */,
 				814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */,
+				819AED8620C69D7B00B1491E /* SigninViewController.swift */,
+				819AED8820C69D8800B1491E /* SignupViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				814E1C5520C13A82006E4FC6 /* Network */,
+				819AED9020C908DA00B1491E /* String+md5.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -618,7 +621,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8109FD8020B53BBD0051C192 /* LoginViewController.swift in Sources */,
 				814E1BDC20BD4669006E4FC6 /* MessageContact.swift in Sources */,
 				81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */,
 				814E1BC420BC1653006E4FC6 /* AccountTableViewController.swift in Sources */,
@@ -627,7 +629,6 @@
 				814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */,
 				810E129B20A0213A00D10B5E /* ViewController.swift in Sources */,
 				81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */,
-				8109FD8220B53BCB0051C192 /* RegisterViewController.swift in Sources */,
 				8109FD6C20B536400051C192 /* SessionViewController.swift in Sources */,
 				810E130520A02A8800D10B5E /* NeteaseMessageAccount.swift in Sources */,
 				814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */,
@@ -642,9 +643,12 @@
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
 				81D4AE5220A04DBA009D9916 /* MessageConsumer.swift in Sources */,
 				8109FD7A20B538BD0051C192 /* Strings.swift in Sources */,
+				819AED8720C69D7B00B1491E /* SigninViewController.swift in Sources */,
 				816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */,
 				81D4AE5620A0657B009D9916 /* MessageObject.swift in Sources */,
+				819AED8920C69D8800B1491E /* SignupViewController.swift in Sources */,
 				8109FD7C20B53B8D0051C192 /* ContactTableViewController.swift in Sources */,
+				819AED9120C908DA00B1491E /* String+md5.swift in Sources */,
 				81D4AE5420A04E6B009D9916 /* MessageConversation.swift in Sources */,
 				814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */,
 				8109FD9D20B7B9A20051C192 /* MessageSessionManager.swift in Sources */,

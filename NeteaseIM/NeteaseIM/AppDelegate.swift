@@ -16,7 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         NIMSDK.shared().register(withAppID: "45c6af3c98409b18a84451215d0bdd6e", cerName: nil)
-        window?.rootViewController = MainViewController<NeteaseMessageAccount>()
+
+        let account = NeteaseMessageAccount()
+        if NeteaseMessageAccount.canAutoSignin() {
+            let vc = MainViewController<NeteaseMessageAccount>(account: account)
+            window?.rootViewController = vc
+        } else {
+            let vc = SigninViewController<NeteaseMessageAccount>(account: account)
+            let nav = BaseNavigationController(rootViewController: vc)
+            window?.rootViewController = nav
+        }
+        
         return true
     }
 

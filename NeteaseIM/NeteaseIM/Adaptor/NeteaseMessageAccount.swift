@@ -9,35 +9,17 @@
 import Foundation
 import MessageKit
 
-struct NeteaseRegisterData {
-    
-    let username: String
-    
-    let password: String
-    
-    let nickname: String
-}
-
-struct NeteaseLoginData {
-    
-    let name: String
-    
-    let token: String
-
-}
-
-
 class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {    
     
     static var name: String = "NeteaseIM"
     
-    typealias SessionType = NeteaseMessageSession
+    typealias SessionType   = NeteaseMessageSession
     
-    typealias ObjectType  = NeteaseMessageObject
+    typealias ObjectType    = NeteaseMessageObject
     
-    typealias ContactType = NeteaseMessageContact
+    typealias ContactType   = NeteaseMessageContact    
     
-    var id: String = ""
+    var id: String          = ""
     
     var displayName: String = ""
     
@@ -55,35 +37,66 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
         super.init()
     }
     
-    func autoLogin(complete: Completion?) {
-        let name = "justin11"
-        let token = "e10adc3949ba59abbe56e057f20f883e"
+    static func canAutoSignin() -> Bool {
+        let name = UserDefaults.standard.string(forKey: "name")
+        let token = UserDefaults.standard.string(forKey: "token")
+        return name != nil && token != nil
+    }
+    
+    func autoSignin(complete: Completion?) {
+        guard let name = UserDefaults.standard.string(forKey: "name") else {
+            return
+        }
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            return
+        }
+        
+//        let name = "justin11"
+//        let token = "123456".md5()
         status = .Connecting
         NIMSDK.shared().loginManager.login(name, token: token) { (error) in
             self.displayName = name
             self.id = NIMSDK.shared().loginManager.currentAccount()
-            self.onLogin(error: error)
+            self.onSignin(error: error)
             complete?(error)
         }
     }
     
-    func register(data: NeteaseRegisterData, complete: Completion?) {
-        
+    func signup(data: AccountSignupData, complete: Completion?) {
+        var request = URLRequest(url: URL(string: "https://app.netease.im/api/createDemoUser")!)
+        request.setValue("45c6af3c98409b18a84451215d0bdd6e", forHTTPHeaderField: "appkey")
+        request.setValue("nim_demo_ios", forHTTPHeaderField: "User-Agent")
+        request.setValue("application/x-www-form-urlencoded;charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "username=\(data.username)&nickname=\(data.nickname)&password=\(data.password.md5())".data(using: .utf8)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                complete?(error)
+            }
+        }
+        task.resume()
     }
     
-    func login(data: NeteaseLoginData, complete: Completion?) {
-        NIMSDK.shared().loginManager.login(data.name, token: data.token) { (error) in
-            self.onLogin(error: error)
+    func signin(data: AccountSigninData, complete: Completion?) {
+        NIMSDK.shared().loginManager.login(data.name, token: data.token.md5()) { (error) in
+            if error == nil {
+                UserDefaults.standard.set(data.name, forKey: "name")
+                UserDefaults.standard.set(data.token.md5(), forKey: "token")
+            }
+            self.displayName = data.name
+            self.id = NIMSDK.shared().loginManager.currentAccount()
+            self.onSignin(error: error)
             complete?(error)
         }
     }
     
-    func logout(complete: Completion?) {
+    func signout(complete: Completion?) {
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "token")
         NIMSDK.shared().chatManager.remove(self)
         NIMSDK.shared().loginManager.logout(complete)
     }
     
-    func onLogin(error: Error?) {
+    func onSignin(error: Error?) {
         guard error == nil else {
             status = .Disconnected
             return
@@ -123,7 +136,9 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             for message in messages {
                 if message.session?.sessionId == session.session.sessionId {
                     count += 1
+//                    if message.messageType != .notification {
                     array.append(NeteaseMessageObject(message: message))
+//                    }
                 }
             }
             if array.count > 0 {
