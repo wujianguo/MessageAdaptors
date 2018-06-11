@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let account = NeteaseMessageAccount()
         if NeteaseMessageAccount.canAutoSignin() {
-            let vc = MainViewController<NeteaseMessageAccount>(account: account)
+            let vc = SplitViewController<NeteaseMessageAccount>(account: account)
+//            let vc = MainViewController<NeteaseMessageAccount>(account: account)
             window?.rootViewController = vc
         } else {
             let vc = SigninViewController<NeteaseMessageAccount>(account: account)

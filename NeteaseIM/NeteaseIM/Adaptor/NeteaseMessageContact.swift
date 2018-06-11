@@ -17,4 +17,8 @@ class NeteaseMessageContact: MessageContact {
     func loadFriends(complete: Completion?) {
         complete?(nil)
     }
+    
+    func isMyFriend(id: String) -> Bool {
+        return NIMSDK.shared().userManager.isMyFriend(id)
+    }
 }

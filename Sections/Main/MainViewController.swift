@@ -8,11 +8,16 @@
 
 import UIKit
 
-class MainViewController<AccountType: MessageAccount>: UITabBarController {
 
-    var sessions: SessionsTableViewController<AccountType>!
-    var contact:  ContactTableViewController<AccountType>!
-    var more:     AccountTableViewController<AccountType>!
+class PlaceholderViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+    }
+}
+
+class SplitViewController<AccountType: MessageAccount>: UISplitViewController, UISplitViewControllerDelegate {
     
     let account: AccountType!
     
@@ -24,10 +29,10 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if account.status != .Connected {
             account.autoSignin { (error) in
                 guard error == nil else {
@@ -37,43 +42,41 @@ class MainViewController<AccountType: MessageAccount>: UITabBarController {
             }
         }
 
-        sessions = SessionsTableViewController<AccountType>(account: account)
-        contact  = ContactTableViewController<AccountType>(account: account)
-        more     = AccountTableViewController<AccountType>(account: account)
-        
+
+        let master = MasterViewController<AccountType>(account: account)
+        let detail = BaseNavigationController(rootViewController: PlaceholderViewController())
         viewControllers = [
-            createTab(vc: sessions, item: .recents,  tag: 0),
-            createTab(vc: contact,  item: .contacts, tag: 1),
-            createTab(vc: more,     item: .more,     tag: 2),
+            master,
+            detail
         ]
-
-        tabBar.tintColor = UIConstants.themeColor
-    }
-    
-    func createTab(vc: UIViewController, name: String, image: UIImage?, tag: Int) -> UINavigationController {
-        let navigationController = BaseNavigationController(rootViewController: vc)
-        navigationController.tabBarItem.title = name
-        navigationController.tabBarItem.image = image
-        return navigationController;
-    }
-    
-    func createTab(vc: UIViewController, item: UITabBarSystemItem, tag: Int) -> UINavigationController {
-        let navigationController = BaseNavigationController(rootViewController: vc)
-        navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: item, tag: tag)
-        return navigationController;
-    }
-}
-
-class SplitViewController<AccountType: MessageAccount>: UISplitViewController, UISplitViewControllerDelegate {
-    
-    var account: AccountType!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+        
         delegate = self
 
     }
     
+    /*
+    func splitViewController(_ svc: UISplitViewController, willChangeTo displayMode: UISplitViewControllerDisplayMode) {
+        
+    }
     
+    func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+        return displayMode
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, show vc: UIViewController, sender: Any?) -> Bool {
+        return true
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, showDetail vc: UIViewController, sender: Any?) -> Bool {
+        return true
+    }
+    
+    func primaryViewController(forExpanding splitViewController: UISplitViewController) -> UIViewController? {
+        return nil
+    }
+    
+    override func separateSecondaryViewController(for splitViewController: UISplitViewController) -> UIViewController? {
+        return nil
+    }
+    */
 }

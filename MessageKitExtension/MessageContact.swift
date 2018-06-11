@@ -14,6 +14,8 @@ protocol MessageContact {
     
     func loadFriends(complete: Completion?)
     
+    func isMyFriend(id: String) -> Bool
+    
 //    func requestFriend()
     
 //    func acceptFriend()

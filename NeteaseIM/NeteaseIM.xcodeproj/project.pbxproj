@@ -202,6 +202,7 @@
 		8109FD6520B536400051C192 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				819AED9C20CE6C4700B1491E /* Settings */,
 				814E1C5420C13A82006E4FC6 /* Service */,
 				8109FD7520B536C30051C192 /* Main */,
 				8109FD6820B536400051C192 /* Session */,
@@ -384,6 +385,13 @@
 				819AED7F20C5080000B1491E /* NeteaseMessageNotificationCoding.swift */,
 			);
 			path = Coding;
+			sourceTree = "<group>";
+		};
+		819AED9C20CE6C4700B1491E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

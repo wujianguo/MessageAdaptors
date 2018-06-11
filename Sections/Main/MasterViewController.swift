@@ -14,8 +14,17 @@ class MasterViewController<AccountType: MessageAccount>: UITabBarController {
     var contact:  ContactTableViewController<AccountType>!
     var more:     AccountTableViewController<AccountType>!
     
-    var account: AccountType!
+    let account: AccountType!
+
+    init(account: AccountType) {
+        self.account = account
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -29,6 +38,7 @@ class MasterViewController<AccountType: MessageAccount>: UITabBarController {
             createTab(vc: more,     item: .more,     tag: 2),
         ]
         
+        tabBar.tintColor = UIConstants.themeColor
     }
     
     func createTab(vc: UIViewController, name: String, image: UIImage?, tag: Int) -> UINavigationController {
@@ -43,4 +53,14 @@ class MasterViewController<AccountType: MessageAccount>: UITabBarController {
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: item, tag: tag)
         return navigationController;
     }
+    
+    /*
+    override func collapseSecondaryViewController(_ secondaryViewController: UIViewController, for splitViewController: UISplitViewController) {
+        
+    }
+    
+    override func separateSecondaryViewController(for splitViewController: UISplitViewController) -> UIViewController? {
+        return nil
+    }
+    */
 }

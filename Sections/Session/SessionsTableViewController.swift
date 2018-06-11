@@ -81,6 +81,8 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = SessionViewController<AccountType>(account: account, session: account.sessions[indexPath.row])
+//        let nav = BaseNavigationController(rootViewController: vc)
+//        navigationController?.showDetailViewController(nav, sender: self)
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -129,6 +131,9 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     }
     */
 
+//    override func targetViewController(forAction action: Selector, sender: Any?) -> UIViewController? {
+//        return nil
+//    }
 }
 
 

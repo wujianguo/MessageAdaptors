@@ -108,7 +108,8 @@ class SigninViewController<AccountType: MessageAccount>: UIViewController {
             guard error == nil else {
                 return
             }
-            let vc = MainViewController<AccountType>(account: self.account)
+            let vc = SplitViewController<AccountType>(account: self.account)
+//            let vc = MainViewController<AccountType>(account: self.account)
             let app = UIApplication.shared.delegate as! AppDelegate
             app.window?.rootViewController = vc
         }
