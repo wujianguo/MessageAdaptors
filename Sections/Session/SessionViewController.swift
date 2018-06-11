@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 import MessageKit
 
 class SessionViewController<AccountType: MessageAccount>: MessagesViewController {
@@ -242,7 +243,8 @@ extension SessionViewController: MessageLabelDelegate {
     }
     
     func didSelectURL(_ url: URL) {
-        print("URL Selected: \(url)")
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true, completion: nil)
     }
     
     func didSelectTransitInformation(_ transitInformation: [String: String]) {

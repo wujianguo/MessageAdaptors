@@ -38,4 +38,16 @@ extension Strings {
     static let Signin = NSLocalizedString("Sign in", comment: "Sign in")
     static let Signup = NSLocalizedString("Sign up", comment: "Sign up")
     static let Signout = NSLocalizedString("Sign out", comment: "Sign out")
+    static let confirmSignout = NSLocalizedString("Are you sure?", comment: "Are you sure?")
+}
+
+// contact
+extension Strings {
+    static let inputAccountPlaceholder = NSLocalizedString("input account", comment: "input account")
+}
+
+// common
+extension Strings{
+    static let ok       = NSLocalizedString("OK", comment: "OK")
+    static let cancel   = NSLocalizedString("Cancel", comment: "Cancel")
 }

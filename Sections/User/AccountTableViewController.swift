@@ -29,14 +29,20 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
     }
 
     @objc func signoutClick(sender: UIBarButtonItem) {
-        account.signout(complete: nil)
-        
-        let naccount = AccountType()
-        let vc = SigninViewController<AccountType>(account: naccount)
-        let nav = BaseNavigationController(rootViewController: vc)
-        let app = UIApplication.shared.delegate as! AppDelegate
-        app.window?.rootViewController = nav
-        
+        let alert = UIAlertController(title: Strings.Signout, message: Strings.confirmSignout, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: { (action) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: Strings.ok, style: .destructive, handler: { (action) in
+            self.account.signout(complete: nil)
+            
+            let naccount = AccountType()
+            let vc = SigninViewController<AccountType>(account: naccount)
+            let nav = BaseNavigationController(rootViewController: vc)
+            let app = UIApplication.shared.delegate as! AppDelegate
+            app.window?.rootViewController = nav
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

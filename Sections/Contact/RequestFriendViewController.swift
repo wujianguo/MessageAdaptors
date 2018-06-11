@@ -7,21 +7,37 @@
 //
 
 import UIKit
+import SnapKit
 
-class RequestFriendViewController: UIViewController {
+class RequestFriendViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { (make) in
+            make.leading.equalTo(view.snp.leadingMargin)
+            make.top.equalTo(view.snp.topMargin).offset(UIConstants.padding)
+            make.trailing.equalTo(view.snp.trailingMargin)
+            make.height.equalTo(40)
+        }
     }
     
+    lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.placeholder = Strings.inputAccountPlaceholder
+        textField.borderStyle = .roundedRect
+        textField.keyboardType = .asciiCapable
+        textField.returnKeyType = .done
+        return textField
+    }()
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        return true
+    }
 
     /*
     // MARK: - Navigation
