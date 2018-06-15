@@ -274,3 +274,9 @@ extension SessionViewController: MessageInputBarDelegate {
 
     }
 }
+
+extension SessionViewController: SplitDetailProtocol {
+    var isDetail: Bool {
+        return true
+    }
+}

@@ -8,12 +8,27 @@
 
 import UIKit
 
+protocol SplitDetailProtocol {
 
-class PlaceholderViewController: UIViewController {
+}
+
+extension SplitDetailProtocol {
+
+    var isDetail: Bool {
+        return false
+    }
+    
+}
+
+class PlaceholderViewController: UIViewController, SplitDetailProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+    }
+    
+    var isDetail: Bool {
+        return true
     }
 }
 
@@ -30,6 +45,8 @@ class SplitViewController<AccountType: MessageAccount>: UISplitViewController, U
         fatalError("init(coder:) has not been implemented")
     }
 
+    var master: MasterViewController<AccountType>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,9 +58,8 @@ class SplitViewController<AccountType: MessageAccount>: UISplitViewController, U
                 }
             }
         }
-
-
-        let master = MasterViewController<AccountType>(account: account)
+        preferredDisplayMode = .allVisible
+        master = MasterViewController<AccountType>(account: account)
         let detail = BaseNavigationController(rootViewController: PlaceholderViewController())
         viewControllers = [
             master,
@@ -52,6 +68,41 @@ class SplitViewController<AccountType: MessageAccount>: UISplitViewController, U
         
         delegate = self
 
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, showDetail vc: UIViewController, sender: Any?) -> Bool {
+        if splitViewController.isCollapsed {
+            if let tabBarController = splitViewController.viewControllers.first as? UITabBarController {
+                if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+                    var viewControllerToPush = vc
+                    if let vc = viewControllerToPush as? UINavigationController {
+                        viewControllerToPush = vc.topViewController!
+                    }
+                    navigationController.pushViewController(viewControllerToPush, animated: true)
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    /*
+    func primaryViewController(forExpanding splitViewController: UISplitViewController) -> UIViewController? {
+        return master
+    }
+    
+    func primaryViewController(forCollapsing splitViewController: UISplitViewController) -> UIViewController? {
+        return master
+    }
+    */
+    func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
+        return nil
+    }
+    
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        
+        return false
     }
     
     /*
