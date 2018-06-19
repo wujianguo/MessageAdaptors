@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import MessageKit
+import AVKit
 
 class SessionViewController<AccountType: MessageAccount>: MessagesViewController {
 
@@ -210,7 +211,19 @@ extension SessionViewController: MessageCellDelegate {
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-        print("Message tapped")
+        if let indexPath = messagesCollectionView.indexPath(for: cell) {
+            switch session.messages[indexPath.section].kind {
+            case .video(let item):
+                if let url = item.url {
+                    let vc = AVPlayerViewController()
+                    vc.player = AVPlayer(url: url)
+                    vc.player?.play()
+                    present(vc, animated: true, completion: nil)
+                }
+            default:
+                break
+            }
+        }
     }
     
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {

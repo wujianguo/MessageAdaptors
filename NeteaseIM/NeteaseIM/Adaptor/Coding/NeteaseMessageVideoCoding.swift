@@ -16,7 +16,19 @@ class NeteaseMessageVideoCoding: NeteaseMessageCoding {
     }
     
     func decode(message: NIMMessage) -> MessageKind? {
-        return nil
+        guard let object = message.messageObject as? NIMVideoObject else {
+            return nil
+        }
+        let placeholder = UIImage()
+        var size = object.coverSize
+        let m = max(size.width, size.height)
+        if m > 100 {
+            let ratio = m / 100.0
+            size = CGSize(width: size.width/ratio, height: size.height/ratio)
+        }
+        let item = MessageMediaItem(placeholderImage: placeholder, size: size)
+        item.url = URL(string: object.url ?? "")
+        return .video(item)
     }
     
     
