@@ -83,8 +83,6 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
         let vc = SessionViewController<AccountType>(account: account, session: account.sessions[indexPath.row])
         let nav = BaseNavigationController(rootViewController: vc)
         splitViewController?.showDetailViewController(nav, sender: self)
-//        navigationController?.showDetailViewController(nav, sender: self)
-//        navigationController?.pushViewController(vc, animated: true)
     }
 
     /*

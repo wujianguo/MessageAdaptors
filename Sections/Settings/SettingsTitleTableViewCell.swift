@@ -8,17 +8,37 @@
 
 import UIKit
 
-class SettingsTitleTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+class SettingsTitleTableViewCellTypeInfo: SettingsTypeProtocol {
+    
+    func register(tableView: UITableView) {
+        tableView.register(SettingsTitleTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+    }
+    
+    func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: SettingsTitleTableViewCell.identifier(), for: indexPath) as! SettingsTitleTableViewCell
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func didSelect(type: SettingsType) {
+        
+    }
 
-        // Configure the view for the selected state
+}
+
+class SettingsTitleTableViewCell: SettingsTableViewCell {
+
+    override class func identifier() -> String {
+        return "SettingsTitleTableViewCellIdentifier"
+    }
+
+    override var type: SettingsType! {
+        didSet {
+//            switch type {
+//            case .title(let title):
+//                textLabel?.text = title
+//            default:
+//                break
+//            }
+        }
     }
 
 }

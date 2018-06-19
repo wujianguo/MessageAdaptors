@@ -8,17 +8,34 @@
 
 import UIKit
 
-class SettingsSwitchTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+class SettingsSwitchTableViewCellTypeInfo: SettingsTypeProtocol {
+    
+    func register(tableView: UITableView) {
+        tableView.register(SettingsSwitchTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+    }
+    
+    func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: SettingsSwitchTableViewCell.identifier(), for: indexPath) as! SettingsSwitchTableViewCell
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func didSelect(type: SettingsType) {
+        
+    }
 
-        // Configure the view for the selected state
+}
+class SettingsSwitchTableViewCell: SettingsTableViewCell {
+
+    override class func identifier() -> String {
+        return "SettingsSwitchTableViewCellIdentifier"
+    }
+
+    lazy var switcher: UISwitch = {
+        let switcher = UISwitch()
+        return switcher
+    }()
+
+    override func setup() {
+        accessoryView = switcher
     }
 
 }

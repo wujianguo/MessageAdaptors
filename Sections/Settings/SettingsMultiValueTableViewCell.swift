@@ -8,17 +8,31 @@
 
 import UIKit
 
-class SettingsMultiValueTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+class SettingsMultiValueTableViewCellTypeInfo: SettingsTypeProtocol {
+    
+    func register(tableView: UITableView) {
+        tableView.register(SettingsMultiValueTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+    }
+    
+    func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: SettingsMultiValueTableViewCell.identifier(), for: indexPath) as! SettingsMultiValueTableViewCell
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func didSelect(type: SettingsType) {
+        
+    }
 
-        // Configure the view for the selected state
+}
+
+
+class SettingsMultiValueTableViewCell: SettingsTableViewCell {
+
+    override class func identifier() -> String {
+        return "SettingsMultiValueTableViewCellIdentifier"
+    }
+
+    override func setup() {
+        accessoryType = .disclosureIndicator
     }
 
 }

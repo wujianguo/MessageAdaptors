@@ -35,13 +35,13 @@
 		81444C1620D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */; };
 		81444C1820D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */; };
 		81444C1A20D8CE6B007B23A4 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */; };
+		81444C2420D8EDD7007B23A4 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */; };
 		814E1BC220BC162F006E4FC6 /* SessionDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BC120BC162F006E4FC6 /* SessionDetailTableViewController.swift */; };
 		814E1BC420BC1653006E4FC6 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */; };
 		814E1BC620BCEF03006E4FC6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814E1BC520BCEF03006E4FC6 /* Media.xcassets */; };
 		814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BD720BD3078006E4FC6 /* RequestFriendViewController.swift */; };
 		814E1BDA20BD364E006E4FC6 /* AcceptFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BD920BD364E006E4FC6 /* AcceptFriendViewController.swift */; };
 		814E1BDC20BD4669006E4FC6 /* MessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BDB20BD4669006E4FC6 /* MessageContact.swift */; };
-		814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */; };
 		814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEA20BE7237006E4FC6 /* ContactTableViewCell.swift */; };
 		814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEC20BE7264006E4FC6 /* NeteaseMessageContact.swift */; };
 		814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BEE20BE7364006E4FC6 /* MessageUser.swift */; };
@@ -122,13 +122,13 @@
 		81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTitleTableViewCell.swift; sourceTree = "<group>"; };
 		81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMultiValueTableViewCell.swift; sourceTree = "<group>"; };
 		81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		814E1BC120BC162F006E4FC6 /* SessionDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailTableViewController.swift; sourceTree = "<group>"; };
 		814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
 		814E1BC520BCEF03006E4FC6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		814E1BD720BD3078006E4FC6 /* RequestFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendViewController.swift; sourceTree = "<group>"; };
 		814E1BD920BD364E006E4FC6 /* AcceptFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptFriendViewController.swift; sourceTree = "<group>"; };
 		814E1BDB20BD4669006E4FC6 /* MessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContact.swift; sourceTree = "<group>"; };
-		814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		814E1BEA20BE7237006E4FC6 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		814E1BEC20BE7264006E4FC6 /* NeteaseMessageContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageContact.swift; sourceTree = "<group>"; };
 		814E1BEE20BE7364006E4FC6 /* MessageUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUser.swift; sourceTree = "<group>"; };
@@ -242,7 +242,6 @@
 			children = (
 				814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */,
 				8109FD7D20B53B9C0051C192 /* UserTableViewController.swift */,
-				814E1BE720BE49F3006E4FC6 /* SettingsTableViewController.swift */,
 				814E1BF420BE88F5006E4FC6 /* UserHeadTableViewCell.swift */,
 				819AED8620C69D7B00B1491E /* SigninViewController.swift */,
 				819AED8820C69D8800B1491E /* SignupViewController.swift */,
@@ -408,6 +407,7 @@
 				81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */,
 				81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */,
 				81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */,
+				81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -670,6 +670,7 @@
 				8109FD7720B5373F0051C192 /* MainViewController.swift in Sources */,
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
 				81D4AE5220A04DBA009D9916 /* MessageConsumer.swift in Sources */,
+				81444C2420D8EDD7007B23A4 /* SettingsTableViewController.swift in Sources */,
 				8109FD7A20B538BD0051C192 /* Strings.swift in Sources */,
 				819AED8720C69D7B00B1491E /* SigninViewController.swift in Sources */,
 				816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */,
@@ -688,7 +689,6 @@
 				81444C1A20D8CE6B007B23A4 /* SettingsTableViewCell.swift in Sources */,
 				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,
-				814E1BE820BE49F3006E4FC6 /* SettingsTableViewController.swift in Sources */,
 				814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */,
 				8109FD8620B53FDF0051C192 /* Images.swift in Sources */,
 				81444C1220D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift in Sources */,
