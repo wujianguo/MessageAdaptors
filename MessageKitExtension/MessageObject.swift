@@ -37,7 +37,7 @@ extension MessageKind {
         default:
             break
         }
-        return Strings.NotSupportYet
+        return Strings.notSupportYet
     }
     
     var text: String? {

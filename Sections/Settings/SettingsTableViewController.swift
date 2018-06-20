@@ -15,9 +15,6 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        settings = [
-//            .title("hello", SettingsTitleTableViewCellTypeInfo())
-        ]
         for type in settings {
             type.delegate.register(tableView: tableView)
         }

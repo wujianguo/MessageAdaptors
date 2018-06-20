@@ -32,6 +32,16 @@ class UserTableViewController<AccountType: MessageAccount>: UITableViewControlle
         
         if account.contact.isMyFriend(id: user.id) {
             let startChat = SettingsType(kind: SettingsKind.button(Strings.startChat, nil), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
+                if let vcs = self.navigationController?.viewControllers {
+                    if vcs.count > 1 {
+                        if let last = vcs[vcs.count-2] as? SessionViewController<AccountType> {
+                            if last.session.id == self.user.id {
+                                self.navigationController?.popViewController(animated: true)
+                                return
+                            }
+                        }
+                    }
+                }
                 let session = AccountType.SessionType(id: self.user.id, type: .P2P)
                 let vc = SessionViewController<AccountType>(account: self.account, session: session)
                 self.navigationController?.pushViewController(vc, animated: true)

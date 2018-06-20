@@ -46,9 +46,9 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
         if let status = notification.userInfo?["status"] as? AccountStatus {
             switch status {
             case .Connecting:
-                title = Strings.Connecting
+                title = Strings.connecting
             case .Disconnected:
-                title = Strings.Disconnected
+                title = Strings.disconnected
             default:
                 title = AccountType.name
                 tableView.reloadData()

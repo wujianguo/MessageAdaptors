@@ -26,7 +26,7 @@ class SigninViewController<AccountType: MessageAccount>: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-        title = Strings.Signin
+        title = Strings.signin
         
         view.addSubview(nameTextField)
         view.addSubview(passwordTextField)
@@ -84,7 +84,7 @@ class SigninViewController<AccountType: MessageAccount>: UIViewController {
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 4
         button.backgroundColor = UIConstants.themeColor
-        button.setTitle(Strings.Signin, for: .normal)
+        button.setTitle(Strings.signin, for: .normal)
         button.addTarget(self, action: #selector(signinClick(sender:)), for: .touchUpInside)
         return button
     }()
@@ -92,7 +92,7 @@ class SigninViewController<AccountType: MessageAccount>: UIViewController {
     lazy var signupButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIConstants.themeColor, for: .normal)
-        button.setTitle(Strings.Signup, for: .normal)
+        button.setTitle(Strings.signup, for: .normal)
         button.addTarget(self, action: #selector(signupClick(sender:)), for: .touchUpInside)
         return button
     }()

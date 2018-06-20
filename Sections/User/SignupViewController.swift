@@ -25,7 +25,7 @@ class SignupViewController<AccountType: MessageAccount>: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-        title = Strings.Signup
+        title = Strings.signup
         
         view.addSubview(nameTextField)
         view.addSubview(nickTextField)
@@ -94,7 +94,7 @@ class SignupViewController<AccountType: MessageAccount>: UIViewController {
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 4
         button.backgroundColor = UIConstants.themeColor
-        button.setTitle(Strings.Signup, for: .normal)
+        button.setTitle(Strings.signup, for: .normal)
         button.addTarget(self, action: #selector(signupClick(sender:)), for: .touchUpInside)
         return button
     }()

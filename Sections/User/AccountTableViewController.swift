@@ -26,10 +26,16 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = Strings.Me
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Strings.Signout, style: .plain, target: self, action: #selector(signoutClick(sender:)))
+        title = Strings.me
+        
+        tableView.register(UserHeadTableViewCell.self, forCellReuseIdentifier: UserHeadTableViewCell.identifier())
+        
+        let signout = SettingsType(kind: .button(Strings.signout, UIConstants.destructiveColor), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
+            self.signout()
+        }))
         
         settings = [
+            signout,
         ]
         
         for type in settings {
@@ -38,8 +44,8 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
 
     }
 
-    @objc func signoutClick(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: Strings.Signout, message: Strings.confirmSignout, preferredStyle: .alert)
+    func signout() {
+        let alert = UIAlertController(title: Strings.signout, message: Strings.confirmSignout, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: { (action) in
             
         }))
@@ -57,22 +63,45 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
     
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 80
+        } else {
+            return 40
+        }
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settings.count
+        if section == 0 {
+            return 1
+        } else {
+            return settings.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = settings[indexPath.row].delegate.dequeueReusableCell(for: indexPath, at: tableView)
-        cell.type = settings[indexPath.row]
-        return cell;
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserHeadTableViewCell.identifier(), for: indexPath) as! UserHeadTableViewCell
+            cell.user = account
+            return cell
+        } else {
+            let cell = settings[indexPath.row].delegate.dequeueReusableCell(for: indexPath, at: tableView)
+            cell.type = settings[indexPath.row]
+            return cell;
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        settings[indexPath.row].delegate.didSelect(type: settings[indexPath.row])
+        if indexPath.section == 0 {
+            
+        } else {
+            settings[indexPath.row].delegate.didSelect(type: settings[indexPath.row])
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

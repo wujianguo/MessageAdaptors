@@ -28,7 +28,7 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Strings.Contact
+        title = Strings.contact
         tableView.rowHeight = 60
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: ContactTableViewCell.identifier())
         tableView.tableFooterView = UIView()

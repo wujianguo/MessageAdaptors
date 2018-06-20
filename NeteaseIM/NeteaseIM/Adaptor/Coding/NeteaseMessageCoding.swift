@@ -58,7 +58,7 @@ class NeteaseMessageCoder {
             }
         }
         let ret = NIMMessage()
-        ret.text = Strings.NotSupportYet
+        ret.text = Strings.notSupportYet
         return ret
     }
     
@@ -71,7 +71,7 @@ class NeteaseMessageCoder {
         if let content = message.apnsContent {
             return .text(content)
         } else {
-            return .text(Strings.NotSupportYet)
+            return .text(Strings.notSupportYet)
         }
     }
 

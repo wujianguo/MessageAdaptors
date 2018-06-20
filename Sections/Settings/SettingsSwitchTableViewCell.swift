@@ -23,6 +23,7 @@ class SettingsSwitchTableViewCellTypeInfo: SettingsTypeProtocol {
     }
 
 }
+
 class SettingsSwitchTableViewCell: SettingsTableViewCell {
 
     override class func identifier() -> String {

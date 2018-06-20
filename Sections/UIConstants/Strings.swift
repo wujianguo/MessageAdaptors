@@ -14,19 +14,19 @@ struct Strings {
 
 // tab
 extension Strings {
-    static let Contact = NSLocalizedString("Contact", comment: "contact")
-    static let Me      = NSLocalizedString("Me", comment: "me")
+    static let contact = NSLocalizedString("Contact", comment: "contact")
+    static let me      = NSLocalizedString("Me", comment: "me")
 }
 
 // status
 extension Strings {
-    static let Connecting   = NSLocalizedString("Connecting", comment: "Connecting")
-    static let Disconnected = NSLocalizedString("Disconnected", comment: "Disconnected")
+    static let connecting   = NSLocalizedString("Connecting", comment: "Connecting")
+    static let disconnected = NSLocalizedString("Disconnected", comment: "Disconnected")
 }
 
 // message
 extension Strings {
-    static let NotSupportYet = NSLocalizedString("[not support yet.]", comment: "[not support yet.]")
+    static let notSupportYet = NSLocalizedString("[not support yet.]", comment: "[not support yet.]")
     static let ID            = NSLocalizedString("ID", comment: "ID")
 }
 
@@ -36,9 +36,9 @@ extension Strings {
     static let inputNickPlaceholder     = NSLocalizedString("input your nick name", comment: "input your nick name")
     static let inputPasswordPlaceholder = NSLocalizedString("input your password", comment: "input your password")
     
-    static let Signin           = NSLocalizedString("Sign in", comment: "Sign in")
-    static let Signup           = NSLocalizedString("Sign up", comment: "Sign up")
-    static let Signout          = NSLocalizedString("Sign out", comment: "Sign out")
+    static let signin           = NSLocalizedString("Sign in", comment: "Sign in")
+    static let signup           = NSLocalizedString("Sign up", comment: "Sign up")
+    static let signout          = NSLocalizedString("Sign out", comment: "Sign out")
     static let confirmSignout   = NSLocalizedString("Are you sure?", comment: "Are you sure?")
 }
 

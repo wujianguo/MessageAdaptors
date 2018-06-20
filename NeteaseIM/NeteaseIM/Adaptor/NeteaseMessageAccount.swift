@@ -66,7 +66,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
     
     func signup(data: AccountSignupData, complete: Completion?) {
         var request = URLRequest(url: URL(string: "https://app.netease.im/api/createDemoUser")!)
-        request.setValue("45c6af3c98409b18a84451215d0bdd6e", forHTTPHeaderField: "appkey")
+        request.setValue(NIMSDK.shared().appKey(), forHTTPHeaderField: "appkey")
         request.setValue("nim_demo_ios", forHTTPHeaderField: "User-Agent")
         request.setValue("application/x-www-form-urlencoded;charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.httpBody = "username=\(data.username)&nickname=\(data.nickname)&password=\(data.password.md5())".data(using: .utf8)
