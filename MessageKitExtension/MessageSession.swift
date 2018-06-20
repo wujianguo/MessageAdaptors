@@ -18,6 +18,8 @@ protocol MessageSession {
     
     associatedtype ObjectType: MessageObject
     
+    init(id: String, type: MessageSessionType)
+
     var sessionType: MessageSessionType { get }
     
     var lastMessage: ObjectType? { get set }
@@ -66,6 +68,6 @@ extension MessageSession {
     }
 }
 
-protocol MessageRecentSession {
-    
-}
+//protocol MessageRecentSession {
+//    
+//}

@@ -21,4 +21,20 @@ class NeteaseMessageContact: MessageContact {
     func isMyFriend(id: String) -> Bool {
         return NIMSDK.shared().userManager.isMyFriend(id)
     }
+    
+    func fetchUserInfo(id: String, complete: @escaping (MessageUser?, Error?) -> Void) {
+        NIMSDK.shared().userManager.fetchUserInfos([id]) { (users, error) in
+            complete(users?.first, error)
+        }
+    }
+    
+    func requestFriend(id: String, message: String?, complete: @escaping (Error?) -> Void) {
+        let request = NIMUserRequest()
+        request.userId = id
+        request.operation = .request
+        request.message = message
+        NIMSDK.shared().userManager.requestFriend(request) { (error) in
+            complete(error)
+        }
+    }
 }

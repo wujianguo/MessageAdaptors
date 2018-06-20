@@ -27,7 +27,7 @@ class RequestFriendViewController: UIViewController, UITextFieldDelegate {
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.delegate = self
-        textField.placeholder = Strings.inputAccountPlaceholder
+        textField.placeholder = Strings.inputAccount
         textField.borderStyle = .roundedRect
         textField.keyboardType = .asciiCapable
         textField.returnKeyType = .done

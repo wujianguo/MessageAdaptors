@@ -51,6 +51,8 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     
     associatedtype ContactType: MessageContact
     
+    associatedtype SessionManagerType: MessageSessionManager
+    
     static var name: String { get }
     
     init()
@@ -68,7 +70,9 @@ protocol MessageAccount: MessageUser, MessageProducer where SessionType: Message
     func signout(complete: Completion?)
 
     
-    var sessions: [SessionType] { get set }
+    var sessionManager: SessionManagerType { get set }
+    
+//    var sessions: [SessionType] { get set }
 
     func send(message: ObjectType, to session: SessionType)
     

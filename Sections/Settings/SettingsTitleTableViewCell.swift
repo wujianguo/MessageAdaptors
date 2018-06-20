@@ -11,7 +11,7 @@ import UIKit
 class SettingsTitleTableViewCellTypeInfo: SettingsTypeProtocol {
     
     func register(tableView: UITableView) {
-        tableView.register(SettingsTitleTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+        tableView.register(SettingsTitleTableViewCell.self, forCellReuseIdentifier: SettingsTitleTableViewCell.identifier())
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
@@ -32,12 +32,12 @@ class SettingsTitleTableViewCell: SettingsTableViewCell {
 
     override var type: SettingsType! {
         didSet {
-//            switch type {
-//            case .title(let title):
-//                textLabel?.text = title
-//            default:
-//                break
-//            }
+            switch type.kind {
+            case .title(let text):
+                textLabel?.text = text
+            default:
+                break
+            }
         }
     }
 

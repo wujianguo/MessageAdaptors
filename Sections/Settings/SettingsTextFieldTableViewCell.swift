@@ -11,7 +11,7 @@ import UIKit
 class SettingsTextFieldTableViewCellTypeInfo: SettingsTypeProtocol {
     
     func register(tableView: UITableView) {
-        tableView.register(SettingsTextFieldTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+        tableView.register(SettingsTextFieldTableViewCell.self, forCellReuseIdentifier: SettingsTextFieldTableViewCell.identifier())
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
@@ -42,6 +42,17 @@ class SettingsTextFieldTableViewCell: SettingsTableViewCell {
             make.leading.equalTo(self.contentView.snp.leadingMargin)
             make.trailing.equalTo(self.contentView.snp.trailingMargin)
             make.top.bottom.equalTo(self.contentView)
+        }
+    }
+    
+    override var type: SettingsType! {
+        didSet {
+            switch type.kind {
+            case .textField(let placeholder):
+                textField.placeholder = placeholder
+            default:
+                break
+            }
         }
     }
 }

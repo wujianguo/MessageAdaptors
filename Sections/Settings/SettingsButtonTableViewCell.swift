@@ -11,7 +11,7 @@ import UIKit
 class SettingsButtonTableViewCellTypeInfo: SettingsTypeProtocol {
     
     func register(tableView: UITableView) {
-        tableView.register(SettingsButtonTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+        tableView.register(SettingsButtonTableViewCell.self, forCellReuseIdentifier: SettingsButtonTableViewCell.identifier())
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
@@ -19,9 +19,14 @@ class SettingsButtonTableViewCellTypeInfo: SettingsTypeProtocol {
     }
 
     func didSelect(type: SettingsType) {
-        
+        selectionBlock?(type)
     }
 
+    var selectionBlock: ((SettingsType) -> Void)? = nil
+    
+    init(selection: @escaping (SettingsType) -> Void) {
+        self.selectionBlock = selection
+    }
 }
 
 class SettingsButtonTableViewCell: SettingsTableViewCell {
@@ -45,13 +50,17 @@ class SettingsButtonTableViewCell: SettingsTableViewCell {
 
     override var type: SettingsType! {
         didSet {
-//            switch type {
-//            case .button(let title, let color):
-//                self.nameLabel.text = title
-//                self.nameLabel.textColor = color
-//            default:
-//                break
-//            }
+            switch type.kind {
+            case .button(let title, let color):
+                nameLabel.text = title
+                if color != nil {
+                    nameLabel.textColor = color
+                } else {
+                    nameLabel.textColor = UIConstants.themeColor
+                }
+            default:
+                break
+            }
         }
     }
 

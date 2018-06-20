@@ -9,7 +9,7 @@
 import Foundation
 import MessageKit
 
-class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {    
+class NeteaseMessageAccount: NSObject, MessageAccount {
     
     static var name: String = "NeteaseIM"
     
@@ -17,7 +17,9 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     
     typealias ObjectType    = NeteaseMessageObject
     
-    typealias ContactType   = NeteaseMessageContact    
+    typealias ContactType   = NeteaseMessageContact
+    
+    typealias SessionManagerType = NeteaseSessionManager
     
     var id: String          = ""
     
@@ -92,7 +94,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
     func signout(complete: Completion?) {
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "token")
-        NIMSDK.shared().chatManager.remove(self)
+//        NIMSDK.shared().chatManager.remove(self)
         NIMSDK.shared().loginManager.logout(complete)
     }
     
@@ -102,13 +104,14 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             return
         }
         
-        let recentSessions = NIMSDK.shared().conversationManager.allRecentSessions() ?? []
-        for session in recentSessions {
-            let s = NeteaseMessageSession(recent: session)
-            sessions.append(s)
-        }
+        sessionManager.load()
+//        let recentSessions = NIMSDK.shared().conversationManager.allRecentSessions() ?? []
+//        for session in recentSessions {
+//            let s = NeteaseMessageSession(recent: session)
+//            sessions.append(s)
+//        }
         
-        NIMSDK.shared().chatManager.add(self)
+//        NIMSDK.shared().chatManager.add(self)
         status = .Connected
     }
     
@@ -121,7 +124,11 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             
         }
     }
+    
+    
+    var sessionManager = NeteaseSessionManager()
 
+    /*
     var sessions = [NeteaseMessageSession]()
     
     
@@ -136,9 +143,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             for message in messages {
                 if message.session?.sessionId == session.session.sessionId {
                     count += 1
-//                    if message.messageType != .notification {
                     array.append(NeteaseMessageObject(message: message))
-//                    }
                 }
             }
             if array.count > 0 {
@@ -149,4 +154,5 @@ class NeteaseMessageAccount: NSObject, MessageAccount, NIMChatManagerDelegate {
             }
         }
     }
+    */
 }

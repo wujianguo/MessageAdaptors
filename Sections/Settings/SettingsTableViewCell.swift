@@ -18,32 +18,25 @@ protocol SettingsTypeProtocol {
 //    var type: SettingsType! { get set }
 }
 
-enum SettingsType {
+enum SettingsKind {
     
-    case title(String, SettingsTypeProtocol)
+    case title(String)
     
-    case button(String, UIColor?, SettingsTypeProtocol)
+    case button(String, UIColor?)
     
-    case textField(String?, SettingsTypeProtocol)
+    case textField(String?)
     
-    case `switch`(Bool, SettingsTypeProtocol)
+    case `switch`(Bool)
     
-    case custom(Any?, SettingsTypeProtocol)
+    case custom(Any?)    
+}
+
+struct SettingsType {
     
-    func cell() -> SettingsTypeProtocol {
-        switch self {
-        case .title(_, let type):
-            return type
-        case .button(_, _, let type):
-            return type
-        case .textField(_, let type):
-            return type
-        case .switch(_, let type):
-            return type
-        case .custom(_, let type):
-            return type
-        }
-    }
+    var kind: SettingsKind
+    
+    var delegate: SettingsTypeProtocol
+    
 }
 
 class SettingsTableViewCellTypeInfo: SettingsTypeProtocol {

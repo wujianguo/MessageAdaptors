@@ -11,7 +11,7 @@ import UIKit
 class SettingsSwitchTableViewCellTypeInfo: SettingsTypeProtocol {
     
     func register(tableView: UITableView) {
-        tableView.register(SettingsSwitchTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+        tableView.register(SettingsSwitchTableViewCell.self, forCellReuseIdentifier: SettingsSwitchTableViewCell.identifier())
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
@@ -36,6 +36,17 @@ class SettingsSwitchTableViewCell: SettingsTableViewCell {
 
     override func setup() {
         accessoryView = switcher
+    }
+    
+    override var type: SettingsType! {
+        didSet {
+            switch type.kind {
+            case .switch(let value):
+                switcher.isOn = value
+            default:
+                break
+            }
+        }
     }
 
 }

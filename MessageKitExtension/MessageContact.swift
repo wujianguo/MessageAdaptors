@@ -16,7 +16,9 @@ protocol MessageContact {
     
     func isMyFriend(id: String) -> Bool
     
-//    func requestFriend()
+    func fetchUserInfo(id: String, complete: @escaping (MessageUser?, Error?) -> Void)
+    
+    func requestFriend(id: String, message: String?, complete: @escaping Completion)
     
 //    func acceptFriend()
     

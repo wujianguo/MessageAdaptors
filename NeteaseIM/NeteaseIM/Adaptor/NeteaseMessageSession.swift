@@ -23,6 +23,20 @@ extension NIMSessionType {
     
 }
 
+extension MessageSessionType {
+
+    func toType() -> NIMSessionType {
+        switch self {
+        case .P2P:
+            return .P2P
+        case .Team:
+            return .team
+        case .Chatroom:
+            return .chatroom
+        }
+    }
+}
+
 class NeteaseMessageSession: MessageSession {
     
     typealias ObjectType = NeteaseMessageObject
@@ -45,6 +59,12 @@ class NeteaseMessageSession: MessageSession {
         }
         sessionType = recent.session!.sessionType.toType()
         self.session = recent.session!
+        self.user = fetchUserInfo(session: self.session)
+    }
+    
+    required init(id: String, type: MessageSessionType) {
+        sessionType = type
+        session = NIMSession(id, type: type.toType())
         self.user = fetchUserInfo(session: self.session)
     }
     

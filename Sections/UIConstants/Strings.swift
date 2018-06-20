@@ -32,18 +32,21 @@ extension Strings {
 
 // signin & signup
 extension Strings {
-    static let inputNamePlaceholder = NSLocalizedString("user name for login", comment: "input your user name")
-    static let inputNickPlaceholder = NSLocalizedString("input your nick name", comment: "input your nick name")
+    static let inputNamePlaceholder     = NSLocalizedString("user name for login", comment: "input your user name")
+    static let inputNickPlaceholder     = NSLocalizedString("input your nick name", comment: "input your nick name")
     static let inputPasswordPlaceholder = NSLocalizedString("input your password", comment: "input your password")
-    static let Signin = NSLocalizedString("Sign in", comment: "Sign in")
-    static let Signup = NSLocalizedString("Sign up", comment: "Sign up")
-    static let Signout = NSLocalizedString("Sign out", comment: "Sign out")
-    static let confirmSignout = NSLocalizedString("Are you sure?", comment: "Are you sure?")
+    
+    static let Signin           = NSLocalizedString("Sign in", comment: "Sign in")
+    static let Signup           = NSLocalizedString("Sign up", comment: "Sign up")
+    static let Signout          = NSLocalizedString("Sign out", comment: "Sign out")
+    static let confirmSignout   = NSLocalizedString("Are you sure?", comment: "Are you sure?")
 }
 
 // contact
 extension Strings {
-    static let inputAccountPlaceholder = NSLocalizedString("input account", comment: "input account")
+    static let inputAccount  = NSLocalizedString("input account", comment: "input account")
+    static let requestFriend = NSLocalizedString("Request friend", comment: "Request friend")
+    static let startChat     = NSLocalizedString("Start chat", comment: "Start chat")
 }
 
 // common

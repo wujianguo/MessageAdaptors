@@ -23,6 +23,8 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        var manager = account.sessionManager
+        manager.remove(delegate: self)
     }
     
     override func viewDidLoad() {
@@ -34,6 +36,9 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
         tableView.tableFooterView = UIView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(statusChanged(notification:)), name: AccountStatusChangedNotificationName, object: nil)
+        
+        var manager = account.sessionManager
+        manager.add(delegate: self)
     }
     
     // MARK: - Notification
@@ -58,9 +63,9 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return account.sessions.count
+        return account.sessionManager.recentSessions.count
     }
-
+/*
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? SessionTableViewCell<AccountType.SessionType> {
             cell.session.add(consumer: self)
@@ -72,38 +77,35 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
             cell.session.remove(consumer: self)
         }
     }
-    
+    */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SessionTableViewCell<AccountType.SessionType>.identifier(), for: indexPath) as! SessionTableViewCell<AccountType.SessionType>
-        cell.session = account.sessions[indexPath.row]        
+        cell.session = account.sessionManager.recentSessions[indexPath.row] as! AccountType.SessionType
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = SessionViewController<AccountType>(account: account, session: account.sessions[indexPath.row])
+        let vc = SessionViewController<AccountType>(account: account, session: account.sessionManager.recentSessions[indexPath.row] as! AccountType.SessionType)
         let nav = BaseNavigationController(rootViewController: vc)
         splitViewController?.showDetailViewController(nav, sender: self)
     }
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            account.sessionManager.delete(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -137,7 +139,7 @@ class SessionsTableViewController<AccountType: MessageAccount>: UITableViewContr
 
 
 // MARK: - MessageConsumer
-
+/*
 extension SessionsTableViewController: MessageConsumer {
     
     func on(sessionId: String, recv messages: [MessageObject]) {
@@ -151,6 +153,37 @@ extension SessionsTableViewController: MessageConsumer {
         }
     }
     
+    
+}
+*/
+// MARK: - MessageSessionManagerDelegate
+
+extension SessionsTableViewController: MessageSessionManagerDelegate {
+
+    func on(sessionId: String, lastMessage: MessageObject, from: Int, to: Int) {
+        if from > 0 && from != to {
+            tableView.moveRow(at: IndexPath(row: from, section: 0), to: IndexPath(row: to, section: 0))
+        }
+        if let cell = tableView.cellForRow(at: IndexPath(row: to, section: 0)) as? SessionTableViewCell<AccountType.SessionType> {
+            if cell.session.id == sessionId {
+                cell.update()
+            }
+        }
+    }
+    
+    func onNewSession(count: Int) {
+        var indexPaths = [IndexPath]()
+        for i in 0..<count {
+            indexPaths.append(IndexPath(row: i, section: 0))
+        }
+        if indexPaths.count > 0 {
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        }
+    }
+    
+    func reload() {
+        tableView.reloadData()
+    }
     
 }
 

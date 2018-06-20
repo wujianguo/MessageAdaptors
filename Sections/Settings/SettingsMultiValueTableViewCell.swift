@@ -11,7 +11,7 @@ import UIKit
 class SettingsMultiValueTableViewCellTypeInfo: SettingsTypeProtocol {
     
     func register(tableView: UITableView) {
-        tableView.register(SettingsMultiValueTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier())
+        tableView.register(SettingsMultiValueTableViewCell.self, forCellReuseIdentifier: SettingsMultiValueTableViewCell.identifier())
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
@@ -34,5 +34,4 @@ class SettingsMultiValueTableViewCell: SettingsTableViewCell {
     override func setup() {
         accessoryType = .disclosureIndicator
     }
-
 }
