@@ -15,6 +15,6 @@ struct UIConstants {
 
 extension UIConstants {
     static let padding          = 8
-    static let themeColor       = UINavigationBar.appearance().tintColor
+    static let themeColor       = UIColor(red: 0, green: 122.0/255.0, blue: 1, alpha: 1)
     static let destructiveColor = UIColor.red
 }

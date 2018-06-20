@@ -8,7 +8,13 @@
 
 import Foundation
 
+protocol MessageContactNotification {
+    
+}
+
 protocol MessageContact {
+    
+    var notifications: [MessageContactNotification] { get }
     
     var friends: [MessageUser] { get }
     

@@ -18,6 +18,7 @@ class SettingsTableViewController: UITableViewController {
         for type in settings {
             type.delegate.register(tableView: tableView)
         }
+        tableView.rowHeight = 40
     }
 
     override func didReceiveMemoryWarning() {

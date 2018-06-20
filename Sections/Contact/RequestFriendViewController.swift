@@ -9,44 +9,35 @@
 import UIKit
 import SnapKit
 
-class RequestFriendViewController: UIViewController, UITextFieldDelegate {
+class RequestFriendViewController<AccountType: MessageAccount>: SettingsTableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-
-        view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(view.snp.leadingMargin)
-            make.top.equalTo(view.snp.topMargin).offset(UIConstants.padding)
-            make.trailing.equalTo(view.snp.trailingMargin)
-            make.height.equalTo(40)
-        }
+    let account: AccountType
+    
+    init(account: AccountType) {
+        self.account = account
+        super.init(style: .grouped)
     }
     
-    lazy var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.delegate = self
-        textField.placeholder = Strings.inputAccount
-        textField.borderStyle = .roundedRect
-        textField.keyboardType = .asciiCapable
-        textField.returnKeyType = .done
-        return textField
-    }()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        let inputId = SettingsType(kind: .textField(Strings.inputAccount), delegate: SettingsTextFieldTableViewCellTypeInfo())
+        let confirm = SettingsType(kind: .button(Strings.ok, nil), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        }))
         
-        return true
+        settings = [
+            inputId,
+            confirm
+        ]
+
+        super.viewDidLoad()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
 }

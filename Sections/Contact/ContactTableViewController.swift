@@ -45,8 +45,31 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
     
     // MARK: - Action
     @objc func requestFriend(sender: UIBarButtonItem) {
-        let vc = RequestFriendViewController()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = RequestFriendViewController<AccountType>(account: account)
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        let alert = UIAlertController(title: Strings.inputAccount, message: Strings.confirmSignout, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = Strings.inputAccount
+        }
+        alert.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: { (action) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: Strings.ok, style: .default, handler: { (action) in
+            guard let text = alert.textFields?.first?.text else {
+                return
+            }
+            self.account.contact.fetchUserInfo(id: text, complete: { (user, error) in
+                guard let user = user else {
+                    return
+                }
+                let vc = UserTableViewController<AccountType>(account: self.account, user: user)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+
+        }))
+        present(alert, animated: true, completion: nil)
+
     }
 
 

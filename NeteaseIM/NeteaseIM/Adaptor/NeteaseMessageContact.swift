@@ -8,8 +8,14 @@
 
 import Foundation
 
-class NeteaseMessageContact: MessageContact {
+class NeteaseContactNotification: MessageContactNotification {
+    
+}
 
+class NeteaseMessageContact: MessageContact {
+    
+    var notifications = [MessageContactNotification]()
+    
     var friends: [MessageUser] {
         return NIMSDK.shared().userManager.myFriends() ?? []
     }
