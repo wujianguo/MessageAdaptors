@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol MessageNotificationObject {
+    
+    
+    
+}
+
 protocol MessageNotificationManager {
     
 }

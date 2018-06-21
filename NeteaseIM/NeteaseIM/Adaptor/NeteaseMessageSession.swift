@@ -115,9 +115,7 @@ class NeteaseMessageSession: MessageSession {
         var history = [NeteaseMessageObject]()
         if let msgs = NIMSDK.shared().conversationManager.messages(in: session, message: messages.last?.message, limit: 100) {
             for msg in msgs {
-//                if msg.messageType != .notification {
                 history.append(NeteaseMessageObject(message: msg))
-//                }
             }
             messages.insert(contentsOf: history, at: 0)
         }

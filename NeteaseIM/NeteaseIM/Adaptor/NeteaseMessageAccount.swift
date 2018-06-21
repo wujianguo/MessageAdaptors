@@ -106,13 +106,8 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
         }
         
         sessionManager.load()
-//        let recentSessions = NIMSDK.shared().conversationManager.allRecentSessions() ?? []
-//        for session in recentSessions {
-//            let s = NeteaseMessageSession(recent: session)
-//            sessions.append(s)
-//        }
+        notificationManager.load()
         
-//        NIMSDK.shared().chatManager.add(self)
         status = .Connected
     }
     
@@ -128,32 +123,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
     
     
     var sessionManager = NeteaseSessionManager()
-
-    /*
-    var sessions = [NeteaseMessageSession]()
     
     
-    func onRecvMessages(_ messages: [NIMMessage]) {
-        dispatchMessages(messages: messages)
-    }
-    
-    func dispatchMessages(messages: [NIMMessage]) {
-        var count = 0
-        for session in sessions {
-            var array = [NeteaseMessageObject]()
-            for message in messages {
-                if message.session?.sessionId == session.session.sessionId {
-                    count += 1
-                    array.append(NeteaseMessageObject(message: message))
-                }
-            }
-            if array.count > 0 {
-                session.onRecv(array: array)
-            }
-            if count == messages.count {
-                break;
-            }
-        }
-    }
-    */
+    var notificationManager = NeteaseNotificationManager()
 }
