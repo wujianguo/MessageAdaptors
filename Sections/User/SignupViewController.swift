@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SignupViewController<AccountType: MessageAccount>: UIViewController {
+class SignupViewController<AccountType: MessageAccount>: SettingsTableViewController {
 
     let account: AccountType!
     
     init(account: AccountType) {
         self.account = account
-        super.init(nibName: nil, bundle: nil)
+        super.init(style: .grouped)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,97 +22,54 @@ class SignupViewController<AccountType: MessageAccount>: UIViewController {
     }
 
     override func viewDidLoad() {
+        
+        let inputAccount = SettingsType(kind: .textField(Strings.inputNamePlaceholder), delegate: SettingsTextFieldTableViewCellTypeInfo(configuration: { (textField) in
+            textField.keyboardType = .asciiCapable
+        }))
+        
+        let inputNick = SettingsType(kind: .textField(Strings.inputNickPlaceholder), delegate: SettingsTextFieldTableViewCellTypeInfo(configuration: { (textField) in
+            textField.borderStyle = .roundedRect
+        }))
+
+        let inputPassword = SettingsType(kind: .textField(Strings.inputPasswordPlaceholder), delegate: SettingsTextFieldTableViewCellTypeInfo(configuration: { (textField) in
+            textField.isSecureTextEntry = true
+            textField.returnKeyType = .done
+        }))
+        
+        let confirm = SettingsType(kind: .button(Strings.signup, nil), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
+            guard let name = inputAccount.delegate.textValue?.trimmingCharacters(in: .whitespaces), let nick = inputNick.delegate.textValue?.trimmingCharacters(in: .whitespaces), let password = inputPassword.delegate.textValue?.trimmingCharacters(in: .whitespaces) else {
+                return
+            }
+            self.signup(name: name, nick: nick, password: password)
+        }))
+
+
+        settings = [
+            inputAccount,
+            inputNick,
+            inputPassword,
+            confirm,
+        ]
+        
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
         title = Strings.signup
-        
-        view.addSubview(nameTextField)
-        view.addSubview(nickTextField)
-        view.addSubview(passwordTextField)
-        view.addSubview(signupButton)
-        
-        nameTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(view.snp.leadingMargin)
-            make.top.equalTo(view.snp.topMargin).offset(UIConstants.padding)
-            make.trailing.equalTo(view.snp.trailingMargin)
-            make.height.equalTo(40)
-        }
-        
-        nickTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(view.snp.leadingMargin)
-            make.top.equalTo(nameTextField.snp.bottom).offset(UIConstants.padding/2)
-            make.trailing.equalTo(view.snp.trailingMargin)
-            make.height.equalTo(40)
-        }
-
-        passwordTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(view.snp.leadingMargin)
-            make.top.equalTo(nickTextField.snp.bottom).offset(UIConstants.padding/2)
-            make.trailing.equalTo(view.snp.trailingMargin)
-            make.height.equalTo(40)
-        }
-        
-        signupButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(view.snp.leadingMargin)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(UIConstants.padding)
-            make.trailing.equalTo(view.snp.trailingMargin)
-            make.height.equalTo(40)
-        }
-    
     }
     
-    lazy var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = Strings.inputNamePlaceholder
-        textField.borderStyle = .roundedRect
-        textField.keyboardType = .asciiCapable
-        textField.returnKeyType = .next
-        return textField
-    }()
-    
-    lazy var nickTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = Strings.inputNickPlaceholder
-        textField.borderStyle = .roundedRect
-        textField.returnKeyType = .next
-        return textField
-    }()
-
-    
-    lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.placeholder = Strings.inputPasswordPlaceholder
-        textField.isSecureTextEntry = true
-        textField.returnKeyType = .done
-        return textField
-    }()
-    
-    lazy var signupButton: UIButton = {
-        let button = UIButton()
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 4
-        button.backgroundColor = UIConstants.themeColor
-        button.setTitle(Strings.signup, for: .normal)
-        button.addTarget(self, action: #selector(signupClick(sender:)), for: .touchUpInside)
-        return button
-    }()
-    
-    
-    @objc func signupClick(sender: UIButton) {
-        guard let name = nameTextField.text?.trimmingCharacters(in: .whitespaces), let nick = nickTextField.text?.trimmingCharacters(in: .whitespaces), let password = passwordTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            return
-        }
-        sender.isEnabled = false
+    func signup(name: String, nick: String, password: String) {
         let data = AccountSignupData(username: name, password: password, nickname: nick)
         account.signup(data: data) { (error) in
-            sender.isEnabled = true
             guard error == nil else {
+                print(error!)
                 return
             }
             self.navigationController?.popViewController(animated: true)
         }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

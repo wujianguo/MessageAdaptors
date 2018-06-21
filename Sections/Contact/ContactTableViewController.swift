@@ -45,8 +45,11 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
     
     // MARK: - Action
     @objc func requestFriend(sender: UIBarButtonItem) {
-//        let vc = RequestFriendViewController<AccountType>(account: account)
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = RequestFriendViewController<AccountType>(account: account)
+        navigationController?.pushViewController(vc, animated: true)
+        
+        /*
+        return
         
         let alert = UIAlertController(title: Strings.inputAccount, message: Strings.confirmSignout, preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -69,7 +72,7 @@ class ContactTableViewController<AccountType: MessageAccount>: UITableViewContro
 
         }))
         present(alert, animated: true, completion: nil)
-
+        */
     }
 
 

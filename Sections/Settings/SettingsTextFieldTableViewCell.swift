@@ -15,10 +15,29 @@ class SettingsTextFieldTableViewCellTypeInfo: SettingsTypeProtocol {
     }
     
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: SettingsTextFieldTableViewCell.identifier(), for: indexPath) as! SettingsTextFieldTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTextFieldTableViewCell.identifier(), for: indexPath) as! SettingsTextFieldTableViewCell
+        textField = cell.textField
+        configurationBlock?(textField!)
+        return cell
     }
 
     func didSelect(type: SettingsType) {
+        
+    }
+    
+    var textValue: String? {
+        return textField?.text
+    }
+    
+    var textField: UITextField?
+
+    var configurationBlock: ((UITextField) -> Void)? = nil
+    
+    init(configuration: @escaping (UITextField) -> Void) {
+        self.configurationBlock = configuration
+    }
+    
+    init() {
         
     }
 

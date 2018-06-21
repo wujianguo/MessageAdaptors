@@ -15,7 +15,16 @@ protocol SettingsTypeProtocol {
     func dequeueReusableCell(for indexPath: IndexPath, at tableView: UITableView) -> SettingsTableViewCell
     
     func didSelect(type: SettingsType)
-//    var type: SettingsType! { get set }
+
+    var textValue: String? { get }
+}
+
+extension SettingsTypeProtocol {
+    
+    var textValue: String? {
+        return nil
+    }
+    
 }
 
 enum SettingsKind {

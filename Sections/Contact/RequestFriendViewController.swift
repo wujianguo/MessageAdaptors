@@ -25,7 +25,15 @@ class RequestFriendViewController<AccountType: MessageAccount>: SettingsTableVie
     override func viewDidLoad() {
         let inputId = SettingsType(kind: .textField(Strings.inputAccount), delegate: SettingsTextFieldTableViewCellTypeInfo())
         let confirm = SettingsType(kind: .button(Strings.ok, nil), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
-
+            if let text = inputId.delegate.textValue {
+                self.account.contact.fetchUserInfo(id: text, complete: { (user, error) in
+                    guard let user = user else {
+                        return
+                    }
+                    let vc = UserTableViewController<AccountType>(account: self.account, user: user)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                })
+            }
         }))
         
         settings = [
