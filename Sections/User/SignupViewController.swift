@@ -43,12 +43,9 @@ class SignupViewController<AccountType: MessageAccount>: SettingsTableViewContro
             self.signup(name: name, nick: nick, password: password)
         }))
 
-
-        settings = [
-            inputAccount,
-            inputNick,
-            inputPassword,
-            confirm,
+        groups = [
+            SettingsGroup(settings: [inputAccount, inputNick, inputPassword]),
+            SettingsGroup(settings: [confirm])
         ]
         
         super.viewDidLoad()

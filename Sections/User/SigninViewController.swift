@@ -35,10 +35,10 @@ class SigninViewController<AccountType: MessageAccount>: SettingsTableViewContro
             }
             self.signin(name: name, password: password)
         }))
-        settings = [
-            inputAccount,
-            inputPassword,
-            confirm,
+        
+        groups = [
+            SettingsGroup(settings: [inputAccount, inputPassword]),
+            SettingsGroup(settings: [confirm])
         ]
         super.viewDidLoad()
         title = Strings.signin

@@ -8,15 +8,29 @@
 
 import UIKit
 
+
+class SettingsGroup {
+    
+    var name: String? = nil
+    
+    var settings: [SettingsType] = []
+    
+    init(settings: [SettingsType], name: String? = nil) {
+        self.name = name
+        self.settings = settings
+    }
+}
+
 class SettingsTableViewController: UITableViewController {
 
-    var settings: [SettingsType] = []
+    var groups: [SettingsGroup] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        for type in settings {
-            type.delegate.register(tableView: tableView)
+        for group in groups {
+            for type in group.settings {
+                type.delegate.register(tableView: tableView)
+            }
         }
         tableView.rowHeight = 40
     }
@@ -27,23 +41,29 @@ class SettingsTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return groups[section].name
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return groups.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settings.count
+        return groups[section].settings.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = settings[indexPath.row].delegate.dequeueReusableCell(for: indexPath, at: tableView)
-        cell.type = settings[indexPath.row]
+        let type = groups[indexPath.section].settings[indexPath.row]
+        let cell = type.delegate.dequeueReusableCell(for: indexPath, at: tableView)
+        cell.type = type
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        settings[indexPath.row].delegate.didSelect(type: settings[indexPath.row])
+        let type = groups[indexPath.section].settings[indexPath.row]
+        type.delegate.didSelect(type: type)
     }
     
 }

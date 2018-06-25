@@ -40,12 +40,16 @@ enum SettingsKind {
     case custom(Any?)    
 }
 
-struct SettingsType {
+class SettingsType {
     
     var kind: SettingsKind
     
     var delegate: SettingsTypeProtocol
     
+    init(kind: SettingsKind, delegate: SettingsTypeProtocol) {
+        self.kind = kind
+        self.delegate = delegate
+    }
 }
 
 class SettingsTableViewCellTypeInfo: SettingsTypeProtocol {

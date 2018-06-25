@@ -10,26 +10,7 @@ import Foundation
 import MessageKit
 
 extension MessageKind {
-    
-//    var typeValue: Int {
-//        switch self {
-//        case .text:
-//            return 1
-//        case .attributedText:
-//            return 2
-//        case .photo:
-//            return 3
-//        case .video:
-//            return 4
-//        case .location:
-//            return 5
-//        case .emoji:
-//            return 6
-//        case .custom:
-//            return 7
-//        }
-//    }
-    
+        
     var messageContent: String {
         switch self {
         case .text(let text):

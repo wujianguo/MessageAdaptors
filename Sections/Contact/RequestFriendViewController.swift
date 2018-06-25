@@ -36,11 +36,11 @@ class RequestFriendViewController<AccountType: MessageAccount>: SettingsTableVie
             }
         }))
         
-        settings = [
-            inputId,
-            confirm
+        groups = [
+            SettingsGroup(settings: [inputId]),
+            SettingsGroup(settings: [confirm]),
         ]
-
+        
         super.viewDidLoad()
     }
     

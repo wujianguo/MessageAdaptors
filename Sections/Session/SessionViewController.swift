@@ -70,6 +70,11 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
             messagesCollectionView.scrollToBottom()
         }
     }
+    
+    // MARK: - Custom Message
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return super.collectionView(collectionView, cellForItemAt: indexPath)
+    }
 
     // MARK: - Navigation
 

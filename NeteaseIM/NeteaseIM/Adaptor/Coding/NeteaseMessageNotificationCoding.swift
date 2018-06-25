@@ -9,6 +9,7 @@
 import Foundation
 import MessageKit
 
+
 class NeteaseMessageNotificationCoding: NeteaseMessageCoding {
 
     func encode(message: NeteaseMessageObject) -> NIMMessage? {
@@ -16,10 +17,10 @@ class NeteaseMessageNotificationCoding: NeteaseMessageCoding {
     }
     
     func decode(message: NIMMessage) -> MessageKind? {
-        if let object = message.messageObject as? NIMNotificationObject {
+        guard let object = message.messageObject as? NIMNotificationObject else {
             return nil
         }
-        return nil
+        return .custom("hello")
     }
     
     

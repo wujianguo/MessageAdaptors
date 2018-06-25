@@ -40,8 +40,29 @@ extension MessageKind {
 
 }
 
+protocol NeteaseMessageCustomCoding {
+    
+}
+
 
 class NeteaseMessageCoder {
+    
+    var coders = [NeteaseMessageCoding]()
+    
+    init() {
+        coders = [
+            NeteaseMessageTextCoding(),
+            NeteaseMessagePhotoCoding(),
+            NeteaseMessageVideoCoding(),
+            NeteaseMessageLocationCoding(),
+            NeteaseMessageNotificationCoding(),
+        ]
+    }
+    
+    
+    static let customCodings: [NeteaseMessageCustomCoding] = [
+        
+    ]
     
     static let coders: [Int: NeteaseMessageCoding] = [
         NIMMessageType.text.rawValue: NeteaseMessageTextCoding(),
@@ -49,6 +70,7 @@ class NeteaseMessageCoder {
         NIMMessageType.image.rawValue: NeteaseMessagePhotoCoding(),
         NIMMessageType.video.rawValue: NeteaseMessageVideoCoding(),
         NIMMessageType.location.rawValue: NeteaseMessageLocationCoding(),
+        NIMMessageType.notification.rawValue: NeteaseMessageNotificationCoding(),
     ]
     
     static func encode(message: NeteaseMessageObject) -> NIMMessage {
@@ -74,5 +96,15 @@ class NeteaseMessageCoder {
             return .text(Strings.notSupportYet)
         }
     }
+    
+    static func register(at collectionView: UICollectionView) {
+        for customCoding in NeteaseMessageCoder.customCodings {
+//            customCoding.register(at: collectionView)
+        }
+    }
 
+    func dequeueReusableCell(at collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
+    }
+    
 }
