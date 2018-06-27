@@ -58,7 +58,6 @@
 		817E870320DA3E56007C0891 /* MessageNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E870220DA3E56007C0891 /* MessageNotificationManager.swift */; };
 		817E870820DB879F007C0891 /* NeteaseNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E870720DB879E007C0891 /* NeteaseNotificationManager.swift */; };
 		817E870C20DB97D5007C0891 /* MessageCustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E870B20DB97D5007C0891 /* MessageCustomLayout.swift */; };
-		817E871020DBA547007C0891 /* MessageVoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E870F20DBA547007C0891 /* MessageVoteObject.swift */; };
 		819AED8020C5080000B1491E /* NeteaseMessageNotificationCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED7F20C5080000B1491E /* NeteaseMessageNotificationCoding.swift */; };
 		819AED8720C69D7B00B1491E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED8620C69D7B00B1491E /* SigninViewController.swift */; };
 		819AED8920C69D8800B1491E /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819AED8820C69D8800B1491E /* SignupViewController.swift */; };
@@ -70,6 +69,8 @@
 		81D4AE5420A04E6B009D9916 /* MessageConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE5320A04E6B009D9916 /* MessageConversation.swift */; };
 		81D4AE5620A0657B009D9916 /* MessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE5520A0657B009D9916 /* MessageObject.swift */; };
 		81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE5820A1A5B1009D9916 /* NeteaseMessageObject.swift */; };
+		81F3988820E38A75006444E7 /* MessageJanKenPonLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */; };
+		81F3988A20E38ADC006444E7 /* MessageChartletLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */; };
 		B443C449B705EFE0606DAB44 /* Pods_NeteaseIMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42312EA5CCEBEC6BAF72E0F /* Pods_NeteaseIMUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,7 +151,6 @@
 		817E870220DA3E56007C0891 /* MessageNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageNotificationManager.swift; sourceTree = "<group>"; };
 		817E870720DB879E007C0891 /* NeteaseNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseNotificationManager.swift; sourceTree = "<group>"; };
 		817E870B20DB97D5007C0891 /* MessageCustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCustomLayout.swift; sourceTree = "<group>"; };
-		817E870F20DBA547007C0891 /* MessageVoteObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVoteObject.swift; sourceTree = "<group>"; };
 		819AED7F20C5080000B1491E /* NeteaseMessageNotificationCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageNotificationCoding.swift; sourceTree = "<group>"; };
 		819AED8620C69D7B00B1491E /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		819AED8820C69D8800B1491E /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +162,8 @@
 		81D4AE5320A04E6B009D9916 /* MessageConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageConversation.swift; sourceTree = "<group>"; };
 		81D4AE5520A0657B009D9916 /* MessageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageObject.swift; sourceTree = "<group>"; };
 		81D4AE5820A1A5B1009D9916 /* NeteaseMessageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageObject.swift; sourceTree = "<group>"; };
+		81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageJanKenPonLayout.swift; sourceTree = "<group>"; };
+		81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChartletLayout.swift; sourceTree = "<group>"; };
 		9D0F8F5A9B4D7F3B9C5739D1 /* Pods_NeteaseIMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeteaseIMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0A71F9397C756D5717763A /* Pods-NeteaseIM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeteaseIM.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeteaseIM/Pods-NeteaseIM.release.xcconfig"; sourceTree = "<group>"; };
 		B42312EA5CCEBEC6BAF72E0F /* Pods_NeteaseIMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeteaseIMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,7 +418,8 @@
 			isa = PBXGroup;
 			children = (
 				817E870B20DB97D5007C0891 /* MessageCustomLayout.swift */,
-				817E870F20DBA547007C0891 /* MessageVoteObject.swift */,
+				81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */,
+				81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				814E1BDA20BD364E006E4FC6 /* AcceptFriendViewController.swift in Sources */,
 				814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */,
 				810E129B20A0213A00D10B5E /* ViewController.swift in Sources */,
+				81F3988A20E38ADC006444E7 /* MessageChartletLayout.swift in Sources */,
 				81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */,
 				8109FD6C20B536400051C192 /* SessionViewController.swift in Sources */,
 				810E130520A02A8800D10B5E /* NeteaseMessageAccount.swift in Sources */,
@@ -692,7 +696,6 @@
 				814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */,
 				816775C820C4D9F40024A556 /* NeteaseMessageCoding.swift in Sources */,
 				8109FD8820B540AB0051C192 /* BaseNavigationController.swift in Sources */,
-				817E871020DBA547007C0891 /* MessageVoteObject.swift in Sources */,
 				81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */,
 				8109FD7720B5373F0051C192 /* MainViewController.swift in Sources */,
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
@@ -703,6 +706,7 @@
 				816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */,
 				81D4AE5620A0657B009D9916 /* MessageObject.swift in Sources */,
 				817E870320DA3E56007C0891 /* MessageNotificationManager.swift in Sources */,
+				81F3988820E38A75006444E7 /* MessageJanKenPonLayout.swift in Sources */,
 				819AED8920C69D8800B1491E /* SignupViewController.swift in Sources */,
 				817E86FF20DA0F7D007C0891 /* NeteaseSessionManager.swift in Sources */,
 				8109FD7C20B53B8D0051C192 /* ContactTableViewController.swift in Sources */,

@@ -1,15 +1,15 @@
 //
-//  MessageVoteObject.swift
+//  MessageJanKenPonLayout.swift
 //  NeteaseIM
 //
-//  Created by Jianguo Wu on 2018/6/21.
+//  Created by Jianguo Wu on 2018/6/27.
 //  Copyright © 2018年 wujianguo. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import MessageKit
 
-class VoteMessageSizeCalculator: MessageSizeCalculator {
+class JanKenPonMessageSizeCalculator: MessageSizeCalculator {
     
     override func sizeForItem(at indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
@@ -17,21 +17,21 @@ class VoteMessageSizeCalculator: MessageSizeCalculator {
     
 }
 
-class MessageVoteObject: NSObject, MessageCustomObject {
+class MessageJanKenPonObject: NSObject, MessageCustomObject {
     
     static var type: Int = 1
     
 }
 
-class MessageVoteCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {
+class MessageJanKenPonCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {
     
-    static var sizeCalculator: MessageSizeCalculator = VoteMessageSizeCalculator()
+    static var sizeCalculator: MessageSizeCalculator = JanKenPonMessageSizeCalculator()
     
-    typealias ObjectType = MessageVoteObject
+    typealias ObjectType = MessageJanKenPonObject
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = UIColor.red
+        contentView.backgroundColor = UIColor.blue
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,5 +41,5 @@ class MessageVoteCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCe
     func config(object: ObjectType, at indexPath: IndexPath) {
         
     }
-
+    
 }

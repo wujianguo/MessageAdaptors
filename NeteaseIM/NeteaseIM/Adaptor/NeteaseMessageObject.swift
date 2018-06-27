@@ -33,7 +33,7 @@ class NeteaseMessageObject: MessageObject {
         self.message = message
         messageId = message.messageId
         sentDate = Date(timeIntervalSince1970: message.timestamp)
-        kind = NeteaseMessageCoder.decode(message: message)
+        kind = NeteaseMessageCoderManager.decode(message: message)
         if let content = message.apnsContent {
             messageContent = content
         } else {
@@ -75,6 +75,6 @@ class NeteaseMessageObject: MessageObject {
     }
     
     func encode() -> NIMMessage {
-        return NeteaseMessageCoder.encode(message: self)
+        return NeteaseMessageCoderManager.encode(message: self)
     }
 }

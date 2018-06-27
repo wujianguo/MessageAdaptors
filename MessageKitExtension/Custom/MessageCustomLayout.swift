@@ -9,6 +9,53 @@
 import UIKit
 import MessageKit
 
+/*
+protocol MessageCustomObject2: Codable {
+    
+    static var type: Int { get }
+
+}
+
+protocol MessageCustomLayoutCell2: NSObjectProtocol {
+    
+    static var reuseIdentifier: String { get }
+
+}
+
+extension MessageCustomLayoutCell2 {
+    
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
+    
+}
+
+
+class MessageCellAdaptor2<ObjectType: MessageCustomObject2, CellType: MessageCustomLayoutCell2> {
+    
+    init(collectionView: UICollectionView) {
+        collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseIdentifier)
+    }
+    
+}
+
+struct MessageCustomLayoutManager2 {
+    
+    static func register(at collectionView: UICollectionView) {
+        let vote = MessageCellAdaptor2<MessageVoteObject2, MessageVoteCollectionViewCell2>(collectionView: collectionView)
+    }
+}
+*/
+/*
+typedef NS_ENUM(NSInteger,NTESCustomMessageType){
+    CustomMessageTypeJanKenPon  = 1, //剪子石头布
+    CustomMessageTypeSnapchat   = 2, //阅后即焚
+    CustomMessageTypeChartlet   = 3, //贴图表情
+    CustomMessageTypeWhiteboard = 4, //白板会话
+    CustomMessageTypeRedPacket  = 5, //红包消息
+    CustomMessageTypeRedPacketTip = 6, //红包提示消息
+};
+*/
 protocol MessageCustomObject: Codable {
         
     static var type: Int { get }
@@ -46,7 +93,8 @@ class MessageCellAdaptor<CellType: MessageCustomLayoutCell> {
 struct MessageCustomLayoutManager {
 
     static let cellAdaptors = [
-        MessageCellAdaptor<MessageVoteCollectionViewCell>()
+        MessageCellAdaptor<MessageJanKenPonCollectionViewCell>(),
+//        MessageCellAdaptor<MessageChartletCollectionViewCell>(),
     ]
 
     static func register(at collectionView: UICollectionView) {
