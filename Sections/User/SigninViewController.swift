@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 
+
 class SigninViewController<AccountType: MessageAccount>: SettingsTableViewController {
 
     let account: AccountType!

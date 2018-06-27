@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         NIMSDK.shared().register(withAppID: "45c6af3c98409b18a84451215d0bdd6e", cerName: nil)
-
+        NIMCustomObject.registerCustomDecoder(NeteaseMessageCustomCoding())
         let account = NeteaseMessageAccount()
         if NeteaseMessageAccount.canAutoSignin() {
             let vc = SplitViewController<NeteaseMessageAccount>(account: account)

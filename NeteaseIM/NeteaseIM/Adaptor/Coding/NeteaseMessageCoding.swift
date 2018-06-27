@@ -17,6 +17,74 @@ protocol NeteaseMessageCoding: MessageCoding {
     
 }
 
+class NeteaseMessageCustomAttachment<CustomType: MessageCustomObject>: NSObject, NIMCustomAttachment {
+    
+    var object: CustomType? = nil
+    
+    init(object: CustomType) {
+        self.object = object
+        super.init()
+    }
+    
+    func encode() -> String {
+        if let object = object {
+            do {
+                let data = try JSONEncoder().encode(object)
+                if let str = String(bytes: data, encoding: .utf8) {
+                    return str
+                }
+            } catch {
+                
+            }
+        }
+        return ""
+    }
+    
+}
+
+
+class NeteaseMessageCustomCoding: NSObject, NeteaseMessageCoding, NIMCustomAttachmentCoding {
+    
+    func encode(message: NeteaseMessageObject) -> NIMMessage? {
+        return nil
+    }
+    
+    func decode(message: NIMMessage) -> MessageKind? {
+        guard let object = message.messageObject as? NIMCustomObject else {
+            return nil
+        }
+        for adapt in MessageCustomLayoutManager.cellAdaptors {
+            if adapt.objectType == type(of: object.attachment) {
+                return .custom(object.attachment)
+            }
+        }
+
+        return .custom(object.attachment)
+    }
+
+    func decodeAttachment(_ content: String?) -> NIMCustomAttachment? {
+        guard let data = content?.data(using: .utf8) else {
+            return nil
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Any> else {
+            return nil
+        }
+        guard let type = json?["type"] as? Int else {
+            return nil
+        }
+        for adap in MessageCustomLayoutManager.cellAdaptors {
+            if adap.objectType.type == type {
+                if let object = try? JSONDecoder().decode(adap.objectType, from: data) {
+                    return NeteaseMessageCustomAttachment(object: object)
+                }
+                return nil
+            }
+        }
+
+        return nil
+    }
+}
+
 extension MessageKind {
 
     var typeValue: Int {
@@ -40,10 +108,6 @@ extension MessageKind {
 
 }
 
-protocol NeteaseMessageCustomCoding {
-    
-}
-
 
 class NeteaseMessageCoder {
     
@@ -56,14 +120,11 @@ class NeteaseMessageCoder {
             NeteaseMessageVideoCoding(),
             NeteaseMessageLocationCoding(),
             NeteaseMessageNotificationCoding(),
+            NeteaseMessageCustomCoding(),
         ]
     }
     
-    
-    static let customCodings: [NeteaseMessageCustomCoding] = [
-        
-    ]
-    
+
     static let coders: [Int: NeteaseMessageCoding] = [
         NIMMessageType.text.rawValue: NeteaseMessageTextCoding(),
         NIMMessageType.tip.rawValue: NeteaseMessageTextCoding(),
@@ -96,15 +157,5 @@ class NeteaseMessageCoder {
             return .text(Strings.notSupportYet)
         }
     }
-    
-    static func register(at collectionView: UICollectionView) {
-        for customCoding in NeteaseMessageCoder.customCodings {
-//            customCoding.register(at: collectionView)
-        }
-    }
 
-    func dequeueReusableCell(at collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
-    }
-    
 }

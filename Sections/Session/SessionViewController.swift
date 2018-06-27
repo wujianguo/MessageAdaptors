@@ -28,14 +28,19 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
     
     let refreshControl = UIRefreshControl()
     var firstWillAppear = true
-    
+        
     override func viewDidLoad() {
+        messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: MessageCustomMessagesFlowLayout())
+        
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.white
         title = session.displayName
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonImage, style: .plain, target: self, action: #selector(userItemClick(sender:)))
         
+        MessageCustomLayoutManager.register(at:messagesCollectionView)
+
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -73,6 +78,12 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
     
     // MARK: - Custom Message
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let message = session.messages[indexPath.section]
+        if let object = message.kind.custom as? MessageCustomObject {
+            if let cell = MessageCustomLayoutManager.dequeueReusableCell(at: collectionView, for: indexPath, with: object) {
+                return cell
+            }
+        }
         return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
 
@@ -296,5 +307,19 @@ extension SessionViewController: MessageInputBarDelegate {
 extension SessionViewController: SplitDetailProtocol {
     var isDetail: Bool {
         return true
+    }
+}
+
+
+class MessageCustomMessagesFlowLayout: MessagesCollectionViewFlowLayout {
+    
+    override func cellSizeCalculatorForItem(at indexPath: IndexPath) -> CellSizeCalculator {
+        let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
+        if let object = message.kind.custom as? MessageCustomObject {
+            if let calculator = MessageCustomLayoutManager.cellSizeCalculator(for: object) {
+                return calculator
+            }
+        }
+        return super.cellSizeCalculatorForItem(at: indexPath)
     }
 }
