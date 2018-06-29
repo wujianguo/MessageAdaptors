@@ -83,7 +83,7 @@ class NeteaseMessageCustomCoding: NSObject, NeteaseMessageCoding, NIMCustomAttac
             for adap in MessageCustomLayoutManager.cellAdaptors {
                 if adap.objectType.type == wrapped.type {
                     if let decodedObject = try? JSONDecoder().decode(adap.objectType, from: data) {
-                        return .custom(decodedObject)
+                        return decodedObject.kind()
                     }
                 }
             }
@@ -154,7 +154,7 @@ class NeteaseMessageCoderManager {
         NeteaseMessageVideoCoding(),
         NeteaseMessageLocationCoding(),
         NeteaseMessageNotificationCoding(),
-//        NeteaseMessageCustomCoding(),
+        NeteaseMessageCustomCoding(),
     ]
     
     static func encode(message: NeteaseMessageObject) -> NIMMessage {

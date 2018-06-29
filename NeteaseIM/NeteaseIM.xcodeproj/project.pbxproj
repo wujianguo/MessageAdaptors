@@ -71,6 +71,7 @@
 		81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D4AE5820A1A5B1009D9916 /* NeteaseMessageObject.swift */; };
 		81F3988820E38A75006444E7 /* MessageJanKenPonLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */; };
 		81F3988A20E38ADC006444E7 /* MessageChartletLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */; };
+		81F3988C20E39991006444E7 /* MessageNotificationLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F3988B20E39991006444E7 /* MessageNotificationLayout.swift */; };
 		B443C449B705EFE0606DAB44 /* Pods_NeteaseIMUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42312EA5CCEBEC6BAF72E0F /* Pods_NeteaseIMUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +165,7 @@
 		81D4AE5820A1A5B1009D9916 /* NeteaseMessageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageObject.swift; sourceTree = "<group>"; };
 		81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageJanKenPonLayout.swift; sourceTree = "<group>"; };
 		81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChartletLayout.swift; sourceTree = "<group>"; };
+		81F3988B20E39991006444E7 /* MessageNotificationLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageNotificationLayout.swift; sourceTree = "<group>"; };
 		9D0F8F5A9B4D7F3B9C5739D1 /* Pods_NeteaseIMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeteaseIMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0A71F9397C756D5717763A /* Pods-NeteaseIM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeteaseIM.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeteaseIM/Pods-NeteaseIM.release.xcconfig"; sourceTree = "<group>"; };
 		B42312EA5CCEBEC6BAF72E0F /* Pods_NeteaseIMUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeteaseIMUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -420,6 +422,7 @@
 				817E870B20DB97D5007C0891 /* MessageCustomLayout.swift */,
 				81F3988720E38A75006444E7 /* MessageJanKenPonLayout.swift */,
 				81F3988920E38ADC006444E7 /* MessageChartletLayout.swift */,
+				81F3988B20E39991006444E7 /* MessageNotificationLayout.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				81444C1620D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift in Sources */,
 				8109FD7E20B53B9C0051C192 /* UserTableViewController.swift in Sources */,
 				816775C020C4D0450024A556 /* NeteaseMessageTextCoding.swift in Sources */,
+				81F3988C20E39991006444E7 /* MessageNotificationLayout.swift in Sources */,
 				81444C1A20D8CE6B007B23A4 /* SettingsTableViewCell.swift in Sources */,
 				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,

@@ -59,6 +59,16 @@ typedef NS_ENUM(NSInteger,NTESCustomMessageType){
 protocol MessageCustomObject: Codable {
         
     static var type: Int { get }
+    
+    func kind() -> MessageKind
+}
+
+
+extension MessageCustomObject {
+    
+    func kind() -> MessageKind {
+        return .custom(self)
+    }
 }
 
 

@@ -21,6 +21,9 @@ class MessageJanKenPonObject: NSObject, MessageCustomObject {
     
     static var type: Int = 1
     
+    func kind() -> MessageKind {
+        return .text("JanKenPon")
+    }
 }
 
 class MessageJanKenPonCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {

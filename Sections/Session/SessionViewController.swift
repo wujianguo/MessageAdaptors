@@ -311,14 +311,25 @@ extension SessionViewController: SplitDetailProtocol {
 }
 
 
+class MessageCustomSizeCalculator: MessageSizeCalculator {
+
+//    override func sizeForItem(at indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 100, height: 100)
+//    }
+
+}
+
 class MessageCustomMessagesFlowLayout: MessagesCollectionViewFlowLayout {
+    
+    lazy open var customMessageSizeCalculator = MessageCustomSizeCalculator(layout: self)
     
     override func cellSizeCalculatorForItem(at indexPath: IndexPath) -> CellSizeCalculator {
         let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
         if let object = message.kind.custom as? MessageCustomObject {
-            if let calculator = MessageCustomLayoutManager.cellSizeCalculator(for: object) {
-                return calculator
-            }
+            return customMessageSizeCalculator
+//            if let calculator = MessageCustomLayoutManager.cellSizeCalculator(for: object) {
+//                return calculator
+//            }
         }
         return super.cellSizeCalculatorForItem(at: indexPath)
     }

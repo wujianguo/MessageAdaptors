@@ -54,7 +54,7 @@ class NeteaseMessageNotificationCoding: NeteaseMessageCoding {
             break
         }
         if let text = text {
-            return .text(text)
+            return .custom(MessageCustomNotificationObject(content: text))
         } else {
             return nil
         }
