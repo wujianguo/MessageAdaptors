@@ -55,9 +55,10 @@ class SignupViewController<AccountType: MessageAccount>: SettingsTableViewContro
     
     func signup(name: String, nick: String, password: String) {
         let data = AccountSignupData(username: name, password: password, nickname: nick)
+        MessageHUD.startLoading()
         account.signup(data: data) { (error) in
+            MessageHUD.stopLoading(error: error)
             guard error == nil else {
-                print(error!)
                 return
             }
             self.navigationController?.popViewController(animated: true)

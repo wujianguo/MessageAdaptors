@@ -48,7 +48,9 @@ class SigninViewController<AccountType: MessageAccount>: SettingsTableViewContro
     
     func signin(name: String, password: String) {
         let data = AccountSigninData(name: name, token: password)
+        MessageHUD.startLoading()
         account.signin(data: data) { (error) in
+            MessageHUD.stopLoading(error: error)
             guard error == nil else {
                 return
             }
