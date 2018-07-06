@@ -8,7 +8,6 @@
 
 import UIKit
 import Kingfisher
-import SnapKit
 import MessageKit
 
 class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
@@ -75,29 +74,25 @@ class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
         contentView.addSubview(messageLabel)
         contentView.addSubview(timeLabel)
         
-        avatarImageView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(contentView)
-            make.leading.equalTo(contentView.snp.leadingMargin)
-            make.top.equalTo(contentView.snp.topMargin)
-            make.width.equalTo(avatarImageView.snp.height)
-        }
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leadingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .topMargin, multiplier: 1, constant: 0))
+        avatarImageView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: avatarImageView, attribute: .height, multiplier: 1, constant: 0))
+
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: timeLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: timeLabel, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: -UIConstants.padding/2))
         
-        timeLabel.snp.makeConstraints { (make) in
-            make.trailing.equalTo(contentView.snp.trailingMargin).priority(ConstraintPriority.high)
-            make.bottom.equalTo(contentView.snp.centerY).offset(-UIConstants.padding/2)
-        }
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: avatarImageView, attribute: .trailing, multiplier: 1, constant: UIConstants.padding))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .trailing, relatedBy: .lessThanOrEqual, toItem: timeLabel, attribute: .leading, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .firstBaseline, relatedBy: .equal, toItem: timeLabel, attribute: .firstBaseline, multiplier: 1, constant: 0))
         
-        nameLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(UIConstants.padding)
-            make.trailing.lessThanOrEqualTo(timeLabel.snp.leading)
-            make.firstBaseline.equalTo(timeLabel.snp.firstBaseline)
-        }
-        
-        messageLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(nameLabel.snp.bottom).offset(UIConstants.padding)
-            make.trailing.equalTo(contentView.snp.trailingMargin)
-        }
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .leading, relatedBy: .equal, toItem: nameLabel, attribute: .leading, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: nameLabel, attribute: .bottom, multiplier: 1, constant: UIConstants.padding))
+        contentView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: 0))
     }
     
     func update() {
@@ -105,8 +100,6 @@ class SessionTableViewCell<SessionType: MessageSession>: UITableViewCell {
         nameLabel.text = session.displayName
         if let last = session.lastMessage {
             let formater = MessageKitDateFormatter.shared
-//            formater.dateStyle = .none
-//            formater.timeStyle = .short
             timeLabel.text = formater.string(from: last.sentDate)
             messageLabel.text = last.messageContent
         } else {

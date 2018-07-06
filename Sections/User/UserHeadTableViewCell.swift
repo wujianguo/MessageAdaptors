@@ -67,24 +67,21 @@ class UserHeadTableViewCell: UITableViewCell {
         contentView.addSubview(displayLabel)
         contentView.addSubview(idLabel)
         
-        avatarImageView.snp.makeConstraints { (make) in
-            make.leading.equalTo(contentView.snp.leadingMargin)
-            make.centerY.equalTo(contentView)
-            make.top.equalTo(contentView.snp.topMargin)
-            make.width.equalTo(avatarImageView.snp.height)
-        }
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leadingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .topMargin, multiplier: 1, constant: 0))
+        avatarImageView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: avatarImageView, attribute: .height, multiplier: 1, constant: 0))
         
-        displayLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(UIConstants.padding)
-            make.trailing.equalTo(contentView.snp.trailingMargin)
-            make.bottom.equalTo(contentView.snp.centerY).offset(-UIConstants.padding/2)
-        }
-        
-        idLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(displayLabel.snp.leading)
-            make.top.equalTo(displayLabel.snp.bottom).offset(UIConstants.padding)
-            make.trailing.equalTo(contentView.snp.trailingMargin)
-        }
+        displayLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: displayLabel, attribute: .leading, relatedBy: .equal, toItem: avatarImageView, attribute: .trailing, multiplier: 1, constant: UIConstants.padding))
+        contentView.addConstraint(NSLayoutConstraint(item: displayLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: displayLabel, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: -UIConstants.padding/2))
+
+        idLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: idLabel, attribute: .leading, relatedBy: .equal, toItem: displayLabel, attribute: .leading, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: idLabel, attribute: .top, relatedBy: .equal, toItem: displayLabel, attribute: .bottom, multiplier: 1, constant: UIConstants.padding))
+        contentView.addConstraint(NSLayoutConstraint(item: idLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: 0))        
     }
     
     func update() {

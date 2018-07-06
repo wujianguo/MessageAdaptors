@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 class RequestFriendViewController<AccountType: MessageAccount>: SettingsTableViewController {
 

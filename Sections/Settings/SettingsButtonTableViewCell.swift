@@ -43,9 +43,12 @@ class SettingsButtonTableViewCell: SettingsTableViewCell {
 
     override func setup() {
         contentView.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.top.bottom.equalTo(self.contentView)
-        }
+        
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false;
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: 0))
     }
 
     override var type: SettingsType! {

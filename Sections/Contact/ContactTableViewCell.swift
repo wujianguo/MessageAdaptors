@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 import Kingfisher
 
 class ContactTableViewCell: UITableViewCell {
@@ -60,19 +59,16 @@ class ContactTableViewCell: UITableViewCell {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         
-        avatarImageView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(contentView)
-            make.leading.equalTo(contentView.snp.leadingMargin)
-            make.top.equalTo(contentView.snp.topMargin)
-            make.width.equalTo(avatarImageView.snp.height)
-        }
-        
-        nameLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(avatarImageView.snp.trailing).offset(UIConstants.padding)
-            make.trailing.equalTo(contentView.snp.trailingMargin)
-            make.centerY.equalTo(contentView)
-        }
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leadingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .topMargin, multiplier: 1, constant: 0))
+        avatarImageView.addConstraint(NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: avatarImageView, attribute: .height, multiplier: 1, constant: 0))
 
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .leading, relatedBy: .equal, toItem: avatarImageView, attribute: .trailing, multiplier: 1, constant: UIConstants.padding))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailingMargin, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: nameLabel, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
     }
     
     func update() {
