@@ -17,28 +17,6 @@ protocol NeteaseMessageCoding: MessageCoding {
     
 }
 
-/*
-extension MessageVoteObject2: NIMCustomAttachment {
-    
-    func encode() -> String {
-        do {
-            let data = try JSONEncoder().encode(self)
-            if let str = String(bytes: data, encoding: .utf8) {
-                return str
-            }
-        } catch {
-            
-        }
-        return ""
-    }
-
-}
-
-extension MessageVoteObject2: Codable {
-    
-}
-*/
-
 class NeteaseMessageCustomAttachment: NSObject, NIMCustomAttachment {
     
     var data: Data? = nil
@@ -54,11 +32,9 @@ class NeteaseMessageCustomAttachment: NSObject, NIMCustomAttachment {
     
 }
 
-struct NeteaseMessageWrappedObject: Codable {
+struct NeteaseMessageWrappedObject: Decodable {
     
     let type: Int
-    
-//    let data: Codable
     
 }
 
@@ -79,14 +55,31 @@ class NeteaseMessageCustomCoding: NSObject, NeteaseMessageCoding, NIMCustomAttac
             return nil
         }
 
-        if let wrapped = try? JSONDecoder().decode(NeteaseMessageWrappedObject.self, from: data) {
-            for adap in MessageCustomLayoutManager.cellAdaptors {
-                if adap.objectType.type == wrapped.type {
-                    if let decodedObject = try? JSONDecoder().decode(adap.objectType, from: data) {
-                        return decodedObject.kind()
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Any> {
+                if let type = json["type"] as? Int {
+                    for adap in MessageCustomLayoutManager.cellAdaptors {
+                        if adap.type == type {
+                            if let value = json["data"] as? Dictionary<String, Any> {
+                                if let decodedObject = adap.decode(data: value) {
+                                    return decodedObject.kind()
+                                }
+
+                            }
+                        }
                     }
                 }
             }
+//            let wrapped = try JSONDecoder().decode(NeteaseMessageWrappedObject.self, from: data)
+//            for adap in MessageCustomLayoutManager.cellAdaptors {
+//                if adap.type == wrapped.type {
+//                    if let decodedObject = adap.decode(data: wrapped.data) {
+//                        return decodedObject.kind()
+//                    }
+//                }
+//            }
+        } catch {
+            print(error)
         }
         return nil
     }
@@ -96,55 +89,10 @@ class NeteaseMessageCustomCoding: NSObject, NeteaseMessageCoding, NIMCustomAttac
             return nil
         }
         let str = String(bytes: data, encoding: .utf8)
-        print(str)
+        debugPrint(str ?? "")
         return NeteaseMessageCustomAttachment(data: data)
-        /*
-        guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Any> else {
-            return nil
-        }
-        guard let type = json?["type"] as? Int else {
-            return nil
-        }
-//        guard let content = json?["data"] as? Dictionary<String, Any> else {
-//            return nil
-//        }
-        for adap in MessageCustomLayoutManager.cellAdaptors {
-            if adap.objectType.type == type {
-                if let object = try? JSONDecoder().decode(adap.objectType, from: data) {
-                    return NeteaseMessageCustomAttachment(object: object)
-                }
-                return nil
-            }
-        }
-
-        return nil
- */
     }
 }
-/*
-extension MessageKind {
-
-    var typeValue: Int {
-        switch self {
-        case .text:
-            return NIMMessageType.text.rawValue
-        case .attributedText:
-            return NIMMessageType.text.rawValue
-        case .photo:
-            return NIMMessageType.image.rawValue
-        case .video:
-            return NIMMessageType.video.rawValue
-        case .location:
-            return NIMMessageType.location.rawValue
-        case .emoji:
-            return NIMMessageType.text.rawValue
-        case .custom:
-            return NIMMessageType.custom.rawValue
-        }
-    }
-
-}
-*/
 
 class NeteaseMessageCoderManager {
     
@@ -182,55 +130,3 @@ class NeteaseMessageCoderManager {
         }
     }
 }
-/*
-class NeteaseMessageCoder {
-    
-    var coders = [NeteaseMessageCoding]()
-    
-    init() {
-        coders = [
-            NeteaseMessageTextCoding(),
-            NeteaseMessagePhotoCoding(),
-            NeteaseMessageVideoCoding(),
-            NeteaseMessageLocationCoding(),
-            NeteaseMessageNotificationCoding(),
-            NeteaseMessageCustomCoding(),
-        ]
-    }
-    
-
-    static let coders: [Int: NeteaseMessageCoding] = [
-        NIMMessageType.text.rawValue: NeteaseMessageTextCoding(),
-        NIMMessageType.tip.rawValue: NeteaseMessageTextCoding(),
-        NIMMessageType.image.rawValue: NeteaseMessagePhotoCoding(),
-        NIMMessageType.video.rawValue: NeteaseMessageVideoCoding(),
-        NIMMessageType.location.rawValue: NeteaseMessageLocationCoding(),
-        NIMMessageType.notification.rawValue: NeteaseMessageNotificationCoding(),
-    ]
-    
-    static func encode(message: NeteaseMessageObject) -> NIMMessage {
-        if let coder = NeteaseMessageCoder.coders[message.kind.typeValue] {
-            if let ret = coder.encode(message: message) {
-                return ret
-            }
-        }
-        let ret = NIMMessage()
-        ret.text = Strings.notSupportYet
-        return ret
-    }
-    
-    static func decode(message: NIMMessage) -> MessageKind {
-        if let coder = NeteaseMessageCoder.coders[message.messageType.rawValue] {
-            if let ret = coder.decode(message: message) {
-                return ret
-            }
-        }
-        if let content = message.apnsContent {
-            return .text(content)
-        } else {
-            return .text(Strings.notSupportYet)
-        }
-    }
-
-}
-*/

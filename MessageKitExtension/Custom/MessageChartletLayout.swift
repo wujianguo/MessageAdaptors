@@ -25,6 +25,8 @@ class MessageChartletObject: NSObject, MessageCustomObject {
 
 class MessageChartletCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {
     
+    static var cellReuseIdentifier: String = "MessageChartletCollectionViewCellIdentifier"
+    
     static var sizeCalculator: MessageSizeCalculator = ChartletMessageSizeCalculator()
     
     typealias ObjectType = MessageChartletObject

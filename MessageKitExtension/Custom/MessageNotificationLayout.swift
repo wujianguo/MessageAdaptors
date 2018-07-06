@@ -31,6 +31,8 @@ class MessageCustomNotificationObject: MessageCustomObject {
 
 class MessageNotificationCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {
     
+    static var cellReuseIdentifier: String = "MessageNotificationCollectionViewCellIdentifier"
+    
     static var sizeCalculator: MessageSizeCalculator = NotificationMessageSizeCalculator()
     
     typealias ObjectType = MessageCustomNotificationObject

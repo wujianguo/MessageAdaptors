@@ -22,11 +22,16 @@ class MessageJanKenPonObject: NSObject, MessageCustomObject {
     static var type: Int = 1
     
     func kind() -> MessageKind {
-        return .text("JanKenPon")
+        return .custom(self)
+//        return .text("JanKenPon")
     }
+    
+    var value: Int = 0
 }
 
 class MessageJanKenPonCollectionViewCell: UICollectionViewCell, MessageCustomLayoutCell {
+    
+    static var cellReuseIdentifier: String = "MessageJanKenPonCollectionViewCellIdentifier"
     
     static var sizeCalculator: MessageSizeCalculator = JanKenPonMessageSizeCalculator()
     
@@ -41,8 +46,14 @@ class MessageJanKenPonCollectionViewCell: UICollectionViewCell, MessageCustomLay
         fatalError("init(coder:) has not been implemented")
     }
     
-    func config(object: ObjectType, at indexPath: IndexPath) {
-        
+    func config(object: MessageJanKenPonObject, at indexPath: IndexPath) {
+        if object.value == 1 {
+            contentView.backgroundColor = UIColor.gray
+        } else if object.value == 2 {
+            contentView.backgroundColor = UIColor.brown
+        } else if object.value == 3 {
+            contentView.backgroundColor = UIColor.yellow
+        }
     }
     
 }

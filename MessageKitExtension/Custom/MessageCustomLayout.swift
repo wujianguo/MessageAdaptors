@@ -10,43 +10,6 @@ import UIKit
 import MessageKit
 
 /*
-protocol MessageCustomObject2: Codable {
-    
-    static var type: Int { get }
-
-}
-
-protocol MessageCustomLayoutCell2: NSObjectProtocol {
-    
-    static var reuseIdentifier: String { get }
-
-}
-
-extension MessageCustomLayoutCell2 {
-    
-    static var reuseIdentifier: String {
-        return String(describing: self)
-    }
-    
-}
-
-
-class MessageCellAdaptor2<ObjectType: MessageCustomObject2, CellType: MessageCustomLayoutCell2> {
-    
-    init(collectionView: UICollectionView) {
-        collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.reuseIdentifier)
-    }
-    
-}
-
-struct MessageCustomLayoutManager2 {
-    
-    static func register(at collectionView: UICollectionView) {
-        let vote = MessageCellAdaptor2<MessageVoteObject2, MessageVoteCollectionViewCell2>(collectionView: collectionView)
-    }
-}
-*/
-/*
 typedef NS_ENUM(NSInteger,NTESCustomMessageType){
     CustomMessageTypeJanKenPon  = 1, //剪子石头布
     CustomMessageTypeSnapchat   = 2, //阅后即焚
@@ -72,11 +35,11 @@ extension MessageCustomObject {
 }
 
 
-protocol MessageCustomLayoutCell {
+protocol MessageCustomLayoutCell: NSObjectProtocol {
     
     associatedtype ObjectType: MessageCustomObject
     
-    static var reuseIdentifier: String { get }
+    static var cellReuseIdentifier: String { get }
     
     static var sizeCalculator: MessageSizeCalculator { get }
  
@@ -84,40 +47,72 @@ protocol MessageCustomLayoutCell {
 
 }
 
-extension MessageCustomLayoutCell {
+protocol MessageCellAdaptorProtocol {
+
+    var type: Int { get }
+
+    var sizeCalculator: MessageSizeCalculator { get }
     
-    static var reuseIdentifier: String {
-        return String(describing: self)
-    }
+    func register(at collectionView: UICollectionView)
     
+    func decode(data: Dictionary<String, Any>) -> MessageCustomObject?
+    
+    func dequeueReusableCell(at collectionView: UICollectionView, for indexPath: IndexPath, with object: MessageCustomObject) -> UICollectionViewCell
 }
 
-class MessageCellAdaptor<CellType: MessageCustomLayoutCell> {
+class MessageCellAdaptor<CellType: MessageCustomLayoutCell>: MessageCellAdaptorProtocol {
     
-    let objectType  = CellType.ObjectType.self
-    let cellType    = CellType.self
+    var type: Int {
+        return CellType.ObjectType.type
+    }
+
+    var sizeCalculator: MessageSizeCalculator {
+        return CellType.sizeCalculator
+    }
     
+    func register(at collectionView: UICollectionView) {
+        collectionView.register(CellType.self, forCellWithReuseIdentifier: CellType.cellReuseIdentifier)
+    }
+    
+    func decode(data: Dictionary<String, Any>) -> MessageCustomObject? {
+        do {
+            let ret = try DictionaryDecoder().decode(CellType.ObjectType.self, from: data)
+//            let ret = try JSONDecoder().decode(CellType.ObjectType.self, from: data)
+            return ret
+        } catch {
+            print(error)
+            return nil
+        }
+//        return try? JSONDecoder().decode(CellType.ObjectType.self, from: data)
+    }
+    
+    func dequeueReusableCell(at collectionView: UICollectionView, for indexPath: IndexPath, with object: MessageCustomObject) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellType.cellReuseIdentifier, for: indexPath)
+        if let cell = cell as? CellType {
+            cell.config(object: object as! CellType.ObjectType, at: indexPath)
+        }
+        return cell
+    }
 }
 
 
 struct MessageCustomLayoutManager {
 
-    static let cellAdaptors = [
+    static let cellAdaptors: [MessageCellAdaptorProtocol] = [
         MessageCellAdaptor<MessageJanKenPonCollectionViewCell>(),
-//        MessageCellAdaptor<MessageChartletCollectionViewCell>(),
+        MessageCellAdaptor<MessageChartletCollectionViewCell>(),
     ]
 
     static func register(at collectionView: UICollectionView) {
         for adapt in cellAdaptors {
-            collectionView.register(adapt.cellType, forCellWithReuseIdentifier: adapt.cellType.reuseIdentifier)
+            adapt.register(at: collectionView)
         }
     }
     
     static func dequeueReusableCell(at collectionView: UICollectionView, for indexPath: IndexPath, with object: MessageCustomObject) -> UICollectionViewCell? {
         for adapt in cellAdaptors {
-            if adapt.objectType == type(of: object) {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: adapt.cellType.reuseIdentifier, for: indexPath)
-                return cell
+            if adapt.type == type(of: object).type {
+                return adapt.dequeueReusableCell(at: collectionView, for: indexPath, with: object)
             }
         }
         return nil
@@ -125,8 +120,8 @@ struct MessageCustomLayoutManager {
     
     static func cellSizeCalculator(for object: MessageCustomObject) -> MessageSizeCalculator? {
         for adapt in cellAdaptors {
-            if adapt.objectType == type(of: object) {
-                return adapt.cellType.sizeCalculator
+            if adapt.type == type(of: object).type {
+                return adapt.sizeCalculator
             }
         }
         return nil
