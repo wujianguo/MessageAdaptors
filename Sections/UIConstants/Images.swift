@@ -16,8 +16,7 @@ struct Images {
 // session
 extension Images {
     
-    static let User    = UIImage(named: "message_user_icon")
-    static let Group   = UIImage(named: "message_group_icon")
+    static let More = UIImage(named: "message_session_more")
 
     static func avatarURL(id: String) -> URL {
         return URL(string: "http://i.pravatar.cc/150?u=\(id)")!

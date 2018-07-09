@@ -37,7 +37,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         view.backgroundColor = UIColor.white
         title = session.displayName
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightBarButtonImage, style: .plain, target: self, action: #selector(userItemClick(sender:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.More, style: .plain, target: self, action: #selector(userItemClick(sender:)))
         
         MessageCustomLayoutManager.register(at:messagesCollectionView)
 
@@ -53,16 +53,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         refreshControl.addTarget(self, action: #selector(loadMoreMessages(sender:)), for: .valueChanged)
         
         firstLoad()
-    }
-    
-    var rightBarButtonImage: UIImage? {
-        switch session.sessionType {
-        case .P2P:
-            return Images.User
-        default:
-            return Images.Group
-        }
-    }
+    }    
 
     deinit {
         session.remove(consumer: self)
