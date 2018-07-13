@@ -71,6 +71,19 @@ class StaticTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
+    
+    func layoutFooterButton(button: UIButton) {
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        
+        footer.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        footer.addConstraint(NSLayoutConstraint(item: button, attribute: .top, relatedBy: .equal, toItem: footer, attribute: .top, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: button, attribute: .bottom, relatedBy: .equal, toItem: footer, attribute: .bottom, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: button, attribute: .leading, relatedBy: .equal, toItem: footer, attribute: .leadingMargin, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: button, attribute: .trailing, relatedBy: .equal, toItem: footer, attribute: .trailingMargin, multiplier: 1, constant: 0))
+        
+        tableView.tableFooterView = footer
+    }
 
     // MARK: - Table view data source
 

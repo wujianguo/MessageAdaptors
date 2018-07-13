@@ -46,6 +46,7 @@ extension Strings {
     static let confirmSignout   = NSLocalizedString("Are you sure?", comment: "Are you sure?")
     
     static let accountPasswordError     = NSLocalizedString("Account or password error", comment: "Account or password error")
+    static let alreadyRegistered = NSLocalizedString("Already registered", comment: "Already registered")
 }
 
 // contact
@@ -53,6 +54,7 @@ extension Strings {
     static let inputAccount  = NSLocalizedString("input account", comment: "input account")
     static let requestFriend = NSLocalizedString("Request friend", comment: "Request friend")
     static let startChat     = NSLocalizedString("Start chat", comment: "Start chat")
+    static let postscript    = NSLocalizedString("postscript", comment: "postscript")
 }
 
 // common

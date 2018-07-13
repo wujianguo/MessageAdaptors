@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AccountTableViewController<AccountType: MessageAccount>: UITableViewController {
-
+class AccountTableViewController<AccountType: MessageAccount>: StaticTableViewController {
+    
     let account: AccountType
     
     init(account: AccountType) {
@@ -20,30 +20,45 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    var settings: [SettingsType] = []
+
+    var headerCell: UserHeadTableViewCell!
+    var signoutCell: CenterTextButtonTableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = Strings.me
-        
-        tableView.register(UserHeadTableViewCell.self, forCellReuseIdentifier: UserHeadTableViewCell.identifier())
-        
-        let signout = SettingsType(kind: .button(Strings.signout, UIConstants.destructiveColor), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
-            self.signout()
-        }))
-        
-        settings = [
-            signout,
-        ]
-        
-        for type in settings {
-            type.delegate.register(tableView: tableView)
-        }
 
+        headerCell = UserHeadTableViewCell(style: .default, reuseIdentifier: nil)
+        headerCell.onConfig = {
+            self.headerCell.user = self.account
+        }
+        let headerSection = StaticTableSection()
+        headerSection.cells = [headerCell]
+        
+        signoutCell = CenterTextButtonTableViewCell(style: .default, reuseIdentifier: nil)
+        signoutCell.onConfig = {
+            self.signoutCell.nameLabel.text = Strings.signout
+            self.signoutCell.nameLabel.textColor = UIConstants.destructiveColor
+        }
+        signoutCell.onSelect = {
+            self.signout()
+        }
+        let buttonSection = StaticTableSection()
+        buttonSection.cells = [signoutCell]
+        
+        sections = [headerSection, buttonSection]
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return sections[indexPath.section].cells[indexPath.row].height
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        super.tableView(tableView, didSelectRowAt: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    
     func signout() {
         let alert = UIAlertController(title: Strings.signout, message: Strings.confirmSignout, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Strings.cancel, style: .cancel, handler: { (action) in
@@ -60,48 +75,6 @@ class AccountTableViewController<AccountType: MessageAccount>: UITableViewContro
         }))
         present(alert, animated: true, completion: nil)
     }
-    
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 80
-        } else {
-            return 40
-        }
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return settings.count
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: UserHeadTableViewCell.identifier(), for: indexPath) as! UserHeadTableViewCell
-            cell.user = account
-            return cell
-        } else {
-            let cell = settings[indexPath.row].delegate.dequeueReusableCell(for: indexPath, at: tableView)
-            cell.type = settings[indexPath.row]
-            return cell;
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            
-        } else {
-            settings[indexPath.row].delegate.didSelect(type: settings[indexPath.row])
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 
 }
+

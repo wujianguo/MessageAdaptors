@@ -37,7 +37,7 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         view.backgroundColor = UIColor.white
         title = session.displayName
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.More, style: .plain, target: self, action: #selector(userItemClick(sender:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.More, style: .plain, target: self, action: #selector(sessionDetailClick(sender:)))
         
         MessageCustomLayoutManager.register(at:messagesCollectionView)
 
@@ -80,8 +80,8 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
 
     // MARK: - Navigation
 
-    @objc func userItemClick(sender: UIBarButtonItem) {
-        let vc = UserTableViewController<AccountType>(account: account, user: session.user)
+    @objc func sessionDetailClick(sender: UIBarButtonItem) {
+        let vc = SessionDetailTableViewController<AccountType>(account: account, user: session.user)
         navigationController?.pushViewController(vc, animated: true)
     }
 

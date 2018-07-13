@@ -52,19 +52,10 @@ class SigninViewController<AccountType: MessageAccount>: StaticTableViewControll
         
         sections = [inputSection]
         
-        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         signinButton = ActivityIndicatorTextButton(title: Strings.signin, loadingTitle: Strings.signin)
         signinButton.addTarget(self, action: #selector(signinClick(sender:)), for: .touchUpInside)
         
-        footer.addSubview(signinButton)
-        signinButton.translatesAutoresizingMaskIntoConstraints = false
-        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .top, relatedBy: .equal, toItem: footer, attribute: .top, multiplier: 1, constant: 0))
-        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .bottom, relatedBy: .equal, toItem: footer, attribute: .bottom, multiplier: 1, constant: 0))
-        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .leading, relatedBy: .equal, toItem: footer, attribute: .leadingMargin, multiplier: 1, constant: 0))
-        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .trailing, relatedBy: .equal, toItem: footer, attribute: .trailingMargin, multiplier: 1, constant: 0))
-
-        tableView.tableFooterView = footer
-        
+        layoutFooterButton(button: signinButton)        
         accountCell.textField.becomeFirstResponder()
     }
 
@@ -113,6 +104,7 @@ class SigninViewController<AccountType: MessageAccount>: StaticTableViewControll
         } else if textField == passwordCell.textField {
             if signinButton.isEnabled {
                 signinClick(sender: signinButton)
+                return false
             }
         }
         return true

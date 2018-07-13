@@ -32,6 +32,15 @@ struct MessageHUD {
         HUD.show(.systemActivity)
     }
     
+    static func tipSuccessOrFailure(error: Error?) {
+        HUD.hide(animated: false)
+        if let error = error {
+            HUD.flash(.label(error.hudDescription), delay: 2)
+        } else {
+            HUD.flash(.label(Strings.ok), delay: 2)
+        }
+    }
+    
     static func stopLoading(error: Error?) {
         if let error = error {
             HUD.hide(animated: false)

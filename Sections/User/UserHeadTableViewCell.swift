@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class UserHeadTableViewCell: UITableViewCell {
+class UserHeadTableViewCell: StatictableViewCell {
 
     static func identifier() -> String {
         return "UserHeadTableViewCellIdentifier"
@@ -33,6 +33,10 @@ class UserHeadTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var height: CGFloat {
+        return 80
     }
     
     var user: MessageUser! {

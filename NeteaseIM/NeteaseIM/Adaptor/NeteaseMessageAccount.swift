@@ -64,6 +64,14 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
         }
     }
     
+    struct SignupResponse: Codable {
+        
+        let res: Int
+        
+        let errmsg: String
+
+    }
+    
     func signup(data: AccountSignupData, complete: Completion?) {
         var request = URLRequest(url: URL(string: "https://app.netease.im/api/createDemoUser")!)
         request.httpMethod = "POST"
@@ -72,8 +80,23 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
         request.setValue("application/x-www-form-urlencoded;charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.httpBody = "username=\(data.username)&nickname=\(data.nickname)&password=\(data.password.md5())".data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var resError: Error? = error
+            if error == nil {
+                do {
+                    let resp = try JSONDecoder().decode(SignupResponse.self, from: data!)
+                    if resp.res != 200 {
+                        var str = resp.errmsg
+                        if resp.res == 414 {
+                            str = Strings.alreadyRegistered
+                        }
+                        resError = NSError(domain: "netease", code: resp.res, userInfo: [NSLocalizedFailureReasonErrorKey: str])
+                    }
+                } catch {
+                    resError = error
+                }
+            }
             DispatchQueue.main.async {
-                complete?(error)
+                complete?(resError)
             }
         }
         task.resume()

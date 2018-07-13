@@ -32,13 +32,7 @@
 		810F175420F4B03900E8B3D5 /* StaticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */; };
 		810F176320F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */; };
 		810F176520F8680200E8B3D5 /* ActivityIndicatorTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */; };
-		81444C1020D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C0F20D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift */; };
-		81444C1220D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1120D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift */; };
-		81444C1420D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1320D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift */; };
-		81444C1620D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */; };
-		81444C1820D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */; };
-		81444C1A20D8CE6B007B23A4 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */; };
-		81444C2420D8EDD7007B23A4 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */; };
+		810F176920F8950700E8B3D5 /* CenterTextButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F176820F8950700E8B3D5 /* CenterTextButtonTableViewCell.swift */; };
 		814E1BC220BC162F006E4FC6 /* SessionDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BC120BC162F006E4FC6 /* SessionDetailTableViewController.swift */; };
 		814E1BC420BC1653006E4FC6 /* AccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */; };
 		814E1BC620BCEF03006E4FC6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814E1BC520BCEF03006E4FC6 /* Media.xcassets */; };
@@ -131,13 +125,7 @@
 		810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableViewController.swift; sourceTree = "<group>"; };
 		810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorTextButton.swift; sourceTree = "<group>"; };
-		81444C0F20D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonTableViewCell.swift; sourceTree = "<group>"; };
-		81444C1120D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		81444C1320D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
-		81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTitleTableViewCell.swift; sourceTree = "<group>"; };
-		81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMultiValueTableViewCell.swift; sourceTree = "<group>"; };
-		81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		810F176820F8950700E8B3D5 /* CenterTextButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextButtonTableViewCell.swift; sourceTree = "<group>"; };
 		814E1BC120BC162F006E4FC6 /* SessionDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailTableViewController.swift; sourceTree = "<group>"; };
 		814E1BC320BC1653006E4FC6 /* AccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewController.swift; sourceTree = "<group>"; };
 		814E1BC520BCEF03006E4FC6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -442,16 +430,10 @@
 		819AED9C20CE6C4700B1491E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				81444C0F20D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift */,
-				81444C1120D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift */,
-				81444C1320D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift */,
-				81444C1520D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift */,
-				81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */,
-				81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */,
-				81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */,
 				810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */,
 				810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */,
 				810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */,
+				810F176820F8950700E8B3D5 /* CenterTextButtonTableViewCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -695,7 +677,6 @@
 				81D4AE4820A04385009D9916 /* MessageSession.swift in Sources */,
 				814E1BC420BC1653006E4FC6 /* AccountTableViewController.swift in Sources */,
 				8109FD9920B7A8740051C192 /* UIConstants.swift in Sources */,
-				81444C1420D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift in Sources */,
 				814E1BDA20BD364E006E4FC6 /* AcceptFriendViewController.swift in Sources */,
 				814E1BEB20BE7237006E4FC6 /* ContactTableViewCell.swift in Sources */,
 				81783F6720EF342A0038A685 /* DictionaryEncoder.swift in Sources */,
@@ -708,7 +689,6 @@
 				814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */,
 				814E1BC220BC162F006E4FC6 /* SessionDetailTableViewController.swift in Sources */,
 				814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */,
-				81444C1820D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift in Sources */,
 				817E870820DB879F007C0891 /* NeteaseNotificationManager.swift in Sources */,
 				81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */,
 				814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */,
@@ -720,34 +700,30 @@
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
 				810F176520F8680200E8B3D5 /* ActivityIndicatorTextButton.swift in Sources */,
 				81D4AE5220A04DBA009D9916 /* MessageConsumer.swift in Sources */,
-				81444C2420D8EDD7007B23A4 /* SettingsTableViewController.swift in Sources */,
 				8109FD7A20B538BD0051C192 /* Strings.swift in Sources */,
 				819AED8720C69D7B00B1491E /* SigninViewController.swift in Sources */,
 				816775C220C4D0570024A556 /* NeteaseMessagePhotoCoding.swift in Sources */,
 				81D4AE5620A0657B009D9916 /* MessageObject.swift in Sources */,
 				817E870320DA3E56007C0891 /* MessageNotificationManager.swift in Sources */,
 				81F3988820E38A75006444E7 /* MessageJanKenPonLayout.swift in Sources */,
+				810F176920F8950700E8B3D5 /* CenterTextButtonTableViewCell.swift in Sources */,
 				819AED8920C69D8800B1491E /* SignupViewController.swift in Sources */,
 				817E86FF20DA0F7D007C0891 /* NeteaseSessionManager.swift in Sources */,
 				8109FD7C20B53B8D0051C192 /* ContactTableViewController.swift in Sources */,
 				819AED9120C908DA00B1491E /* String+md5.swift in Sources */,
 				81D4AE5420A04E6B009D9916 /* MessageConversation.swift in Sources */,
 				814E1BD820BD3079006E4FC6 /* RequestFriendViewController.swift in Sources */,
-				81444C1020D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift in Sources */,
 				8109FD9D20B7B9A20051C192 /* MessageSessionManager.swift in Sources */,
 				814E1C5720C14EDF006E4FC6 /* APIClient.swift in Sources */,
 				817E870C20DB97D5007C0891 /* MessageCustomLayout.swift in Sources */,
-				81444C1620D8CBF2007B23A4 /* SettingsTitleTableViewCell.swift in Sources */,
 				8109FD7E20B53B9C0051C192 /* UserTableViewController.swift in Sources */,
 				816775C020C4D0450024A556 /* NeteaseMessageTextCoding.swift in Sources */,
 				81B6F9A220E9F9BC003AB1A4 /* MessageHUD.swift in Sources */,
 				81F3988C20E39991006444E7 /* MessageNotificationLayout.swift in Sources */,
-				81444C1A20D8CE6B007B23A4 /* SettingsTableViewCell.swift in Sources */,
 				814E1BF120BE737F006E4FC6 /* NeteaseMessageUser.swift in Sources */,
 				8109FD9720B6A13F0051C192 /* SessionTableViewCell.swift in Sources */,
 				814E1C0020BFDEEA006E4FC6 /* MasterViewController.swift in Sources */,
 				8109FD8620B53FDF0051C192 /* Images.swift in Sources */,
-				81444C1220D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift in Sources */,
 				816775C620C4D0D00024A556 /* NeteaseMessageLocationCoding.swift in Sources */,
 				819AED8020C5080000B1491E /* NeteaseMessageNotificationCoding.swift in Sources */,
 				8109FD6B20B536400051C192 /* SessionsTableViewController.swift in Sources */,
