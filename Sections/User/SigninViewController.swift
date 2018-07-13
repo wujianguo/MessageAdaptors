@@ -8,11 +8,10 @@
 
 import UIKit
 
-
-class SigninViewController<AccountType: MessageAccount>: SettingsTableViewController {
-
+class SigninViewController<AccountType: MessageAccount>: StaticTableViewController, UITextFieldDelegate {
+    
     let account: AccountType!
-
+    
     init(account: AccountType) {
         self.account = account
         super.init(style: .grouped)
@@ -21,35 +20,59 @@ class SigninViewController<AccountType: MessageAccount>: SettingsTableViewContro
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    var accountCell: InputTextFieldTableViewCell!
+    var passwordCell: InputTextFieldTableViewCell!
+    var signinButton: ActivityIndicatorTextButton!
+    
     override func viewDidLoad() {
-        let inputAccount = SettingsType(kind: .textField(Strings.inputNamePlaceholder), delegate: SettingsTextFieldTableViewCellTypeInfo(configuration: { (textField) in
-            textField.keyboardType = .asciiCapable
-        }))
-        let inputPassword = SettingsType(kind: .textField(Strings.inputPasswordPlaceholder), delegate: SettingsTextFieldTableViewCellTypeInfo(configuration: { (textField) in
-            textField.isSecureTextEntry = true
-        }))
-        let confirm = SettingsType(kind: .button(Strings.signin, nil), delegate: SettingsButtonTableViewCellTypeInfo(selection: { (type) in
-            guard let name = inputAccount.delegate.textValue?.trimmingCharacters(in: .whitespaces), let password = inputPassword.delegate.textValue?.trimmingCharacters(in: .whitespaces) else {
-                return
-            }
-            self.signin(name: name, password: password)
-        }))
-        
-        groups = [
-            SettingsGroup(settings: [inputAccount, inputPassword]),
-            SettingsGroup(settings: [confirm])
-        ]
         super.viewDidLoad()
+        
         title = Strings.signin
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Strings.signup, style: .plain, target: self, action: #selector(signupClick(sender:)))
+
+        let inputSection = StaticTableSection()
+        accountCell = InputTextFieldTableViewCell(style: .default, reuseIdentifier: nil)
+        accountCell.onConfig = {
+            self.accountCell.selectionStyle = .none
+            self.accountCell.textField.keyboardType = .asciiCapable
+            self.accountCell.textField.returnKeyType = .next
+            self.accountCell.textField.delegate = self
+            self.accountCell.label.text = Strings.account
+        }
+        passwordCell = InputTextFieldTableViewCell(style: .default, reuseIdentifier: nil)
+        passwordCell.onConfig = {
+            self.passwordCell.selectionStyle = .none
+            self.passwordCell.label.text = Strings.password
+            self.passwordCell.textField.returnKeyType = .done
+            self.passwordCell.textField.delegate = self
+            self.passwordCell.textField.isSecureTextEntry = true
+        }
+        inputSection.cells = [accountCell, passwordCell]
+        
+        sections = [inputSection]
+        
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
+        signinButton = ActivityIndicatorTextButton(title: Strings.signin, loadingTitle: Strings.signin)
+        signinButton.addTarget(self, action: #selector(signinClick(sender:)), for: .touchUpInside)
+        
+        footer.addSubview(signinButton)
+        signinButton.translatesAutoresizingMaskIntoConstraints = false
+        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .top, relatedBy: .equal, toItem: footer, attribute: .top, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .bottom, relatedBy: .equal, toItem: footer, attribute: .bottom, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .leading, relatedBy: .equal, toItem: footer, attribute: .leadingMargin, multiplier: 1, constant: 0))
+        footer.addConstraint(NSLayoutConstraint(item: signinButton, attribute: .trailing, relatedBy: .equal, toItem: footer, attribute: .trailingMargin, multiplier: 1, constant: 0))
+
+        tableView.tableFooterView = footer
+        
+        accountCell.textField.becomeFirstResponder()
     }
-    
-    func signin(name: String, password: String) {
+
+    func signin(name: String, password: String, complete: (() -> Void)? = nil) {
         let data = AccountSigninData(name: name, token: password)
-        MessageHUD.startLoading()
         account.signin(data: data) { (error) in
             MessageHUD.stopLoading(error: error)
+            complete?()
             guard error == nil else {
                 return
             }
@@ -59,14 +82,39 @@ class SigninViewController<AccountType: MessageAccount>: SettingsTableViewContro
         }
     }
     
+    @objc func signinClick(sender: ActivityIndicatorTextButton) {
+        guard let name = accountCell.textField.text?.trimmingCharacters(in: .whitespaces), let password = passwordCell.textField.text?.trimmingCharacters(in: .whitespaces) else {
+            return
+        }
+        guard name.count > 0 && password.count > 0 else {
+            return
+        }
+        accountCell.textField.isEnabled = false
+        passwordCell.textField.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        sender.startLoading()
+
+        signin(name: name, password: password) {
+            sender.stopLoading()
+            self.accountCell.textField.isEnabled = true
+            self.passwordCell.textField.isEnabled = true
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }
+    }
+    
     @objc func signupClick(sender: UIBarButtonItem) {
         let vc = SignupViewController<AccountType>(account: account)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        super.tableView(tableView, didSelectRowAt: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == accountCell.textField {
+            passwordCell.textField.becomeFirstResponder()
+        } else if textField == passwordCell.textField {
+            if signinButton.isEnabled {
+                signinClick(sender: signinButton)
+            }
+        }
+        return true
+    }
 }

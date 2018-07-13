@@ -68,7 +68,7 @@ class SettingsTableViewCellTypeInfo: SettingsTypeProtocol {
 
 }
 
-class SettingsTableViewCell: UITableViewCell {
+class SettingsTableViewCell: StatictableViewCell {
 
     class func identifier() -> String {
         return "SettingsTableViewCellIdentifier"

@@ -40,7 +40,7 @@ class SettingsButtonTableViewCell: SettingsTableViewCell {
         label.textAlignment = .center
         return label
     }()
-
+    
     override func setup() {
         contentView.addSubview(nameLabel)
         

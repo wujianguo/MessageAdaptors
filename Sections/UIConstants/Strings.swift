@@ -36,10 +36,16 @@ extension Strings {
     static let inputNickPlaceholder     = NSLocalizedString("input your nick name", comment: "input your nick name")
     static let inputPasswordPlaceholder = NSLocalizedString("input your password", comment: "input your password")
     
+    static let account          = NSLocalizedString("Account", comment: "Account")
+    static let nickName         = NSLocalizedString("Nick name", comment: "Nick name")
+    static let password         = NSLocalizedString("Password", comment: "Password")
+    
     static let signin           = NSLocalizedString("Sign in", comment: "Sign in")
     static let signup           = NSLocalizedString("Sign up", comment: "Sign up")
     static let signout          = NSLocalizedString("Sign out", comment: "Sign out")
     static let confirmSignout   = NSLocalizedString("Are you sure?", comment: "Are you sure?")
+    
+    static let accountPasswordError     = NSLocalizedString("Account or password error", comment: "Account or password error")
 }
 
 // contact

@@ -29,6 +29,9 @@
 		810E12B920A0213C00D10B5E /* NeteaseIMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E12B820A0213C00D10B5E /* NeteaseIMUITests.swift */; };
 		810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E130120A0282A00D10B5E /* MessageAccount.swift */; };
 		810E130520A02A8800D10B5E /* NeteaseMessageAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E130420A02A8800D10B5E /* NeteaseMessageAccount.swift */; };
+		810F175420F4B03900E8B3D5 /* StaticTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */; };
+		810F176320F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */; };
+		810F176520F8680200E8B3D5 /* ActivityIndicatorTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */; };
 		81444C1020D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C0F20D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift */; };
 		81444C1220D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1120D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift */; };
 		81444C1420D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81444C1320D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift */; };
@@ -125,6 +128,9 @@
 		810E130120A0282A00D10B5E /* MessageAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAccount.swift; sourceTree = "<group>"; };
 		810E130420A02A8800D10B5E /* NeteaseMessageAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeteaseMessageAccount.swift; sourceTree = "<group>"; };
 		810E130620A02B1000D10B5E /* NeteaseIM-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NeteaseIM-Bridging-Header.h"; sourceTree = "<group>"; };
+		810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableViewController.swift; sourceTree = "<group>"; };
+		810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorTextButton.swift; sourceTree = "<group>"; };
 		81444C0F20D8CB9B007B23A4 /* SettingsButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsButtonTableViewCell.swift; sourceTree = "<group>"; };
 		81444C1120D8CBCE007B23A4 /* SettingsSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		81444C1320D8CBE1007B23A4 /* SettingsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -443,6 +449,9 @@
 				81444C1720D8CE3B007B23A4 /* SettingsMultiValueTableViewCell.swift */,
 				81444C1920D8CE6B007B23A4 /* SettingsTableViewCell.swift */,
 				81444C2320D8EDD7007B23A4 /* SettingsTableViewController.swift */,
+				810F175320F4B03900E8B3D5 /* StaticTableViewController.swift */,
+				810F176220F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift */,
+				810F176420F8680200E8B3D5 /* ActivityIndicatorTextButton.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -695,6 +704,7 @@
 				81D4AE5020A04DA9009D9916 /* MessageProducer.swift in Sources */,
 				8109FD6C20B536400051C192 /* SessionViewController.swift in Sources */,
 				810E130520A02A8800D10B5E /* NeteaseMessageAccount.swift in Sources */,
+				810F175420F4B03900E8B3D5 /* StaticTableViewController.swift in Sources */,
 				814E1BED20BE7264006E4FC6 /* NeteaseMessageContact.swift in Sources */,
 				814E1BC220BC162F006E4FC6 /* SessionDetailTableViewController.swift in Sources */,
 				814E1BF520BE88F5006E4FC6 /* UserHeadTableViewCell.swift in Sources */,
@@ -702,11 +712,13 @@
 				817E870820DB879F007C0891 /* NeteaseNotificationManager.swift in Sources */,
 				81D4AE5920A1A5B2009D9916 /* NeteaseMessageObject.swift in Sources */,
 				814E1BEF20BE7364006E4FC6 /* MessageUser.swift in Sources */,
+				810F176320F867AC00E8B3D5 /* InputTextFieldTableViewCell.swift in Sources */,
 				816775C820C4D9F40024A556 /* NeteaseMessageCoding.swift in Sources */,
 				8109FD8820B540AB0051C192 /* BaseNavigationController.swift in Sources */,
 				81D4AE4A20A0464A009D9916 /* NeteaseMessageSession.swift in Sources */,
 				8109FD7720B5373F0051C192 /* MainViewController.swift in Sources */,
 				810E130220A0282A00D10B5E /* MessageAccount.swift in Sources */,
+				810F176520F8680200E8B3D5 /* ActivityIndicatorTextButton.swift in Sources */,
 				81D4AE5220A04DBA009D9916 /* MessageConsumer.swift in Sources */,
 				81444C2420D8EDD7007B23A4 /* SettingsTableViewController.swift in Sources */,
 				8109FD7A20B538BD0051C192 /* Strings.swift in Sources */,
@@ -918,7 +930,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIM/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NeteaseIM/Adaptor/NeteaseIM-Bridging-Header.h";
@@ -937,7 +952,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIM/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NeteaseIM/Adaptor/NeteaseIM-Bridging-Header.h";
@@ -955,7 +973,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIMTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -973,7 +995,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIMTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIMTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -990,7 +1016,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIMUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIMUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1007,7 +1037,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AG5J7PR53Y;
 				INFOPLIST_FILE = NeteaseIMUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.wujianguo.NeteaseIMUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
