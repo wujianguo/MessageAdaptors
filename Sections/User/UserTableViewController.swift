@@ -25,7 +25,7 @@ class UserTableViewController<AccountType: MessageAccount>: StaticTableViewContr
     }
 
     var headerCell: UserHeadTableViewCell!
-    var footerButton: ActivityIndicatorTextButton!
+    var footerButton: ActivityIndicatorTextButton? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +41,14 @@ class UserTableViewController<AccountType: MessageAccount>: StaticTableViewContr
         
         if account.contact.isMyFriend(id: user.id) {
             footerButton = ActivityIndicatorTextButton(title: Strings.startChat, loadingTitle: Strings.startChat)
-            footerButton.addTarget(self, action: #selector(startChat(sender:)), for: .touchUpInside)
-        } else {
+            footerButton?.addTarget(self, action: #selector(startChat(sender:)), for: .touchUpInside)
+        } else if account.id != user.id {
             footerButton = ActivityIndicatorTextButton(title: Strings.requestFriend, loadingTitle: Strings.requestFriend)
-            footerButton.addTarget(self, action: #selector(requestFriend(sender:)), for: .touchUpInside)
+            footerButton?.addTarget(self, action: #selector(requestFriend(sender:)), for: .touchUpInside)
         }
-        layoutFooterButton(button: footerButton)
+        if let footer = footerButton {
+            layoutFooterButton(button: footer)
+        }
     }
 
     @objc func requestFriend(sender: ActivityIndicatorTextButton) {
@@ -59,9 +61,9 @@ class UserTableViewController<AccountType: MessageAccount>: StaticTableViewContr
         }))
         alert.addAction(UIAlertAction(title: Strings.ok, style: .default, handler: { (action) in
             let message = alert.textFields?.first?.text
-            self.footerButton.startLoading()
+            self.footerButton?.startLoading()
             self.account.contact.requestFriend(id: self.user.id, message: message, complete: { (error) in
-                self.footerButton.stopLoading()
+                self.footerButton?.stopLoading()
                 MessageHUD.tipSuccessOrFailure(error: error)
             })
         }))

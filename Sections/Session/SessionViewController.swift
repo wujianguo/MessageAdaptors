@@ -73,6 +73,8 @@ class SessionViewController<AccountType: MessageAccount>: MessagesViewController
         if let object = message.kind.custom as? MessageCustomObject {
             if let cell = MessageCustomLayoutManager.dequeueReusableCell(at: collectionView, for: indexPath, with: object) {
                 return cell
+            } else {
+//                print(type(of: object))
             }
         }
         return super.collectionView(collectionView, cellForItemAt: indexPath)

@@ -101,6 +101,7 @@ struct MessageCustomLayoutManager {
     static let cellAdaptors: [MessageCellAdaptorProtocol] = [
         MessageCellAdaptor<MessageJanKenPonCollectionViewCell>(),
         MessageCellAdaptor<MessageChartletCollectionViewCell>(),
+        MessageCellAdaptor<MessageNotificationCollectionViewCell>(),
     ]
 
     static func register(at collectionView: UICollectionView) {

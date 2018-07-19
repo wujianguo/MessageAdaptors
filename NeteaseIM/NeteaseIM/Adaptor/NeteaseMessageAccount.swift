@@ -21,11 +21,17 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
     
     typealias SessionManagerType = NeteaseSessionManager
     
-    var id: String          = ""
+    var id: String {
+        return user.id
+    }
     
-    var displayName: String = ""
+    var displayName: String {
+        return user.displayName
+    }
     
-    var avatarURL: URL = Images.avatarURL(id: NeteaseMessageAccount.name)
+    var avatarURL: URL {
+        return user.avatarURL
+    }
     
     var contact = NeteaseMessageContact()
     
@@ -34,6 +40,8 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
             NotificationCenter.default.post(name: AccountStatusChangedNotificationName, object: self, userInfo: ["status": status])
         }
     }
+    
+    var user: NIMUser = NIMUser()
         
     required override init() {
         super.init()
@@ -57,8 +65,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
 //        let token = "123456".md5()
         status = .Connecting
         NIMSDK.shared().loginManager.login(name, token: token) { (error) in
-            self.displayName = name
-            self.id = NIMSDK.shared().loginManager.currentAccount()
+            self.fetchUserInfo()
             self.onSignin(error: error)
             complete?(error)
         }
@@ -108,11 +115,25 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
                 UserDefaults.standard.set(data.name, forKey: "name")
                 UserDefaults.standard.set(data.token.md5(), forKey: "token")
             }
-            self.displayName = data.name
-            self.id = NIMSDK.shared().loginManager.currentAccount()
+            self.fetchUserInfo()
             self.onSignin(error: error)
             complete?(error)
         }
+    }
+    
+    func fetchUserInfo() {
+        let id = NIMSDK.shared().loginManager.currentAccount()
+        self.user.userId = id
+        if let user = NIMSDK.shared().userManager.userInfo(id) {
+            self.user = user
+        } else {
+            NIMSDK.shared().userManager.fetchUserInfos([id], completion: { (users, error) in
+                if let user = users?.first {
+                    self.user = user
+                }
+            })
+        }
+
     }
     
     func signout(complete: Completion?) {
