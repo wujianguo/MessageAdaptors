@@ -123,7 +123,7 @@ class NeteaseMessageAccount: NSObject, MessageAccount {
     
     func fetchUserInfo() {
         let id = NIMSDK.shared().loginManager.currentAccount()
-        self.user.userId = id
+        user.userId = id
         if let user = NIMSDK.shared().userManager.userInfo(id) {
             self.user = user
         } else {

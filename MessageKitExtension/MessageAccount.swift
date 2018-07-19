@@ -45,7 +45,7 @@ struct AccountSigninData {
 }
 
 
-protocol MessageAccount: MessageUser, MessageProducer where SessionType: MessageSession {
+protocol MessageAccount: MessageUser, MessageProducer {
     
     associatedtype ObjectType: MessageObject
     
